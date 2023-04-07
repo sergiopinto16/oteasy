@@ -1,0 +1,36 @@
+
+header{
+    /* display:flex; */
+    justify-content:space-between;
+    align-items: center;
+    /* margin-top: 20px; */
+    margin-bottom: 50px;
+}
+
+
+header .header-color{
+    background: #cdcdcd;
+}
+
+header .header-content{
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.header-nav{
+    float: right;
+}
+
+header a{
+    text-decoration:none;
+    color: inherit;
+}
+header a.logo{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+header nav{
+    display:flex;
+    gap: 24px;
+} 

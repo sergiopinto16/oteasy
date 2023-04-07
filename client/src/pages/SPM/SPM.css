@@ -1,0 +1,59 @@
+.question_grpup{
+    padding: 10px;
+    border: 5px ;
+    padding-top : 20px;
+}
+
+.question{
+    padding-left: 30px;
+    padding-top: 5px;
+}
+
+
+.spm_calculate_button{
+    padding-top: 30px;
+    display: 100%;
+    padding: 20px , 0;
+}
+
+
+h1.title{
+    font-size: 70px;    
+    font-style: italic;
+}
+
+h1.spm_casa{
+    color: green;
+}
+h1.spm_escola{
+    color: orange;
+}
+h1.spm_p_casa{
+    color: blue;
+}
+h1.spm_p_escola{
+    color: red;
+}
+
+
+
+.resultado{
+    padding-top: 30px;
+    font-weight: bold;
+
+}
+
+
+.spm_table{
+
+    padding-top: 30px;
+}
+
+.spm_graph{
+    padding-top: 30px;  
+    /* height: 600px; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
