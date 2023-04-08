@@ -4,6 +4,8 @@ import {Outlet} from "react-router-dom";
 import './style/Layout.css'
 
 export default function Layout() {
+
+
   return (
     <main>
       <Header />

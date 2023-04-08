@@ -1,7 +1,7 @@
 
 
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
 // import {UserContext} from "../UserContext";
 import SPMRadioAnswer from "../../components/SPMRadioAnswer";
@@ -25,7 +25,10 @@ import { StyledTableCell, StyledTableRow, createData } from './components/table'
 
 import ReactPDF from '@react-pdf/renderer';
 
-import {spmPDF} from './components/pdf';
+import { spmPDF } from './components/pdf';
+import TableWithRadioButtons from '../../components/SPMTableQuestionGroup'
+import * as htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas'
 
 
 
@@ -47,7 +50,7 @@ let rows = [
     createData('Visão', 0, 0),
     createData('Audição', 0, 0),
     createData('Toque', 0, 0),
-    createData('Gosto e Olfato', 0, 0),
+    // createData('Gosto e Olfato', 0, 0),
     createData('Consciência Corporal', 0, 0),
     createData('Movimento e Equilibrio', 0, 0),
     createData('Planeamento Motor e Ideação', 0, 0),
@@ -60,6 +63,9 @@ let rows = [
 
 export default function SPMCasa() {
 
+    document.title += " - SPM CASA"
+
+
     const [valueArray, setValueArray] = useState([]);
 
     const [sumQuestions, setsumQuestions] = useState([]);
@@ -68,6 +74,9 @@ export default function SPMCasa() {
     const [classificacaoQuestions, setclassificacaoQuestions] = useState([]);
 
     const [updateTabel, setupdateTable] = useState(0)
+
+    const chartRef = useRef(null);
+
 
 
     // const tsQuestions_data = [{ name: 'Participação Social', tscore: 0 },
@@ -82,6 +91,9 @@ export default function SPMCasa() {
 
     const [tsQuestions_data, settsQuestions_data] = useState([]);
 
+    
+
+
     const getRadioValue = (name, value) => {
         console.log("SPMCASA - " + name + ' | ' + value)
         // setValueArray([
@@ -94,7 +106,7 @@ export default function SPMCasa() {
         //       id: name,
         //       value: value
         //     }
-        //   ]);
+        //   ]); 
 
         valueArray[name] = value
         // console.log(valueArray)
@@ -184,15 +196,16 @@ export default function SPMCasa() {
         classificacaoQuestions[questionGroup_TOTAL] = calc_total(tscoreTOTAL)['classificacao_group_int']
 
 
-        let data = [{ name: 'Participação Social', tscore: tsQuestions[questionGroup_PS] },
-        { name: 'Visão', tscore: tsQuestions[questionGroup_V] },
-        { name: 'Audição', tscore: tsQuestions[questionGroup_A] },
-        { name: 'Toque', tscore: tsQuestions[questionGroup_T] },
-        { name: 'Gosto e Olfato', tscore: tsQuestions[questionGroup_GO] },
-        { name: 'Consciência Corporal', tscore: tsQuestions[questionGroup_CC] },
-        { name: 'Movimento e Equilibrio', tscore: tsQuestions[questionGroup_ME] },
-        { name: 'Planeamento Motor e Ideação', tscore: tsQuestions[questionGroup_PMI] },
-        { name: 'TOTAL', tscore: tsQuestions[questionGroup_TOTAL] },];
+        let data = [
+            { name: 'Participação Social', tscore: tsQuestions[questionGroup_PS] },
+            { name: 'Visão', tscore: tsQuestions[questionGroup_V] },
+            { name: 'Audição', tscore: tsQuestions[questionGroup_A] },
+            { name: 'Toque', tscore: tsQuestions[questionGroup_T] },
+            // { name: 'Gosto e Olfato', tscore: tsQuestions[questionGroup_GO] },
+            { name: 'Consciência Corporal', tscore: tsQuestions[questionGroup_CC] },
+            { name: 'Movimento e Equilibrio', tscore: tsQuestions[questionGroup_ME] },
+            { name: 'Planeamento Motor e Ideação', tscore: tsQuestions[questionGroup_PMI] },
+            { name: 'TOTAL', tscore: tsQuestions[questionGroup_TOTAL] },];
 
         settsQuestions_data(data)
 
@@ -207,8 +220,11 @@ export default function SPMCasa() {
     async function calculate_spm_casa(ev) {
         ev.preventDefault();
 
-        console.log("Calculate button")
+        console.log("No refresh page")
 
+
+
+        // const base64Image = chartRef.current.chartInstance.toBase64Image();
 
 
 
@@ -234,6 +250,53 @@ export default function SPMCasa() {
     }
 
 
+
+    
+
+
+
+    const tableElement = useRef()
+    const graphElement = useRef()
+
+
+    async function downloadElement(ev, domElement) {
+
+        ev.preventDefault();
+
+        console.log("donwload element");
+
+        html2canvas(domElement).then(canvas => {
+            saveAs(canvas.toDataURL(), 'element.png');
+
+        });
+    };
+
+
+    function saveAs(uri, filename) {
+
+        var link = document.createElement('a');
+    
+        if (typeof link.download === 'string') {
+    
+            link.href = uri;
+            link.download = filename;
+    
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+    
+            //simulate click
+            link.click();
+    
+            //remove the link when done
+            document.body.removeChild(link);
+    
+        } else {
+    
+            window.open(uri);
+    
+        }
+    }
+
     useEffect(() => {
         // CustomizedTables(scoreQuestions, classificacaoQuestions)
         console.log("useEffect runs!")
@@ -243,7 +306,7 @@ export default function SPMCasa() {
             createData('Visão', scoreQuestions[1], classificacaoQuestions[1]),
             createData('Audição', scoreQuestions[2], classificacaoQuestions[2]),
             createData('Toque', scoreQuestions[3], classificacaoQuestions[3]),
-            createData('Gosto e Olfato', scoreQuestions[4], classificacaoQuestions[4]),
+            // createData('Gosto e Olfato', scoreQuestions[4], classificacaoQuestions[4]),
             createData('Consciência Corporal', scoreQuestions[5], classificacaoQuestions[5]),
             createData('Movimento e Equilibrio', scoreQuestions[6], classificacaoQuestions[6]),
             createData('Planeamento Motor e Ideação', scoreQuestions[7], classificacaoQuestions[7]),
@@ -258,7 +321,8 @@ export default function SPMCasa() {
     //     return <Navigate to={'/'} />
     //   }
     return (
-        <form className="spm_casa" onSubmit={calculate_spm_casa}>
+        <form className="spm_casa"  >
+            
 
             {/* //TODO minimize all question and create a button (option) to open (show) questions to answer */}
             <h1 className="title spm_casa" >SPM CASA</h1>
@@ -862,8 +926,8 @@ export default function SPMCasa() {
 
                 {/* <CustomizedTables scoreQuestions classificacaoQuestions/> */}
 
-                <div>
-                    <p>Count {updateTabel}</p>
+                <div ref={tableElement}>
+                    {/* <p>Count {updateTabel}</p> */}
 
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -893,11 +957,23 @@ export default function SPMCasa() {
                     </TableContainer>
                 </div >
 
+
+
+                <button onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Graph</button>
+
             </div>
+
 
             <div className="spm_graph">
 
-                <GraphSPM tsQuestions_data={tsQuestions_data} />
+
+
+                <div ref={graphElement} >
+                    <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} />
+                </div>
+
+                <button onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Table</button>
+
 
 
             </div>
@@ -906,8 +982,7 @@ export default function SPMCasa() {
 
             <div className="spm_calculate_button">
 
-
-                <button onClick={spmPDF}>Donwload PDF</button>
+                <button onClick={spmPDF}>Export to  PDF (NOT WORKING)</button>
 
 
 

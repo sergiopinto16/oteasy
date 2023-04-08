@@ -51,7 +51,17 @@ h1.spm_p_escola{
 
 .spm_graph{
     padding-top: 30px;  
-    /* height: 600px; */
+    /* height: 600px;  */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+
+
+.spm_calculate_button{
+
+    padding-top: 30px;  
     display: block;
     margin-left: auto;
     margin-right: auto;
