@@ -17,6 +17,9 @@ import SPMpCasa from './pages/SPM/SPMpCasa';
 import SPMpEscola from './pages/SPM/SPMpEscola';
 import NotFound from './pages/404';
 
+import GasReportForm from './pages/Car/GasReportForm'
+import GasReportIndex from './pages/Car/IndexPage'
+
 
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
           <Route path="/spm/spm_escola" element={<SPMEscola />} />
           <Route path="/spm/spm_p_casa" element={<SPMpCasa />}  />
           <Route path="/spm/spm_p_escola" element={<SPMpEscola />} />
+          {/* Gas Report */}
+          <Route path="/gas/add" element={<GasReportForm />} />
+          <Route path="/gas/gasReports" element={<GasReportIndex />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

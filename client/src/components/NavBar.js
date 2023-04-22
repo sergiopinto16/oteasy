@@ -40,6 +40,8 @@ const Navbar = () => {
                 </Dropdown.Menu>
             </Dropdown>
             
+            <Link to = "/gas/gasReports">Gas Reports</Link>
+            
             {/* 
             SPMs 
             GasReport

@@ -1,63 +1,69 @@
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
+var bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+
+const salt = bcrypt.genSaltSync(10);
+const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
 
 
 // register user
 // app.post('/register',
-const registerUser = async (req,res) => {
-    const {username,password} = req.body;
-    try{
-      const userDoc = await User.create({
-        username,
-        password:bcrypt.hashSync(password,salt),
-      });
-      res.json(userDoc);
-    } catch(e) {
-      console.log(e);
-      res.status(400).json(e);
+const registerUser = async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const userDoc = await User.create({
+            username,
+            password: bcrypt.hashSync(password, salt),
+        });
+        res.json(userDoc);
+    } catch (e) {
+        console.log(e);
+        res.status(400).json(e);
     }
 }
-  
+
 
 // login user
 // app.post('/login',
-const loginUser = async (req,res) => {
-    const {username,password} = req.body;
-    const userDoc = await User.findOne({username});
+const loginUser = async (req, res) => {
+    const { username, password } = req.body;
+    const userDoc = await User.findOne({ username });
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
-      // logged in
-      jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
-        if (err) throw err;
-        res.cookie('token', token).json({
-          id:userDoc._id,
-          username,
+        // logged in
+        jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+            if (err) throw err;
+            res.cookie('token', token).json({
+                id: userDoc._id,
+                username,
+            });
         });
-      });
     } else {
-      res.status(400).json('wrong credentials');
+        res.status(400).json('wrong credentials');
     }
 }
 
 
 // profile User
 // app.get('/profile',
-const profileUser = (req,res) => {
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err,info) => {
-      if (err) throw err;
-      res.json(info);
+const profileUser = (req, res) => {
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, (err, info) => {
+        if (err) throw err;
+        res.json(info);
     });
 }
 
 
 // logout User
 // app.post('/logout', 
-const logoutUser = (req,res) => {
+const logoutUser = (req, res) => {
     res.cookie('token', '').json('ok');
 }
-  
+
 
 
 

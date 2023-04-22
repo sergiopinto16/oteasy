@@ -91,7 +91,7 @@ export default function SPMCasa() {
 
     const [tsQuestions_data, settsQuestions_data] = useState([]);
 
-    
+
 
 
     const getRadioValue = (name, value) => {
@@ -251,7 +251,7 @@ export default function SPMCasa() {
 
 
 
-    
+
 
 
 
@@ -275,25 +275,25 @@ export default function SPMCasa() {
     function saveAs(uri, filename) {
 
         var link = document.createElement('a');
-    
+
         if (typeof link.download === 'string') {
-    
+
             link.href = uri;
             link.download = filename;
-    
+
             //Firefox requires the link to be in the body
             document.body.appendChild(link);
-    
+
             //simulate click
             link.click();
-    
+
             //remove the link when done
             document.body.removeChild(link);
-    
+
         } else {
-    
+
             window.open(uri);
-    
+
         }
     }
 
@@ -322,12 +322,16 @@ export default function SPMCasa() {
     //   }
     return (
         <form className="spm_casa"  >
-            
+
+            <div className="button-download-formulario" onClick={() => window.open(require('../../static/SPM/docs/SPM_Casa_TUDO_COMPLETO(5-12Anos).pdf'), '_none')}>
+                <button> Donwload Formulário</button>
+            </div>
+
 
             {/* //TODO minimize all question and create a button (option) to open (show) questions to answer */}
             <h1 className="title spm_casa" >SPM CASA</h1>
 
-            <div id="PS" className="question_grpup" >
+            <div id="PS" className="question_group" >
 
                 <h1>PARTICIPAÇÃO SOCIAL A criança ...</h1>
 
@@ -404,7 +408,7 @@ export default function SPMCasa() {
             </div>
 
 
-            <div id="VISAO" className="question_grpup">
+            <div id="VISAO" className="question_group">
 
 
                 <h1>VISÃO A criança ...</h1>
@@ -488,7 +492,7 @@ export default function SPMCasa() {
             </div>
 
 
-            <div id="AUDICAO" className="question_grpup">
+            <div id="AUDICAO" className="question_group">
 
                 <h1>AUDIÇÃO A criança ...</h1>
 
@@ -557,7 +561,7 @@ export default function SPMCasa() {
 
 
 
-            <div id="TOQUE" className="question_grpup">
+            <div id="TOQUE" className="question_group">
 
 
                 <h1>TOQUE A criança ...</h1>
@@ -641,7 +645,7 @@ export default function SPMCasa() {
 
 
 
-            <div id="GOSTO_E_OLFATO" className="question_grpup">
+            <div id="GOSTO_E_OLFATO" className="question_group">
 
 
                 <h1>GOSTO E OLFATO A criança ...</h1>
@@ -690,7 +694,7 @@ export default function SPMCasa() {
             </div>
 
 
-            <div id="CONSCIENCIA_CORPORAL" className="question_grpup">
+            <div id="CONSCIENCIA_CORPORAL" className="question_group">
 
 
 
@@ -770,7 +774,7 @@ export default function SPMCasa() {
             </div>
 
 
-            <div id="MOVIMENTO_E_EQILIBRIO" className="question_grpup">
+            <div id="MOVIMENTO_E_EQILIBRIO" className="question_group">
 
 
                 <h1>MOVIMENTO E EQUILIBRIO A criança ...</h1>
@@ -849,7 +853,7 @@ export default function SPMCasa() {
 
 
 
-            <div id="PLANEAMENTO_MOTOR_E_IDEACAO" className="question_grpup" >
+            <div id="PLANEAMENTO_MOTOR_E_IDEACAO" className="question_group" >
 
 
                 <h1>PLANEAMENTO MOTOR E IDEAÇÃO A criança ...</h1>

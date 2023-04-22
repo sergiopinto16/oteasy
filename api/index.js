@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require("mongoose");
 
-const User = require('./models/userModel');
 const Post = require('./models/postModel');
 
 const bcrypt = require('bcryptjs');
@@ -16,10 +15,9 @@ const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
 const userRoutes = require('./routes/users')
+const gasRoutes = require('./routes/gas')
 
 
-const salt = bcrypt.genSaltSync(10);
-const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 
 
 //TODO ????? only localhost?
@@ -38,6 +36,7 @@ app.use((req,res,next)=>{
 
 // routes
 app.use('/api/user/',userRoutes)
+app.use('/api/gas/',gasRoutes)
 
 
 // connect to db
