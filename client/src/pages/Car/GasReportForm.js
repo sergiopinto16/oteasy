@@ -5,6 +5,14 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 
+
+import config  from './../../config/config.json';
+
+const api_host = config.api.host
+const api_port = config.api.port
+//' + api_host + ':' + api_port + '
+
+
 export default function CreatePost() {
 
     const [car_plate, setCarPlate] = useState('CORSA | 82-RB-05');
@@ -21,7 +29,7 @@ export default function CreatePost() {
             return;
         }
 
-        const response = await fetch('http://localhost:4000/api/gas/add', {
+        const response = await fetch('http://' + api_host + ':' + api_port + '/api/gas/add', {
             method: 'POST',
             body: JSON.stringify({ car_plate, car_km, quantity, price }),
             headers: { 'Content-Type': 'application/json' },

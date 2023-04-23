@@ -4,11 +4,19 @@ import {Link, Route, Routes} from 'react-router-dom';
 
 
 
+
+import config  from './../../config/config.json';
+
+const api_host = config.api.host
+const api_port = config.api.port
+//' + api_host + ':' + api_port + '
+
+
 export default function IndexPage() {
   const [gasReports, setGasReports] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/gas/gasReports').then(response => {
+    fetch('http://' + api_host + ':' + api_port + '/api/gas/gasReports').then(response => {
       response.json().then(gasReports => {
         setGasReports(gasReports);
       });

@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
@@ -6,10 +7,18 @@ import './style/NavBar.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+
+import config  from './../config/config.json';
+// const config = require('config');
+
+const api_host = config.api.host
+const api_port = config.api.port
+//' + api_host + ':' + api_port + '
+
 const Navbar = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
     useEffect(() => {
-        fetch('http://localhost:4000/api/user/profile', {
+        fetch('http://' + api_host + ':' + api_port + '/api/user/profile', {
             credentials: 'include',
         }).then(response => {
             response.json().then(userInfo => {
@@ -19,7 +28,7 @@ const Navbar = () => {
     }, []);
 
     function logout() {
-        fetch('http://localhost:4000/api/user/logout', {
+        fetch('http://' + api_host + ':' + api_port + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
         });
@@ -31,7 +40,7 @@ const Navbar = () => {
     return (
         <nav>
             <Dropdown>
-            <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
+                <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Item href="/spm/spm_casa">SPM Casa</Dropdown.Item>
                     <Dropdown.Item href="/spm/spm_escola">SPM Escola</Dropdown.Item>
@@ -39,9 +48,9 @@ const Navbar = () => {
                     <Dropdown.Item href="/spm/spm_p_escola">SPM-p Escola</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-            
-            <Link to = "/gas/gasReports">Gas Reports</Link>
-            
+
+            <Link to="/gas/gasReports">Gas Reports</Link>
+
             {/* 
             SPMs 
             GasReport

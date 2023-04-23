@@ -1,10 +1,19 @@
 import Post from "./Post";
 import {useEffect, useState} from "react";
 
+
+import config  from './../../config/config.json';
+
+const api_host = config.api.host
+const api_port = config.api.port
+//' + api_host + ':' + api_port + '
+
+
+
 export default function IndexPage() {
   const [posts,setPosts] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:4000/post').then(response => {
+    fetch('http://' + api_host + ':' + api_port + '/post').then(response => {
       response.json().then(posts => {
         setPosts(posts);
       });

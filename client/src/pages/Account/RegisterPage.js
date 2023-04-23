@@ -1,11 +1,21 @@
 import {useState} from "react";
 
+
+
+
+import config  from './../../config/config.json';
+
+const api_host = config.api.host
+const api_port = config.api.port
+//' + api_host + ':' + api_port + '
+
+
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function register(ev) {
     ev.preventDefault();
-    const response = await fetch('http://localhost:4000/api/user/register', {
+    const response = await fetch('http://' + api_host + ':' + api_port + '/api/user/register', {
       method: 'POST',
       body: JSON.stringify({username,password}),
       headers: {'Content-Type':'application/json'},

@@ -20,8 +20,8 @@ const gasRoutes = require('./routes/gas')
 
 
 
-//TODO ????? only localhost?
-app.use(cors({credentials:true,origin:'http://localhost:3000'}));
+// TODO How to connect multiple urls ???
+app.use(cors({credentials:true,origin:'http://'+process.env.URL_PRIVILEGIES+':'+process.env.URL_PRIVILEGIES_PORT}));
 // middleware
 app.use(express.json());
 app.use(cookieParser());
@@ -39,12 +39,13 @@ app.use('/api/user/',userRoutes)
 app.use('/api/gas/',gasRoutes)
 
 
+//app.listen(3010);
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
         // listen for requests
         app.listen(process.env.PORT, () => {
-            console.log('connected to db & listeneing on port ' + process.env.PORT)
+            console.log('connected to mongo db & listening on port ' + process.env.PORT)
         })
     })
     .catch((error)=>{console.log(error)})
@@ -122,5 +123,7 @@ app.get('/post/:id', async (req, res) => {
   res.json(postDoc);
 })
 
-app.listen(4000);
-//
+
+
+// ??? - list to not close ??
+app.listen(4000)

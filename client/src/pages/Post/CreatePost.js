@@ -4,6 +4,16 @@ import {useState} from "react";
 import {Navigate} from "react-router-dom";
 import Editor from "../../Editor";
 
+
+
+
+import config  from './../../config/config.json';
+
+
+const api_host = config.api.host
+const api_port = config.api.port
+//' + api_host + ':' + api_port + '
+
 export default function CreatePost() {
   const [title,setTitle] = useState('');
   const [summary,setSummary] = useState('');
@@ -17,7 +27,7 @@ export default function CreatePost() {
     data.set('content', content);
     data.set('file', files[0]);
     ev.preventDefault();
-    const response = await fetch('http://localhost:4000/post', {
+    const response = await fetch('http://' + api_host + ':' + api_port + '/post', {
       method: 'POST',
       body: data,
       credentials: 'include',
