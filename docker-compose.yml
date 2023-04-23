@@ -1,5 +1,5 @@
 # The version of the docker-compose.
-version: "3.8"
+version: "3.3"
 # Telling docker-compose to build the client and server images and run them in containers.
 services:
   client:
