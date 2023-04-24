@@ -1,13 +1,13 @@
-.question_group{
+.question_group {
     padding: 10px;
-    border: 5px ;
-    padding-top : 20px;
+    border: 5px;
+    padding-top: 20px;
     border-style: double;
     margin-top: 20px;
     margin-bottom: 40px;
 }
 
-.question{
+.question {
     padding-left: 30px;
     padding-right: 30px;
     /* padding-top: 5px; */
@@ -15,63 +15,107 @@
 }
 
 
-.spm_calculate_button{
+.spm_calculate_button {
     padding-top: 30px;
     display: 100%;
-    padding: 20px , 0;
+    padding: 20px, 0;
 }
 
-p{
-    font-weight: bold
+p {
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-top: 10px;
 }
 
-h1.title{
-    font-size: 70px;    
+h1.title {
+    font-size: 70px;
     font-style: italic;
 }
 
-h1.spm_casa{
+h1.spm_casa {
     color: green;
 }
-h1.spm_escola{
+
+h1.spm_escola {
     color: orange;
 }
-h1.spm_p_casa{
+
+h1.spm_p_casa {
     color: blue;
 }
-h1.spm_p_escola{
+
+h1.spm_p_escola {
     color: red;
 }
 
 
 
-.resultado{
+.resultado {
     padding-top: 30px;
     font-weight: bold;
+    padding-left: 5px;
+}
 
+.resultado p {
+    padding-bottom: 1px;
+    margin-bottom: 1px;
 }
 
 
-.spm_table{
-
+.spm_table {
     padding-top: 30px;
 }
 
-.spm_graph{
-    padding-top: 30px;  
+.spm_graph {
+    padding-top: 30px;
     /* height: 600px;  */
     display: block;
     margin-left: auto;
     margin-right: auto;
-  
+
 }
 
 
-.spm_calculate_button{
+.spm_calculate_button {
 
-    padding-top: 30px;  
+    padding-top: 30px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-  
+
+}
+
+
+
+
+@media (max-width: 600px) {
+    body {
+        /* background-color: blue; */
+        font-size: xx-small;
+    }
+
+    h1.title {
+        font-size: 50px;
+        font-style: italic;
+    }
+
+    h1 {
+        font-size: 20px;
+        padding-top: 10px;
+    }
+
+    .question_group {
+        padding: 1px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    .question {
+        padding-left: 5px;
+        padding-right: 5px;
+        /* padding-top: 5px; */
+        /* padding-bottom: 5px; */
+        /* width: 95%; */
+    }
+
 }

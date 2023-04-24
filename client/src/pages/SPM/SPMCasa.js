@@ -77,7 +77,19 @@ export default function SPMCasa() {
 
     const chartRef = useRef(null);
 
+    const [SPMRadioAnswerText, setSPMRadioAnswerText] = useState(["Nunca", "N", "Ocasionalmente", "O", "Frequentemente", "F", "Sempre", "S"]);
+    let minWidth_graph = window.innerWidth;
 
+    if (minWidth_graph > 700) {
+        minWidth_graph = 700;
+    }
+
+
+
+
+    // console.log("SPMRadioAnswer")
+    // console.log(isMobile)
+    // console.log(window.innerWidth)
 
     // const tsQuestions_data = [{ name: 'Participação Social', tscore: 0 },
     // { name: 'Visão', tscore: 0 },
@@ -321,6 +333,7 @@ export default function SPMCasa() {
     //     return <Navigate to={'/'} />
     //   }
     return (
+
         <form className="spm_casa"  >
 
             <div className="button-download-formulario" onClick={() => window.open(require('../../static/SPM/docs/SPM_Casa_TUDO_COMPLETO(5-12Anos).pdf'), '_none')}>
@@ -337,70 +350,67 @@ export default function SPMCasa() {
 
                 <div className="question">
                     <p>1. Brinca com os amigos cooperativamente (sem muita argumentação)?</p>
-                    <SPMRadioAnswer name={"question_1"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_1"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>2. Interage adequadamente com os pais e outros adultos
                         significativos para a criança (comunica bem, segue indicações,
                         mostra respeito, etc)?</p>
-                    <SPMRadioAnswer name={"question_2"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_2"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>3. Partilha as coisas quando solicitada?</p>
-                    <SPMRadioAnswer name={"question_3"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_3"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>4. Mantém uma conversa sem se sentar ou aproximar demasiado dos
                         outros?</p>
-                    <SPMRadioAnswer name={"question_4"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_4"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>5. Mantém contacto visual adequado durante uma conversa?</p>
-                    <SPMRadioAnswer name={"question_5"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_5"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>6. Junta-se aos outros para brincar sem perturbar a atividade em
                         curso?</p>
-                    <SPMRadioAnswer name={"question_6"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_6"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>7. Durante as refeições, toma parte da conversa e interage de um
                         modo adequado?</p>
-                    <SPMRadioAnswer name={"question_7"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_7"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>8. Participa adequadamente em saídas familiares, tais como jantar
                         fora, ir ao parque, museu, cinema ou centro comercial?</p>
-                    <SPMRadioAnswer name={"question_8"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_8"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>9. Participa adequadamente em encontros familiares, tais como
                         férias, casamentos ou aniversários?</p>
-                    <SPMRadioAnswer name={"question_9"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_9"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>10. Participa adequadamente em atividades com amigos como festas, ir
                         ao centro comercial, andar de
                         bicicleta/skate/mota?</p>
-                    <SPMRadioAnswer name={"question_10"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_10"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="resultado">
-                    <p>PARTICIPAÇÃO SOCIAL = {sumQuestions[questionGroup_PS]} |
-                        % score = {scoreQuestions[questionGroup_PS]} % |
-                        T-score = {tsQuestions[questionGroup_PS]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_PS]} />
-                    </p>
+                    <p>PARTICIPAÇÃO SOCIAL = {sumQuestions[questionGroup_PS]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_PS]} % |  T-score = {tsQuestions[questionGroup_PS]} </p>
+                    <p> <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_PS]} /></p>
 
                 </div>
 
@@ -417,77 +427,73 @@ export default function SPMCasa() {
                 <div className="question">
                     <p>11. Parece incomodada com a luz especialmente luz intensa (pisca,
                         chora ou fecha os olhos)?</p>
-                    <SPMRadioAnswer name={"question_11"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_11"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>12. Tem dificuldade em encontrar um objeto quando está no meio de
                         outras coisas?</p>
-                    <SPMRadioAnswer name={"question_12"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_12"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>13. Fecha um olho ou inclina a cabeça para trás quando olha para
                         alguém ou para alguma coisa?</p>
-                    <SPMRadioAnswer name={"question_13"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_13"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>14. Parece aflita/perturbada num ambiente visual não usual, tal como
                         um quarto luminoso, colorido, mal iluminado?</p>
-                    <SPMRadioAnswer name={"question_14"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_14"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>15. Tem dificuldade em controlar o movimento dos olhos enquanto
                         segue um objeto (ex. uma bola)?</p>
-                    <SPMRadioAnswer name={"question_15"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_15"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>16. Tem dificuldade em reconhecer semelhanças ou diferenças entre
                         objetos baseando-se nas suas cores, formas ou
                         tamanhos?</p>
-                    <SPMRadioAnswer name={"question_16"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_16"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>17. Gosta de ver objetos a girar ou a mover-se, mais do que a
                         maioria das crianças da sua idade?</p>
-                    <SPMRadioAnswer name={"question_17"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_17"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>18. Anda em direção a objetos ou pessoas como se não estivessem lá?</p>
-                    <SPMRadioAnswer name={"question_18"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_18"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>19. Gosta de ligar e desligar interruptores repetidamente?</p>
-                    <SPMRadioAnswer name={"question_19"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_19"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>20. Não gosta de certos tipos de iluminação, tais como o sol
                         intenso, luzes brilhantes, intermitentes ou flurescentes?</p>
-                    <SPMRadioAnswer name={"question_20"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_20"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>21. Gosta de olhar os objetos em movimento pelo canto do olho?</p>
-                    <SPMRadioAnswer name={"question_21"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_21"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
 
                 <div className="resultado">
-                    <p>VISÃO = {sumQuestions[questionGroup_V]} |
-                        % score = {scoreQuestions[questionGroup_V]} % |
-                        T-score = {tsQuestions[questionGroup_V]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_V]} />
-                    </p>
+                    <p>VISÃO = {sumQuestions[questionGroup_V]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_V]} % | T-score = {tsQuestions[questionGroup_V]} </p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_V]} /></p>
 
                 </div>
-
 
             </div>
 
@@ -500,59 +506,56 @@ export default function SPMCasa() {
                 <div className="question">
                     <p>22. Parece incomodada com os sons domésticos comuns, tais como o
                         aspirador, secador de cabelo ou o autoclismo?</p>
-                    <SPMRadioAnswer name={"question_22"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_22"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>23. Responde negativamente a barulhos altos, fugindo, chorando ou
                         tapando os ouvidos com as mãos?</p>
-                    <SPMRadioAnswer name={"question_23"} color={"green"} callbackValueRadio={getRadioValue} />
+                    <SPMRadioAnswer name={"question_23"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>24. Parece não ouvir certos sons?</p>
-                    <SPMRadioAnswer name={"question_24"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_24"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>25. Parece perturbada ou muito interessada por sons usualmente não
                         notados por outras pessoas?</p>
-                    <SPMRadioAnswer name={"question_25"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_25"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>26. Parece assustada com sons que usualmente não incomodam outras
                         crianças da mesma idade?</p>
-                    <SPMRadioAnswer name={"question_26"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_26"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>27. Distrai-se facilmente com barulhos de fundo tais como ar
                         condicionado, frigorifico, luz fluorescente ou cortador de
                         relva?</p>
-                    <SPMRadioAnswer name={"question_27"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_27"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>28. Gosta de causar certos sons repetidamente, tais como descarregar
                         o autoclismo?</p>
-                    <SPMRadioAnswer name={"question_28"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_28"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>29. Mostra-se aflita/perturbada com sons muito altos e estridentes,
                         tais como assobios, cornetas, flautas ou trompetes?</p>
-                    <SPMRadioAnswer name={"question_29"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_29"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
 
 
                 <div className="resultado">
-                    <p>AUDIÇÃO = {sumQuestions[questionGroup_A]} |
-                        % score = {scoreQuestions[questionGroup_A]} % |
-                        T-score = {tsQuestions[questionGroup_A]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_A]} />
-                    </p>
+                    <p>AUDIÇÃO = {sumQuestions[questionGroup_A]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_A]} % | T-score = {tsQuestions[questionGroup_A]}</p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_A]} /></p>
 
                 </div>
 
@@ -570,74 +573,71 @@ export default function SPMCasa() {
 
                 <div className="question">
                     <p>30. Afasta-se quando é tocada levemente?</p>
-                    <SPMRadioAnswer name={"question_30"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_30"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>31. Parece não ter uma perceção normal de ser tocada?</p>
-                    <SPMRadioAnswer name={"question_31"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_31"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>32. Fica aflita/perturbada com a sensação de roupa nova (lãs,
                         tecidos ásperos, etiquetas)?</p>
-                    <SPMRadioAnswer name={"question_32"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_32"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>33. Prefere tocar a ser tocada?</p>
-                    <SPMRadioAnswer name={"question_33"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_33"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>34. Fica aflita/perturbada quando lhe cortam as unhas das mãos ou
                         dos pés?</p>
-                    <SPMRadioAnswer name={"question_34"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_34"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>35. Parece incomodada quando alguém lhe toca na cara?</p>
-                    <SPMRadioAnswer name={"question_35"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_35"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>36. Evita tocar ou brincar com digitintas, areia, barro, lama, cola
                         ou outras coisas que sujem?</p>
-                    <SPMRadioAnswer name={"question_36"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_36"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>37. Tem uma tolerância invulgarmente alta à dor (ex. cai e não chora
                         ou vai contra os objetos e não nota)?</p>
-                    <SPMRadioAnswer name={"question_37"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_37"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>38. Não gosta de escovar os dentes, mais do que a maioria das
                         crianças da sua idade?</p>
-                    <SPMRadioAnswer name={"question_38"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_38"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>39. Parece gostar de sensações que podem ser dolorosas como por
                         exemplo atirar-se para o chão ou bater no seu corpo?</p>
-                    <SPMRadioAnswer name={"question_39"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_39"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>40. Tem dificuldade em encontrar coisas nos bolsos, mala, ou mochila
                         usando apenas o toque (sem a visão)?</p>
-                    <SPMRadioAnswer name={"question_40"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_40"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
 
 
                 <div className="resultado">
-                    <p>TOQUE = {sumQuestions[questionGroup_T]} |
-                        % score = {scoreQuestions[questionGroup_T]} % |
-                        T-score = {tsQuestions[questionGroup_T]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_T]} />
-                    </p>
+                    <p>TOQUE = {sumQuestions[questionGroup_T]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_T]} % | T-score = {tsQuestions[questionGroup_T]}</p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_T]} /></p>
 
                 </div>
 
@@ -653,39 +653,36 @@ export default function SPMCasa() {
 
                 <div className="question">
                     <p>41. Gosta de provar coisas não comestíveis, tais como cola ou tinta?</p>
-                    <SPMRadioAnswer name={"question_41"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_41"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>42. Dá-lhe vómitos quando tem à frente uma comida que não aprecia
                         tal como espinafres cozidos?</p>
-                    <SPMRadioAnswer name={"question_42"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_42"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>43. Gosta de cheirar os objetos não comestíveis e pessoas?</p>
-                    <SPMRadioAnswer name={"question_43"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_43"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>44. Fica aflita/perturbada com cheiros que as outras crianças não
                         notam?</p>
-                    <SPMRadioAnswer name={"question_44"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_44"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>45. Parece ignorar ou não notar cheiros fortes a que as outras
                         crianças reagem?</p>
-                    <SPMRadioAnswer name={"question_45"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_45"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
 
                 <div className="resultado">
-                    <p>GOSTO E OLFATO = {sumQuestions[questionGroup_GO]} |
-                        % score = {scoreQuestions[questionGroup_GO]} % |
-                        T-score = {tsQuestions[questionGroup_GO]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_GO]} />
-                    </p>
+                    <p>GOSTO E OLFATO = {sumQuestions[questionGroup_GO]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_GO]} % | T-score = {tsQuestions[questionGroup_GO]}</p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_GO]} /></p>
 
                 </div>
 
@@ -705,68 +702,65 @@ export default function SPMCasa() {
                 <div className="question">
                     <p>46. Agarra os objetos (lápis ou colher) com tanta força que lhe é
                         difícil usá-los?</p>
-                    <SPMRadioAnswer name={"question_46"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_46"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>47. Parece procurar atividades tais como empurrar, puxar, arrastar,
                         levantar e saltar?</p>
-                    <SPMRadioAnswer name={"question_47"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_47"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>48. Parece insegura de como deve baixar ou levantar o corpo durante
                         movimentos tais como sentar ou subir para cima de
                         um banco ou cadeira?</p>
-                    <SPMRadioAnswer name={"question_48"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_48"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>49. Agarra os objetos (lápis ou colher) tão levemente que lhe é
                         difícil usá-los?</p>
-                    <SPMRadioAnswer name={"question_49"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_49"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>50. Parece exercer muita pressão nas tarefas tais como andar
                         pesadamente, bater portas, ou carregar demasiado quando
                         utiliza lápis de cor ou de cera?</p>
-                    <SPMRadioAnswer name={"question_50"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_50"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>51. Salta muitas vezes?</p>
-                    <SPMRadioAnswer name={"question_51"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_51"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>52. Quando pega num animal agarra-o com muita força?</p>
-                    <SPMRadioAnswer name={"question_52"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_52"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>53. Choca ou empurra as outras crianças?</p>
-                    <SPMRadioAnswer name={"question_53"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_53"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>54. Mastiga brinquedos, roupas ou outros objetos mais do que as
                         outras crianças?</p>
-                    <SPMRadioAnswer name={"question_54"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_54"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>55. Agarra ou empurra os objetos com tanta força que os parte?</p>
-                    <SPMRadioAnswer name={"question_55"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_55"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
 
                 <div className="resultado">
-                    <p>CONSCIÊNCIA CORPORAL = {sumQuestions[questionGroup_CC]} |
-                        % score = {scoreQuestions[questionGroup_CC]} % |
-                        T-score = {tsQuestions[questionGroup_CC]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_CC]} />
-                    </p>
+                    <p>CONSCIÊNCIA CORPORAL = {sumQuestions[questionGroup_CC]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_CC]} % | T-score = {tsQuestions[questionGroup_CC]}</p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_CC]} /></p>
 
                 </div>
 
@@ -784,68 +778,65 @@ export default function SPMCasa() {
                     <p>56. Parece ter um medo excessivo do movimento, tal como subir ou
                         descer escadas, andar de baloiço, balancé, escorrega
                         ou outro equipamento dos parques infantis?</p>
-                    <SPMRadioAnswer name={"question_56"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_56"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>57. Tem um bom equilíbrio?</p>
-                    <SPMRadioAnswer name={"question_57"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_57"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>58. Evita atividades que exijam equilíbrio tais como andar no lancil
                         do passeio ou pisos irregulares?</p>
-                    <SPMRadioAnswer name={"question_58"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_58"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>59. Cai da cadeira quando muda de posição?</p>
-                    <SPMRadioAnswer name={"question_59"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_59"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>60. Não se protege quando cai (pôr as mãos à frente do corpo)?</p>
-                    <SPMRadioAnswer name={"question_60"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_60"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>61. Parece não ficar tonta quando usualmente os outros ficam?</p>
-                    <SPMRadioAnswer name={"question_61"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_61"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>62. Gira e rodopia sobre si mesma, mais do que as outras crianças?</p>
-                    <SPMRadioAnswer name={"question_62"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_62"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>63. Mostra-se aflita/perturbada quando a sua cabeça é inclinada e
                         retirada da posição vertical?</p>
-                    <SPMRadioAnswer name={"question_63"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_63"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>64. Tem dificuldades de coordenação e parece desajeitada?</p>
-                    <SPMRadioAnswer name={"question_64"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_64"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>65. Parece ter medo de andar de elevador ou escadas rolantes?</p>
-                    <SPMRadioAnswer name={"question_65"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_65"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
                     <p>66. Encosta-se a outras pessoas ou mobílias quando se senta ou se
                         tenta levantar?</p>
-                    <SPMRadioAnswer name={"question_66"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_66"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
 
                 <div className="resultado">
-                    <p>MOVIMENTO E EQUILIBRIO = {sumQuestions[questionGroup_ME]} |
-                        % score = {scoreQuestions[questionGroup_ME]} % |
-                        T-score = {tsQuestions[questionGroup_ME]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_ME]} />
-                    </p>
+                    <p>MOVIMENTO E EQUILIBRIO = {sumQuestions[questionGroup_ME]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_ME]} % | T-score = {tsQuestions[questionGroup_ME]}</p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_ME]} /></p>
 
                 </div>
 
@@ -861,61 +852,58 @@ export default function SPMCasa() {
 
                 <div className="question">
                     <p>67. Tem um desempenho inconsistente das suas tarefas diárias?</p>
-                    <SPMRadioAnswer name={"question_67"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_67"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>68. Tem dificuldade em perceber como transportar vários objetos ao
                         mesmo tempo?</p>
-                    <SPMRadioAnswer name={"question_68"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_68"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>69. Parece confusa sobre como arrumar os materiais e colocá-los nos
                         seus lugares corretos?</p>
-                    <SPMRadioAnswer name={"question_69"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_69"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>70. Tem dificuldade em desempenhar as tarefas na sequência certa tal
                         como vestir-se ou pôr a mesa?</p>
-                    <SPMRadioAnswer name={"question_70"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_70"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>71. Tem dificuldade em completar tarefas com muitas fases?</p>
-                    <SPMRadioAnswer name={"question_71"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_71"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>72. Tem dificuldade em imitar ações demonstradas, tais como jogos de
                         movimento ou canções com movimento?</p>
-                    <SPMRadioAnswer name={"question_72"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_72"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>73. Tem dificuldade em construir por cópia de um modelo um jogo com
                         legos ou blocos?</p>
-                    <SPMRadioAnswer name={"question_73"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_73"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>74. Tem dificuldade em ter ideias para jogos ou atividades novas?</p>
-                    <SPMRadioAnswer name={"question_74"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_74"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="question">
 
                     <p>75. Tende a jogar sempre o mesmo jogo, em vez de mudar de atividade
                         quando lhe é dada a oportunidade?</p>
-                    <SPMRadioAnswer name={"question_75"} color={"green"} callbackValueRadio={getRadioValue} /></div>
+                    <SPMRadioAnswer name={"question_75"} color={"green"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} /></div>
 
                 <div className="resultado">
-                    <p>PLANEAMENTO MOTOR E IDEAÇÃO= {sumQuestions[questionGroup_PMI]} |
-                        % score = {scoreQuestions[questionGroup_PMI]} % |
-                        T-score = {tsQuestions[questionGroup_PMI]} |
-
-                        <TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_PMI]} />
-                    </p>
+                    <p>PLANEAMENTO MOTOR E IDEAÇÃO= {sumQuestions[questionGroup_PMI]}</p>
+                    <p>% score = {scoreQuestions[questionGroup_PMI]} % | T-score = {tsQuestions[questionGroup_PMI]}</p>
+                    <p><TextClassificacaoNivel classificacao={classificacaoQuestions[questionGroup_PMI]} /></p>
 
                 </div>
 
@@ -934,7 +922,7 @@ export default function SPMCasa() {
                     {/* <p>Count {updateTabel}</p> */}
 
                     <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                        <Table sx={{ minWidth: minWidth_graph }} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell>Avaliação</StyledTableCell>
@@ -973,7 +961,7 @@ export default function SPMCasa() {
 
 
                 <div ref={graphElement} >
-                    <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} />
+                    <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} width_size={minWidth_graph} />
                 </div>
 
                 <button onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Table</button>
@@ -993,7 +981,7 @@ export default function SPMCasa() {
             </div>
 
 
-        </form>
+        </form >
     );
 }
 

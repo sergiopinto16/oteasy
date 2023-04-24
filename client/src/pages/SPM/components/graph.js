@@ -26,7 +26,7 @@ export default class GraphSPM extends PureComponent {
   render() {
     return (
       <BarChart
-        width={700}
+        width={this.props.width_size}
         height={600}
         // data={data}
         data = {this.props.tsQuestions_data}
