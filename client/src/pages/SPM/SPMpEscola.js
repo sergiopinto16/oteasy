@@ -339,49 +339,49 @@ export default function SPMpEscola() {
                 <div className="question">
                     <p>1. Brinca voluntariamente com os pares numa variedade de jogos e
                         actividades</p>
-                    <SPMRadioAnswer name={"question_01"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_1"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>2. Espera pela sua vez</p>
-                    <SPMRadioAnswer name={"question_02"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_2"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>3. Participa apropriadamente no tempo do circulo</p>
-                    <SPMRadioAnswer name={"question_03"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_3"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>4. Transita suavemente para novas actividades</p>
-                    <SPMRadioAnswer name={"question_04"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_4"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>5. Entra para as brincadeiras dos pares sem interromper a
                         continuidade da actividade</p>
-                    <SPMRadioAnswer name={"question_05"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_5"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>6. Segue as regras e as rotinas da sala</p>
-                    <SPMRadioAnswer name={"question_06"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_6"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>7. Partilha os brinquedos e os materiais da sala quando lhe é pedido</p>
-                    <SPMRadioAnswer name={"question_07"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_7"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>8. Trabalha cooperativamente com os pares para atingir um objectivo
                         comum (ex: durante a limpeza, construções)</p>
-                    <SPMRadioAnswer name={"question_08"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_8"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>9. Interage com os pares durante o jogo simbólico</p>
-                    <SPMRadioAnswer name={"question_09"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_9"} color={"red"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">

@@ -99,7 +99,7 @@ export default function SPMEscola() {
 
 
     const getRadioValue = (name, value) => {
-        console.log("SPMCASA - " + name + ' | ' + value)
+        console.log("SPMEscola - " + name + ' | ' + value)
         // setValueArray([
         //     { id: name, value: value }
         //   ])
@@ -340,51 +340,51 @@ export default function SPMEscola() {
 
                 <div className="question">
                     <p>1. Trabalha em equipa; é prestável com os outros.</p>
-                    <SPMRadioAnswer name={"question_01"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_1"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>2. Resolve conflitos com os colegas sem intervenção do professor.</p>
-                    <SPMRadioAnswer name={"question_02"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_2"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>3. Lida com a frustração sem explodir ou demonstrar comportamentos
                         agressivos.</p>
-                    <SPMRadioAnswer name={"question_03"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_3"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>4. Brinca, de bom grado, com os colegas numa variedade de jogos e
                         atividades.</p>
-                    <SPMRadioAnswer name={"question_04"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_4"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>5. Entra nas brincadeiras com os colegas sem interromper o decorrer
                         da atividade.</p>
-                    <SPMRadioAnswer name={"question_05"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_5"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>6. Tem amigos e escolhe estar com eles quando é possível.</p>
-                    <SPMRadioAnswer name={"question_06"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_6"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>7. Usa e percebe o humor quando brinca com os colegas.</p>
-                    <SPMRadioAnswer name={"question_07"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_7"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>8. Mantém “espaço pessoal” adequado (não fica demasiado perto dos
                         outros durante uma conversa).</p>
-                    <SPMRadioAnswer name={"question_08"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_8"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>9. Mantém contacto visual adequado durante uma conversa.</p>
-                    <SPMRadioAnswer name={"question_09"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_9"} color={"orange"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">

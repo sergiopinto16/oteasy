@@ -107,7 +107,7 @@ export default function SPMCasa() {
 
 
     const getRadioValue = (name, value) => {
-        console.log("SPMCASA - " + name + ' | ' + value)
+        console.log("SPMCasa - " + name + ' | ' + value)
         // setValueArray([
         //     { id: name, value: value }
         //   ])

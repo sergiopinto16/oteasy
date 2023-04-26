@@ -340,52 +340,52 @@ export default function SPMpCasa() {
 
                 <div className="question">
                     <p>1. Brinca com os amigos cooperativamente</p>
-                    <SPMRadioAnswer name={"question_01"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_1"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>2. Partilha o que tem quando lhe é pedido</p>
-                    <SPMRadioAnswer name={"question_02"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_2"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>3. Junta-se às bincadeiras dos outros sem interromper a sequência da
                         respetiva atividade</p>
-                    <SPMRadioAnswer name={"question_03"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_3"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>4. Interage adequadamente com os que estão presentes na hora da
                         refeição</p>
-                    <SPMRadioAnswer name={"question_04"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_4"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>5. Participa adequadamente nos passeios de família tais como jantar
                         fora, ir a um parque ou a um
                         museu</p>
-                    <SPMRadioAnswer name={"question_05"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_5"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>6. Participa adequadamente nos ajuntamentos familiares tais como ir
                         de férias, casamentos,
                         aniversários</p>
-                    <SPMRadioAnswer name={"question_06"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_6"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>7. Participa adequadamente nas atividade com amigos tais como festas
                         ou uso de equipamentos no
                         parque</p>
-                    <SPMRadioAnswer name={"question_07"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_7"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
                     <p>8. Coopera durante as tarefas familiares tais como ir com os pais ao
                         supermercado do shopping ou
                         ir com os pais buscar o irmão(ã) à escola</p>
-                    <SPMRadioAnswer name={"question_08"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_8"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
 
@@ -408,7 +408,7 @@ export default function SPMpCasa() {
                 <div className="question">
                     <p>9. Fica aborrecida na presença de luzes especialmente luzes intensas
                         (pisca os olhos ou quase que os fecha, chora, etc.)</p>
-                    <SPMRadioAnswer name={"question_09"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
+                    <SPMRadioAnswer name={"question_9"} color={"blue"} callbackValueRadio={getRadioValue} text={SPMRadioAnswerText} />
                 </div>
 
                 <div className="question">
