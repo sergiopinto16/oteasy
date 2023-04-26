@@ -9,7 +9,7 @@ services:
     container_name: clientapp
     # Mapping the port 3000 on the host machine to the port 3000 on the container.
     ports:
-      - "3000:3000"
+      - "80:3000"
     # Mapping the client directory on the host machine to the /app directory on the container.
     volumes:
       - ./client:/app
