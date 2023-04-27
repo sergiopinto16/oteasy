@@ -34,7 +34,8 @@ const addGasReport = async (req, res) => {
 // get all Gas Reports
 // app.get('/gasReports',
 const gasReports = async (req, res) => {
-    const gasReports = await Gas.find({}).sort({ createAt: -1 })
+    const gasReports = await Gas.find({}).sort({createdAt: -1 })
+    print(gasReports)
     res.status(200).json(gasReports)
 }
 
