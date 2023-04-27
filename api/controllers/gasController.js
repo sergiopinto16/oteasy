@@ -35,7 +35,7 @@ const addGasReport = async (req, res) => {
 // app.get('/gasReports',
 const gasReports = async (req, res) => {
     const gasReports = await Gas.find({}).sort({createdAt: -1 })
-    print(gasReports)
+    console.log(gasReports)
     res.status(200).json(gasReports)
 }
 
