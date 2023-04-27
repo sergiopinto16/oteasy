@@ -21,7 +21,7 @@ const gasRoutes = require('./routes/gas')
 
 
 // TODO How to connect multiple urls ???
-app.use(cors({credentials:true,origin:'http://'+process.env.URL_PRIVILEGIES+':'+process.env.URL_PRIVILEGIES_PORT}));
+app.use(cors({credentials:true,origin:process.env.URL_PRIVILEGIES+':'+process.env.URL_PRIVILEGIES_PORT}));
 // middleware
 app.use(express.json());
 app.use(cookieParser());
