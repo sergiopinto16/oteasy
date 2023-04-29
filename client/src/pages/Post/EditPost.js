@@ -7,7 +7,6 @@ import Editor from "../../Editor";
 import config  from './../../config/config.json';
 
 const api_host = config.api.host
-const api_port = config.api.port
 //' + api_host + ':' + api_port + '
 
 
@@ -20,7 +19,7 @@ export default function EditPost() {
   const [redirect,setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch('http://' + api_host + ':' + api_port + '/post/'+id)
+    fetch(api_host + '/post/'+id)
       .then(response => {
         response.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -40,7 +39,7 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set('file', files?.[0]);
     }
-    const response = await fetch('http://' + api_host + ':' + api_port + '/post', {
+    const response = await fetch(api_host + '/post', {
       method: 'PUT',
       body: data,
       credentials: 'include',

@@ -16,6 +16,7 @@ const fs = require('fs');
 
 const userRoutes = require('./routes/users')
 const gasRoutes = require('./routes/gas')
+const spmRoutes = require('./routes/spm')
 
 
 
@@ -37,6 +38,7 @@ app.use((req,res,next)=>{
 // routes
 app.use('/api/user/',userRoutes)
 app.use('/api/gas/',gasRoutes)
+app.use('/api/spm/',spmRoutes)
 
 
 //app.listen(3010);

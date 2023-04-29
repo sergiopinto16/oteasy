@@ -1,6 +1,5 @@
 {
     "api": {
-        "host": "ec2-54-84-11-249.compute-1.amazonaws.com",
-        "port": 3010
+        "host": "http://localhost:3010"
     }
 }

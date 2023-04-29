@@ -11,7 +11,6 @@ import config  from './../../config/config.json';
 
 
 const api_host = config.api.host
-const api_port = config.api.port
 //' + api_host + ':' + api_port + '
 
 export default function CreatePost() {
@@ -27,7 +26,7 @@ export default function CreatePost() {
     data.set('content', content);
     data.set('file', files[0]);
     ev.preventDefault();
-    const response = await fetch('http://' + api_host + ':' + api_port + '/post', {
+    const response = await fetch(api_host + '/post', {
       method: 'POST',
       body: data,
       credentials: 'include',

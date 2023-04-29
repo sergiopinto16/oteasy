@@ -9,7 +9,6 @@ import {Link} from 'react-router-dom';
 import config  from './../../config/config.json';
 
 const api_host = config.api.host
-const api_port = config.api.port
 //' + api_host + ':' + api_port + '
 
 
@@ -18,7 +17,7 @@ export default function PostPage() {
   const {userInfo} = useContext(UserContext);
   const {id} = useParams();
   useEffect(() => {
-    fetch(`http://' + api_host + ':' + api_port + '/post/${id}`)
+    fetch(api_host + '/post/${id}')
       .then(response => {
         response.json().then(postInfo => {
           setPostInfo(postInfo);
@@ -44,7 +43,7 @@ export default function PostPage() {
         </div>
       )}
       <div className="image">
-        <img src={'http://' + api_host + ':' + api_port + '/${postInfo.cover}'} alt=""/>
+        <img src={api_host + '/${postInfo.cover}'} alt=""/>
       </div>
       <div className="content" dangerouslySetInnerHTML={{__html:postInfo.content}} />
     </div>
