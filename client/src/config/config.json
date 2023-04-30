@@ -1,5 +1,5 @@
 {
     "api": {
-        "host": "http://167.71.1.134:3010"
+        "host": "http://localhost:3010"
     }
 }

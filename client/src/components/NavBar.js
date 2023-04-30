@@ -12,13 +12,12 @@ import config  from './../config/config.json';
 // const config = require('config');
 
 const api_host = config.api.host
-const api_port = config.api.port
 //' + api_host + ':' + api_port + '
 
 const Navbar = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
     useEffect(() => {
-        fetch('http://' + api_host + ':' + api_port + '/api/user/profile', {
+        fetch(api_host + '/api/user/profile', {
             credentials: 'include',
         }).then(response => {
             response.json().then(userInfo => {
@@ -28,7 +27,7 @@ const Navbar = () => {
     }, []);
 
     function logout() {
-        fetch('http://' + api_host + ':' + api_port + '/api/user/logout', {
+        fetch( api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
         });
