@@ -11,10 +11,10 @@ import { UserContextProvider } from "./UserContext";
 import CreatePost from "./pages/Post/CreatePost";
 import PostPage from "./pages/Post/PostPage";
 import EditPost from "./pages/Post/EditPost";
-import SpmCasa from './pages/SPM/SpmCasa';
-import SpmEscola from './pages/SPM/SpmEscola';
-import SpmpCasa from './pages/SPM/SpmpCasa';
-import SpmpEscola from './pages/SPM/SpmpEscola';
+import SpmCasa from './pages/Spm/SpmCasa';
+import SpmEscola from './pages/Spm/SpmEscola';
+import SpmpCasa from './pages/Spm/SpmpCasa';
+import SpmpEscola from './pages/Spm/SpmpEscola';
 import NotFound from './pages/404';
 
 import GasReportForm from './pages/Car/GasReportForm'
