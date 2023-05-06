@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
+import './style.css'
 
 
 
@@ -28,6 +29,7 @@ export default function LoginPage() {
     if (response.ok) {
       response.json().then(userInfo => {
         setUserInfo(userInfo);
+        console.log("Redirect to home page!")
         setRedirect(true);
       });
     } else {

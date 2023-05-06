@@ -22,77 +22,80 @@ const spmRoutes = require('./routes/spm')
 
 
 // TODO How to connect multiple urls ???
-app.use(cors({credentials:true,origin:process.env.URL_PRIVILEGIES}));
+app.use(cors({ credentials: true, origin: process.env.URL_PRIVILEGIES }));
 // middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // ???????
-app.use((req,res,next)=>{
-    console.log(req.path, req.method)
-    next()
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
 })
 
 
 // routes
-app.use('/api/user/',userRoutes)
-app.use('/api/gas/',gasRoutes)
-app.use('/api/spm/',spmRoutes)
+app.use('/api/user/', userRoutes)
+app.use('/api/gas/', gasRoutes)
+app.use('/api/spm/', spmRoutes)
 
 
 //app.listen(3010);
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
-    .then(()=>{
-        // listen for requests
-        app.listen(process.env.PORT, () => {
-            console.log('connected to mongo db & listening on port ' + process.env.PORT)
-        })
+  .then(() => {
+    // listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log('connected to mongo db & listening on port ' + process.env.PORT)
     })
-    .catch((error)=>{console.log(error)})
+  })
+  .catch((error) => { console.log(error) })
 
+
+// TODO - if error in mongo db connection execute app.listen
+// app.listen(process.env.PORT)
 
 
 
 // POST
-app.post('/post', uploadMiddleware.single('file'), async (req,res) => {
-  const {originalname,path} = req.file;
+app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
+  const { originalname, path } = req.file;
   const parts = originalname.split('.');
   const ext = parts[parts.length - 1];
-  const newPath = path+'.'+ext;
+  const newPath = path + '.' + ext;
   fs.renameSync(path, newPath);
 
-  const {token} = req.cookies;
-  jwt.verify(token, secret, {}, async (err,info) => {
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
-    const {title,summary,content} = req.body;
+    const { title, summary, content } = req.body;
     const postDoc = await Post.create({
       title,
       summary,
       content,
-      cover:newPath,
-      author:info.id,
+      cover: newPath,
+      author: info.id,
     });
     res.json(postDoc);
   });
 
 });
 
-app.put('/post',uploadMiddleware.single('file'), async (req,res) => {
+app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
   let newPath = null;
   if (req.file) {
-    const {originalname,path} = req.file;
+    const { originalname, path } = req.file;
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1];
-    newPath = path+'.'+ext;
+    newPath = path + '.' + ext;
     fs.renameSync(path, newPath);
   }
 
-  const {token} = req.cookies;
-  jwt.verify(token, secret, {}, async (err,info) => {
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
-    const {id,title,summary,content} = req.body;
+    const { id, title, summary, content } = req.body;
     const postDoc = await Post.findById(id);
     const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
     if (!isAuthor) {
@@ -110,17 +113,17 @@ app.put('/post',uploadMiddleware.single('file'), async (req,res) => {
 
 });
 
-app.get('/post', async (req,res) => {
+app.get('/post', async (req, res) => {
   res.json(
     await Post.find()
       .populate('author', ['username'])
-      .sort({createdAt: -1})
+      .sort({ createdAt: -1 })
       .limit(20)
   );
 });
 
 app.get('/post/:id', async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const postDoc = await Post.findById(id).populate('author', ['username']);
   res.json(postDoc);
 })

@@ -8,11 +8,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-import config  from './../config/config.json';
+import config from './../config/config.json';
 // const config = require('config');
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
+
+
+const spm_credentials = 0
+const gas_report_credentials = 1
 
 const Navbar = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
@@ -27,47 +31,73 @@ const Navbar = () => {
     }, []);
 
     function logout() {
-        fetch( api_host + '/api/user/logout', {
+        fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
         });
         setUserInfo(null);
     }
 
+    console.log("NavBar.js | userInfo = " + userInfo?.username)
     const username = userInfo?.username;
+    const credentials_level = userInfo?.credentials_level;
+    console.log("NavBar.js | credentials_level =" + credentials_level)
 
     return (
         <nav>
-            <Dropdown>
-                <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item href="/spm/spm_casa">SPM Casa</Dropdown.Item>
-                    <Dropdown.Item href="/spm/spm_escola">SPM Escola</Dropdown.Item>
-                    <Dropdown.Item href="/spm/spm_p_casa">SPM-p Casa</Dropdown.Item>
-                    <Dropdown.Item href="/spm/spm_p_escola">SPM-p Escola</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
 
-            <Link to="/gas/gasReports">Gas Reports</Link>
 
+            {username && credentials_level !== undefined && (
+                <>
+                    {credentials_level[spm_credentials] === 1 && (
+                        <>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item> <Link to="/spm/spm-casa">SPM Casa</Link></Dropdown.Item>
+                                    <Dropdown.Item> <Link to="/spm/spm-escola">SPM Escola</Link></Dropdown.Item>
+                                    <Dropdown.Item> <Link to="/spm/spm-pcasa">SPM-p Casa</Link></Dropdown.Item>
+                                    <Dropdown.Item  ><Link to="/spm/spm-pescola">SPM-p Escola</Link></Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </>)}
+                </>
+            )
+            }
             {/* 
             SPMs 
             GasReport
             Clients - OT
             */}
-            {username && (
-                <>
-                    <Link to="/create">Create new post</Link>
-                    <a onClick={logout}>Logout ({username})</a>
-                </>
-            )}
-            {!username && (
-                <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
-                </>
-            )}
-        </nav>
+            {
+                username && credentials_level !== undefined && (
+                    <>
+                        {credentials_level[gas_report_credentials] === 1 && (
+                            <>
+                                <Link to="/gas/gasReports">Gas Reports</Link>
+                            </>)}
+                    </>
+                )
+            }
+
+
+            {
+                username && (
+                    <>
+                        {/* <Link to="/create">Create new post</Link> */}
+                        <a onClick={logout}><Link to="/"> Logout ({username}) </Link></a>
+                    </>
+                )
+            }
+            {
+                !username && (
+                    <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                    </>
+                )
+            }
+        </nav >
     );
 };
 

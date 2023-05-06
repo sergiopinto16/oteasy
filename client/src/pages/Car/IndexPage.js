@@ -11,6 +11,8 @@ const api_host = config.api.host
 //' + api_host + ':' + api_port + '
 
 
+// TODO - if not logged and not credentials redirect to home page or show message not credentials 
+
 export default function IndexPage() {
   const [gasReports, setGasReports] = useState([]);
 
@@ -31,7 +33,7 @@ export default function IndexPage() {
 
 
       {gasReports.length > 0 && gasReports.map(gasReports => (
-        <GasReports {...gasReports} />
+        <GasReports key={gasReports._id} {...gasReports} /> 
       ))}
     </>
   );

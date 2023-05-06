@@ -11,19 +11,19 @@ const api_port = config.api.port
 
 
 export default function IndexPage() {
-  const [posts,setPosts] = useState([]);
-  useEffect(() => {
-    fetch('http://' + api_host + ':' + api_port + '/post').then(response => {
-      response.json().then(posts => {
-        setPosts(posts);
-      });
-    });
-  }, []);
-  return (
-    <>
-      {posts.length > 0 && posts.map(post => (
-        <Post {...post} />
-      ))}
-    </>
-  );
+  // const [posts,setPosts] = useState([]);
+  // useEffect(() => {
+  //   fetch('http://' + api_host + ':' + api_port + '/post').then(response => {
+  //     response.json().then(posts => {
+  //       setPosts(posts);
+  //     });
+  //   });
+  // }, []);
+  // return (
+  //   <>
+  //     {posts.length > 0 && posts.map(post => (
+  //       <Post {...post} />
+  //     ))}
+  //   </>
+  // );
 }

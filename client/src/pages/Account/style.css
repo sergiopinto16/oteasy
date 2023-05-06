@@ -1,0 +1,20 @@
+
+form.login h1, form.register h1{
+    text-align: center;
+}
+
+
+form.login, form.register{
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input{
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    padding: 5px 7px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}

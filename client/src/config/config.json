@@ -1,5 +1,5 @@
 {
     "api": {
-        "host": "http://www.verasilvato.pt:3010"
+        "host": "http://localhost:3010"
     }
 }

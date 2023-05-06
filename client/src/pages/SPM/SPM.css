@@ -1,3 +1,31 @@
+
+
+button {
+
+    background-color: rgb(43, 174, 47);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+}
+
+button:hover{
+
+    background-color: rgb(5, 102, 6);
+    color: white;
+}
+
+
+.button_form_download{
+    float: right;
+    margin-top: 16px;
+}
+
 .question_group {
     padding: 10px;
     border: 5px;
@@ -35,17 +63,41 @@ h1.title {
 h1.spm_casa {
     color: green;
 }
+button.spm_casa{
+    background-color: green;
+}
+button.spm_casa:hover{
+    background-color: rgb(5, 102, 6);
+}
 
-h1.spm_escola {
+h1.spm_escola{
     color: orange;
 }
-
-h1.spm_p_casa {
+button.spm_escola{
+    background-color: orange;
+}
+button.spm_escola:hover{
+    background-color: rgb(100, 102, 5);
+}
+h1.spm_p_casa{
     color: blue;
 }
+button.spm_p_casa{
+    background-color: blue;
+}
+button.spm_p_casa:hover{
+    background-color: rgb(5, 18, 102);
+}
 
-h1.spm_p_escola {
+h1.spm_p_escola{
     color: red;
+}
+button.spm_p_escola{
+    background-color: red;
+    : red;
+}
+button.spm_p_escola:hover{
+    background-color: rgb(102, 45, 5);
 }
 
 
@@ -78,11 +130,21 @@ h1.spm_p_escola {
 
 .spm_calculate_button {
 
-    padding-top: 30px;
-    display: block;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 600px; */
+    /* display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
 
+}
+
+.button_download_graph,
+.button_download_table {
+    width: 260px;
+    margin-top: 30px;
 }
 
 

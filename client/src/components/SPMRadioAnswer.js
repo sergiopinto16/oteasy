@@ -1,12 +1,12 @@
 import { UserContext } from "../UserContext";
-import './style/SPMRadioAnswer.css';
+import './style/SpmRadioAnswer.css';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 
 
 
 
-export default function SPMRadioAnswer({ name, color, callbackValueRadio, text }) {
+export default function SpmRadioAnswer({ name, color, callbackValueRadio, text }) {
 
   const isMobile = window.innerWidth <= 600;
 

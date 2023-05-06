@@ -51,7 +51,7 @@ export default function CreateReport() {
         <form onSubmit={addGasReport} >
 
             <div className="input">
-                <label for="cars">Choose a car:</label>
+                <label htmlFor="cars">Choose a car:</label>
                 <select name="cars" id="cars"
                     value={car_plate}
                     onChange={ev => setCarPlate(ev.target.value)}>
@@ -65,21 +65,21 @@ export default function CreateReport() {
                 value={car_plate}
                 onChange={ev => setCarPlate(ev.target.value)} /> */}
             <div className="input">
-                <label for="km">Insert car kilometers:</label>
+                <label htmlFor="km">Insert car kilometers:</label>
                 <input type="number" name="km"
                     placeholder={'kilometers'}
                     value={car_km}
                     onChange={ev => setKmCar(ev.target.value)} />
             </div>
             <div className="input">
-                <label for="liters">Insert bomb liters added:</label>
+                <label htmlFor="liters">Insert bomb liters added:</label>
                 <input type="number"
                     placeholder={'bomb liters'}
                     value={quantity}
                     onChange={ev => setQuantity(ev.target.value)} />
             </div >
             <div className="input">
-                <label for="price">Insert gas price:</label>
+                <label htmlFor="price">Insert gas price:</label>
                 <input type="number"
                     placeholder={'gas price'}
                     value={price}

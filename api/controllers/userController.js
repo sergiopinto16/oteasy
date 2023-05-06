@@ -33,12 +33,14 @@ const loginUser = async (req, res) => {
     const userDoc = await User.findOne({ username });
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
+        console.log(userDoc)
         // logged in
-        jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+        jwt.sign({ username, id: userDoc._id}, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token).json({
                 id: userDoc._id,
                 username,
+                credentials_level:userDoc.credentials_level
             });
         });
     } else {
