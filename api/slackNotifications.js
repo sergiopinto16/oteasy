@@ -9,8 +9,8 @@ async function sendSlackNotification(message,username="DB-bot") {
     username:username,
     icon_emoji: ":ghost:"
   };
-
-  const response = await fetch(process.env.SLACK_WEBHOOK_URL, {
+  
+  const response = await fetch(process.env.SLACK_URL_NOTIFICATIONS, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
