@@ -2,7 +2,6 @@
 require('dotenv').config()
 
 // Replace with the webhook URL you saved earlier
-const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
 async function sendSlackNotification(message,username="DB-bot") {
   const payload = {
@@ -11,7 +10,7 @@ async function sendSlackNotification(message,username="DB-bot") {
     icon_emoji: ":ghost:"
   };
 
-  const response = await fetch(SLACK_WEBHOOK_URL, {
+  const response = await fetch(process.env.SLACK_WEBHOOK_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
