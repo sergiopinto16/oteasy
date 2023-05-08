@@ -19,7 +19,7 @@ const registerUser = async (req, res) => {
             password: bcrypt.hashSync(password, salt),
         });
         res.json(userDoc);
-        sendSlackNotification(JSON.stringify(userDoc),"DB-user")
+        sendSlackNotification(JSON.stringify(userDoc),"DB-userRegister")
     } catch (e) {
         console.log(e);
         res.status(400).json(e);
@@ -35,6 +35,7 @@ const loginUser = async (req, res) => {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
         console.log(userDoc)
+        sendSlackNotification(JSON.stringify(userDoc),"DB-userLogin")
         // logged in
         jwt.sign({ username, id: userDoc._id}, secret, {}, (err, token) => {
             if (err) throw err;
@@ -64,6 +65,8 @@ const profileUser = (req, res) => {
 // logout User
 // app.post('/logout', 
 const logoutUser = (req, res) => {
+    const { username, password } = req.body;
+    sendSlackNotification(username,"DB-userLogout")
     res.cookie('token', '').json('ok');
 }
 
