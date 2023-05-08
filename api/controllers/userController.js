@@ -2,7 +2,7 @@ const User = require('../models/userModel')
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const sendSlackNotification = require('../slackNotifications')
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
@@ -19,6 +19,7 @@ const registerUser = async (req, res) => {
             password: bcrypt.hashSync(password, salt),
         });
         res.json(userDoc);
+        sendSlackNotification(JSON.stringify(userDoc),"DB-user")
     } catch (e) {
         console.log(e);
         res.status(400).json(e);

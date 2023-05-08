@@ -2,6 +2,7 @@ const Gas = require('../models/gasReport')
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const sendSlackNotification = require('../slackNotifications')
 
 
 const salt = bcrypt.genSaltSync(10);
@@ -28,6 +29,7 @@ const addGasReport = async (req, res) => {
             author: info.id,
         });
         res.json(gasReportAdd);
+        sendSlackNotification(JSON.stringify(gasReportAdd),"DB-gasReport")
     });
 
     // try {

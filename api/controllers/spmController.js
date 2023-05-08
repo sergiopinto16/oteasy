@@ -2,6 +2,7 @@ const spm = require('../models/spmModel')
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const sendSlackNotification = require('../slackNotifications')
 
 
 const salt = bcrypt.genSaltSync(10);
@@ -95,6 +96,7 @@ const addSPM = async (req, res) => {
       // group_total_comment
     });
     res.json(spmAdd);
+    sendSlackNotification(JSON.stringify(spmAdd),"DB-spm")
   });
 
   // try {

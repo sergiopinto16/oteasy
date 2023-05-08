@@ -19,7 +19,10 @@ const gasRoutes = require('./routes/gas')
 const spmRoutes = require('./routes/spm')
 
 
+const sendSlackNotification = require('./slackNotifications')
 
+// Add timestamp 
+sendSlackNotification("APP start")
 
 // TODO How to connect multiple urls ???
 app.use(cors({ credentials: true, origin: process.env.URL_PRIVILEGIES }));
