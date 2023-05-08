@@ -1,7 +1,8 @@
 // import fetch from 'node-fetch';
+require('dotenv').config()
 
 // Replace with the webhook URL you saved earlier
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
 async function sendSlackNotification(message,username="DB-bot") {
   const payload = {
