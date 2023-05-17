@@ -65,7 +65,7 @@ const profileUser = (req, res) => {
 // logout User
 // app.post('/logout', 
 const logoutUser = (req, res) => {
-    console.log("Logout post req = ",req)
+    console.log("Logout post")
     const { username } = req.body;
     console.log("username = ",username)
     dict_json = {'username':username}

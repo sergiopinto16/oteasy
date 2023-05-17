@@ -35,7 +35,7 @@ const Navbar = () => {
         fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
-            body: JSON.stringify({ username}),
+            body: JSON.stringify({ 'username':username}),
             headers: { 'Content-Type': 'application/json' },
         });
         setUserInfo(null);
