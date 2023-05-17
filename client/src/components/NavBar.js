@@ -30,7 +30,7 @@ const Navbar = () => {
         });
     }, []);
 
-    function logout() {
+    function logout(username) {
         console.log("NavBar Logout username = ", username)
         fetch(api_host + '/api/user/logout', {
             credentials: 'include',
@@ -88,7 +88,7 @@ const Navbar = () => {
                 username && (
                     <>
                         {/* <Link to="/create">Create new post</Link> */}
-                        <a onClick={logout}><Link to="/"> Logout ({username}) </Link></a>
+                        <a onClick={logout(username)}><Link to="/"> Logout ({username}) </Link></a>
                     </>
                 )
             }
