@@ -31,7 +31,6 @@ const Navbar = () => {
     }, []);
 
     function logout() {
-        const username = userInfo?.username;
         console.log("NavBar Logout username = ", username)
         fetch(api_host + '/api/user/logout', {
             credentials: 'include',
