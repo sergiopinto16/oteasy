@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
 import './style/NavBar.css'
+import { Navigate } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -20,6 +21,8 @@ const gas_report_credentials = 1
 
 const Navbar = () => {
     const { setUserInfo, userInfo } = useContext(UserContext);
+    const [redirect, setRedirect] = useState(false);
+
     useEffect(() => {
         fetch(api_host + '/api/user/profile', {
             credentials: 'include',
@@ -31,15 +34,22 @@ const Navbar = () => {
     }, []);
 
     
-    const logout = (username) => () => {
+    async function logout(ev){
+        ev.preventDefault();
+        const username = userInfo?.username;
         console.log("NavBar Logout username = ", username)
-        fetch(api_host + '/api/user/logout', {
+        const response = await fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
             body: JSON.stringify({ 'username':username}),
             headers: { 'Content-Type': 'application/json' },
         });
         setUserInfo(null);
+        setRedirect(true);
+    }
+
+    if (redirect) {
+        return <Navigate to={'/'} />
     }
 
     console.log("NavBar.js | userInfo = " + userInfo?.username)
@@ -89,7 +99,7 @@ const Navbar = () => {
                 username && (
                     <>
                         {/* <Link to="/create">Create new post</Link> */}
-                        <a onClick={logout(username)}><Link to="/"> Logout ({username}) </Link></a>
+                        <a onClick={logout}> Logout ({username})</a>
                     </>
                 )
             }
