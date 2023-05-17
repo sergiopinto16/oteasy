@@ -36,6 +36,7 @@ const Navbar = () => {
             credentials: 'include',
             method: 'POST',
             body: JSON.stringify({ username}),
+            headers: { 'Content-Type': 'application/json' },
         });
         setUserInfo(null);
     }
