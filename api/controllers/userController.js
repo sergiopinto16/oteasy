@@ -65,8 +65,11 @@ const profileUser = (req, res) => {
 // logout User
 // app.post('/logout', 
 const logoutUser = (req, res) => {
+    console.log("Logout post")
     const { username, password } = req.body;
+    console.log("username = ",username)
     dict_json = {'username':username}
+    console.log("Send slack = ",dict_json)
     sendSlackNotification(JSON.stringify(dict_json),"DB-userLogout")
     res.cookie('token', '').json('ok');
 }
