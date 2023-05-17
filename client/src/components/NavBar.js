@@ -20,6 +20,7 @@ const spm_credentials = 0
 const gas_report_credentials = 1
 
 const Navbar = () => {
+    
     const { setUserInfo, userInfo } = useContext(UserContext);
     const [redirect, setRedirect] = useState(false);
 
@@ -33,10 +34,13 @@ const Navbar = () => {
         });
     }, []);
 
+    console.log("NavBar.js | userInfo = " + userInfo?.username)
+    const username = userInfo?.username;
+    const credentials_level = userInfo?.credentials_level;
+    console.log("NavBar.js | credentials_level =" + credentials_level)
     
     async function logout(ev){
         ev.preventDefault();
-        const username = userInfo?.username;
         console.log("NavBar Logout username = ", username)
         const response = await fetch(api_host + '/api/user/logout', {
             credentials: 'include',
@@ -52,10 +56,6 @@ const Navbar = () => {
         return <Navigate to={'/'} />
     }
 
-    console.log("NavBar.js | userInfo = " + userInfo?.username)
-    const username = userInfo?.username;
-    const credentials_level = userInfo?.credentials_level;
-    console.log("NavBar.js | credentials_level =" + credentials_level)
 
     return (
         <nav>
