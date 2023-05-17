@@ -31,9 +31,11 @@ const Navbar = () => {
     }, []);
 
     function logout() {
+        const username = userInfo?.username;
         fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
+            body: JSON.stringify({ username}),
         });
         setUserInfo(null);
     }
