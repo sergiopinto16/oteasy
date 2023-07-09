@@ -6,23 +6,23 @@ import './style.css'
 
 
 
-import config  from './../../config/config.json';
+import config from './../../config/config.json';
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
 
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
   const { setUserInfo } = useContext(UserContext);
-  
+
   async function login(ev) {
     ev.preventDefault();
-    const response = await fetch(api_host+ '/api/user/login', {
+    const response = await fetch(api_host + '/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
@@ -43,10 +43,10 @@ export default function LoginPage() {
   return (
     <form className="login" onSubmit={login}>
       <h1>Login</h1>
-      <input type="text"
-        placeholder="username"
-        value={username}
-        onChange={ev => setUsername(ev.target.value)} />
+      <input type="email"
+        placeholder="email"
+        value={email}
+        onChange={ev => setEmail(ev.target.value)} />
       <input type="password"
         placeholder="password"
         value={password}

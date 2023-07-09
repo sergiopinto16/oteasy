@@ -7,6 +7,8 @@ const {
     logoutUser
 } = require('../controllers/userController')
 
+const { collectEmail, confirmEmail } = require('../controllers/email/emailController')
+
 const router = express.Router()
 
 
@@ -31,20 +33,23 @@ router.patch('/:id',updateUser)
 
 
 // register user
-router.post('/register',registerUser)
+router.post('/register', registerUser)
 
 
 // login user
-router.post('/login',loginUser)
+router.post('/login', loginUser)
 
 
 // profile User
-router.get('/profile',profileUser)
+router.get('/profile', profileUser)
 
 
 // logout User
 router.post('/logout', logoutUser)
 
+router.post('/email', collectEmail)
+
+router.post('/email/confirm/:id', confirmEmail)
 
 
 module.exports = router

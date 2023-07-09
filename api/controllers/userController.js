@@ -1,4 +1,8 @@
 const User = require('../models/userModel')
+const sendEmail = require('./email/emailSend')
+const msgs = require('./email/emailMsgs')
+const templates = require('./email/emailTemplates')
+
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -12,14 +16,22 @@ const secret = 'asdfe45we45w345wegw345werjktjwertkj';
 // register user
 // app.post('/register',
 const registerUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { name, email, password } = req.body;
+    console.log(name)
+    console.log(email)
+    console.log(password)
+
+    //TODO : Check if email exist (new user)
     try {
         const userDoc = await User.create({
-            username,
+            name,
+            email,
             password: bcrypt.hashSync(password, salt),
-        });
+        }).then(newUser => sendEmail(newUser.email, templates.confirm(newUser._id)))
+            // .then(() => res.json({ msg: msgs.confirm }))
+            // .catch(err => console.log(err))
         res.json(userDoc);
-        sendSlackNotification(JSON.stringify(userDoc),"DB-userRegister")
+        sendSlackNotification(JSON.stringify(userDoc), "DB-userRegister")
     } catch (e) {
         console.log(e);
         res.status(400).json(e);
@@ -30,23 +42,31 @@ const registerUser = async (req, res) => {
 // login user
 // app.post('/login',
 const loginUser = async (req, res) => {
-    const { username, password } = req.body;
-    const userDoc = await User.findOne({ username });
-    const passOk = bcrypt.compareSync(password, userDoc.password);
-    if (passOk) {
-        console.log(userDoc)
-        sendSlackNotification(JSON.stringify(userDoc),"DB-userLogin")
-        // logged in
-        jwt.sign({ username, id: userDoc._id}, secret, {}, (err, token) => {
-            if (err) throw err;
-            res.cookie('token', token).json({
-                id: userDoc._id,
-                username,
-                credentials_level:userDoc.credentials_level
+    const { email, password } = req.body;
+    const name = "NoUser"
+    const userDoc = await User.findOne({ email }).lean();
+    console.log(userDoc)
+    if (userDoc===null){
+        res.status(400).json('user dont exist');
+    }
+    else{
+        const passOk = bcrypt.compareSync(password, userDoc.password);
+        if (passOk) {
+            console.log(userDoc)
+            sendSlackNotification(JSON.stringify(userDoc), "DB-userLogin")
+            // logged in
+            jwt.sign({ email, name, id: userDoc._id }, secret, {}, (err, token) => {
+                if (err) throw err;
+                res.cookie('token', token).json({
+                    id: userDoc._id,
+                    email,
+                    name: userDoc.name,
+                    credentials_level: userDoc.credentials_level
+                });
             });
-        });
-    } else {
-        res.status(400).json('wrong credentials');
+        } else {
+            res.status(400).json('wrong credentials');
+        }
     }
 }
 
@@ -66,11 +86,11 @@ const profileUser = (req, res) => {
 // app.post('/logout', 
 const logoutUser = (req, res) => {
     console.log("Logout post")
-    const { username } = req.body;
-    console.log("username = ",username)
-    dict_json = {'username':username}
-    console.log("Send slack = ",dict_json)
-    sendSlackNotification(JSON.stringify(dict_json),"DB-userLogout")
+    const { email } = req.body;
+    console.log("email = ", email)
+    dict_json = { 'email': email }
+    console.log("Send slack = ", dict_json)
+    sendSlackNotification(JSON.stringify(dict_json), "DB-userLogout")
     res.cookie('token', '').json('ok');
 }
 

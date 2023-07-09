@@ -35,17 +35,18 @@ const Navbar = () => {
     }, []);
 
     console.log("NavBar.js | userInfo = " + userInfo?.username)
-    const username = userInfo?.username;
+    const email = userInfo?.email;
+    const name = userInfo?.name;
     const credentials_level = userInfo?.credentials_level;
     console.log("NavBar.js | credentials_level =" + credentials_level)
     
     async function logout(ev){
         ev.preventDefault();
-        console.log("NavBar Logout username = ", username)
+        console.log("NavBar Logout email = ", email)
         const response = await fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
-            body: JSON.stringify({ 'username':username}),
+            body: JSON.stringify({ 'email':email}),
             headers: { 'Content-Type': 'application/json' },
         });
         setUserInfo(null);
@@ -61,7 +62,7 @@ const Navbar = () => {
         <nav>
 
 
-            {username && credentials_level !== undefined && (
+            {email && credentials_level !== undefined && (
                 <>
                     {credentials_level[spm_credentials] === 1 && (
                         <>
@@ -84,7 +85,7 @@ const Navbar = () => {
             Clients - OT
             */}
             {
-                username && credentials_level !== undefined && (
+                email && credentials_level !== undefined && (
                     <>
                         {credentials_level[gas_report_credentials] === 1 && (
                             <>
@@ -96,15 +97,15 @@ const Navbar = () => {
 
 
             {
-                username && (
+                email && (
                     <>
                         {/* <Link to="/create">Create new post</Link> */}
-                        <a onClick={logout}> Logout ({username})</a>
+                        <a onClick={logout}> Logout ({name})</a>
                     </>
                 )
             }
             {
-                !username && (
+                !email && (
                     <>
                         <Link to="/login">Login</Link>
                         <Link to="/register">Register</Link>

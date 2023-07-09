@@ -9,12 +9,16 @@ form.login, form.register{
     margin: 0 auto;
 }
 
-input{
+input, input.form-control{
     display: block;
     margin-bottom: 5px;
-    width: 100%;
+    width: 200px;
     padding: 5px 7px;
     border: 2px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
+}
+
+.show_password_checkbox input{
+    display: inline-block
 }
