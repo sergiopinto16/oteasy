@@ -20,17 +20,25 @@ const spm_credentials = 0
 const gas_report_credentials = 1
 
 const Navbar = () => {
-    
-    const { setUserInfo, userInfo } = useContext(UserContext);
+
+    const { userInfo, setUserInfo } = useContext(UserContext);
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         fetch(api_host + '/api/user/profile', {
             credentials: 'include',
         }).then(response => {
-            response.json().then(userInfo => {
-                setUserInfo(userInfo);
-            });
+            if(response.ok){
+                response.json().then(userInfo => {
+                    setUserInfo(userInfo);
+                });
+            }
+            else{
+                throw new Error('No profile')
+            }
+        }).catch((error) => {
+            console.log(error)
+            setUserInfo({ });
         });
     }, []);
 
@@ -39,18 +47,20 @@ const Navbar = () => {
     const name = userInfo?.name;
     const credentials_level = userInfo?.credentials_level;
     console.log("NavBar.js | credentials_level =" + credentials_level)
-    
-    async function logout(ev){
+
+    async function logout(ev) {
         ev.preventDefault();
         console.log("NavBar Logout email = ", email)
         const response = await fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
-            body: JSON.stringify({ 'email':email}),
+            body: JSON.stringify({ 'email': email }),
             headers: { 'Content-Type': 'application/json' },
         });
-        setUserInfo(null);
-        setRedirect(true);
+        setUserInfo({});
+        // setRedirect(true);
+        window.location.replace("/")
+
     }
 
     if (redirect) {

@@ -32,7 +32,7 @@ export default function SpmRadioAnswer({ name, color, callbackValueRadio, text }
 
     <div id="radio_checkbox">
 
-      <RadioGroup horizontal cssClass='radio_buttons' onChange={(value) => callbackValueRadio(name, value)} >
+      <RadioGroup horizontal onChange={(value) => callbackValueRadio(name, value)} >
         <RadioButton value="1" rootColor={'gray'} pointColor={color} >
           {/* Nunca */}{nunca}
         </RadioButton>
