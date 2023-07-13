@@ -24,27 +24,41 @@ const Navbar = () => {
     const { userInfo, setUserInfo } = useContext(UserContext);
     const [redirect, setRedirect] = useState(false);
 
-    useEffect(() => {
-        fetch(api_host + '/api/user/profile', {
-            credentials: 'include',
-        }).then(response => {
-            if(response.ok){
-                response.json().then(userInfo => {
-                    setUserInfo(userInfo);
-                });
-            }
-            else{
-                throw new Error('No profile')
-            }
-        }).catch((error) => {
-            console.log(error)
-            setUserInfo({ });
-        });
-    }, []);
+    // Dont understand how information change this userInfo
+    // useEffect(() => {
+    //     let userToken = localStorage.getItem("userInfo")
+    //     console.log("useEffect NavBar token = " + userToken)
 
-    console.log("NavBar.js | userInfo = " + userInfo?.username)
+    //     //TODO cehck if ok in api
+
+    //     const response = fetch(api_host + '/api/user/profile', {
+    //         method: 'POST',
+    //         body: JSON.stringify({ "token": userToken }),
+    //         headers: { 'Content-Type': 'application/json' },
+    //         credentials: 'include',
+    //     });
+    //     console.log(response)
+    //     console.log(response.ok)
+    //     if (response.ok) {
+    //         response.json().then(userInfo => {
+    //             setUserInfo(userInfo);
+    //         });
+    //     }
+    //     else {
+    //         setUserInfo({})
+    //         console.log('useEffect NavBar No profile')
+    //     }
+
+    //     // setUserInfo(localStorage.getItem("userInfo"))
+
+    //     // console.log("NavBar UserInfo = " + userInfo)
+    //     // console.log("NavBar UserInfo.token = " + userInfo.token)
+    // }, []);
+
     const email = userInfo?.email;
+    console.log("NavBar.js | email =" + email)
     const name = userInfo?.name;
+    console.log("NavBar.js | name = " + name)
     const credentials_level = userInfo?.credentials_level;
     console.log("NavBar.js | credentials_level =" + credentials_level)
 
@@ -56,11 +70,14 @@ const Navbar = () => {
             method: 'POST',
             body: JSON.stringify({ 'email': email }),
             headers: { 'Content-Type': 'application/json' },
-        });
-        setUserInfo({});
+        }).catch(console.error);
+        
+        // setUserInfo({});
+        // console.log("Remove item from localStorage = " +localStorage.getItem("userInfo"))
+        // localStorage.removeItem("userInfo");
+        // console.log("Item removed = " + localStorage.getItem("userInfo"))
+        window.location.replace("/");
         // setRedirect(true);
-        window.location.replace("/")
-
     }
 
     if (redirect) {
@@ -70,42 +87,6 @@ const Navbar = () => {
 
     return (
         <nav>
-
-
-            {email && credentials_level !== undefined && (
-                <>
-                    {credentials_level[spm_credentials] === 1 && (
-                        <>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item> <Link to="/spm/spm-casa">SPM Casa</Link></Dropdown.Item>
-                                    <Dropdown.Item> <Link to="/spm/spm-escola">SPM Escola</Link></Dropdown.Item>
-                                    <Dropdown.Item> <Link to="/spm/spm-pcasa">SPM-p Casa</Link></Dropdown.Item>
-                                    <Dropdown.Item  ><Link to="/spm/spm-pescola">SPM-p Escola</Link></Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </>)}
-                </>
-            )
-            }
-            {/* 
-            SPMs 
-            GasReport
-            Clients - OT
-            */}
-            {
-                email && credentials_level !== undefined && (
-                    <>
-                        {credentials_level[gas_report_credentials] === 1 && (
-                            <>
-                                <Link to="/gas/gasReports">Gas Reports</Link>
-                            </>)}
-                    </>
-                )
-            }
-
-
             {
                 email && (
                     <>

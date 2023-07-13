@@ -17,7 +17,7 @@ const fs = require('fs');
 const userRoutes = require('./routes/users')
 const gasRoutes = require('./routes/gas')
 const spmRoutes = require('./routes/spm')
-
+const clientRoutes = require('./routes/client')
 
 const sendSlackNotification = require('./slackNotifications')
 
@@ -39,6 +39,7 @@ app.use((req, res, next) => {
 
 
 // routes
+app.use('/api/client/',clientRoutes)
 app.use('/api/user/', userRoutes)
 app.use('/api/gas/', gasRoutes)
 app.use('/api/spm/', spmRoutes)

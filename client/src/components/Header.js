@@ -9,7 +9,6 @@ export default function Header() {
     <header>
       <div className="header-color">
         <div className="header-content">
-          <Link to="/" className="logo">OTeasy</Link>
           <div className="header-nav">
             <Navbar />
           </div>

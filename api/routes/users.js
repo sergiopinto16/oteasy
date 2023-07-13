@@ -47,9 +47,9 @@ router.get('/profile', profileUser)
 // logout User
 router.post('/logout', logoutUser)
 
-router.post('/email', collectEmail)
+router.get('/email', collectEmail)
 
-router.post('/email/confirm/:id', confirmEmail)
+router.get('/email/confirm/:id', confirmEmail)
 
 
 module.exports = router

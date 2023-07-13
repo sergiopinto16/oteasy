@@ -4,7 +4,7 @@ const msgs = require('./emailMsgs')
 const templates = require('./emailTemplates')
 
 // The callback that is invoked when the user submits the form on the client.
-exports.collectEmail = (req, res) => {
+const collectEmail = async (req, res) => {
   const { email } = req.body
 
   User.findOne({ email })
@@ -36,9 +36,9 @@ exports.collectEmail = (req, res) => {
 
 // The callback that is invoked when the user visits the confirmation
 // url on the client and a fetch request is sent in componentDidMount.
-exports.confirmEmail = (req, res) => {
+const confirmEmail = async (req, res) => {
   const { id } = req.params
-
+  console.log(id)
   User.findById(id)
     .then(user => {
 
@@ -52,7 +52,7 @@ exports.confirmEmail = (req, res) => {
       // The user exists but has not been confirmed. We need to confirm this 
       // user and let them know their email address has been confirmed.
       else if (user && !user.confirmed) {
-        User.findByIdAndUpdate(id, { confirmed: true })
+        User.findByIdAndUpdate(id, { confirmed: true, credentials_level:[1,0,0,0,0,0,0,0,0,0]})
           .then(() => res.json({ msg: msgs.confirmed }))
           .catch(err => console.log(err))
       }
@@ -65,3 +65,18 @@ exports.confirmEmail = (req, res) => {
     })
     .catch(err => console.log(err))
 }
+
+
+
+module.exports = {
+  collectEmail,
+  confirmEmail
+}
+
+// {"_id":{"$oid":"64ae7da50be5fed1017145cf"},
+// "name":"Sérgio (x)",
+// "email":"xergio.17@gmail.com",
+// "password":"$2a$10$4StZQQr0467/pPZaMYs5YON2T9/yCvdC2JMtYwTdpMYsrD/o7kh2O",
+// "credentials_level":[{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"},{"$numberInt":"0"}],
+// "confirmed":true,
+// "__v":{"$numberInt":"0"}}

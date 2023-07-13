@@ -1,14 +1,12 @@
+require('dotenv').config()
+
 const Gas = require('../models/gasReport')
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
 
-
-const salt = bcrypt.genSaltSync(10);
-const secret = 'asdfe45we45w345wegw345werjktjwertkj';
-
-
+const secret = process.env.SECRET;
 
 // add gas report
 // app.post('/add',

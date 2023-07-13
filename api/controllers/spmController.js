@@ -5,9 +5,7 @@ const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
 
 
-const salt = bcrypt.genSaltSync(10);
-const secret = 'asdfe45we45w345wegw345werjktjwertkj';
-
+const secret = process.env.SECRET;
 
 
 // add gas report

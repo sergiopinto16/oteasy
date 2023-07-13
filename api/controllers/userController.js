@@ -1,3 +1,6 @@
+// https://blog.bitsrc.io/email-confirmation-with-react-257e5d9de725
+require('dotenv').config()
+
 const User = require('../models/userModel')
 const sendEmail = require('./email/emailSend')
 const msgs = require('./email/emailMsgs')
@@ -9,7 +12,7 @@ const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
 
 const salt = bcrypt.genSaltSync(10);
-const secret = 'asdfe45we45w345wegw345werjktjwertkj';
+const secret = process.env.SECRET;
 
 
 
@@ -22,19 +25,29 @@ const registerUser = async (req, res) => {
     console.log(password)
 
     //TODO : Check if email exist (new user)
-    try {
-        const userDoc = await User.create({
-            name,
-            email,
-            password: bcrypt.hashSync(password, salt),
-        }).then(newUser => sendEmail(newUser.email, templates.confirm(newUser._id)))
-            // .then(() => res.json({ msg: msgs.confirm }))
-            // .catch(err => console.log(err))
-        res.json(userDoc);
-        sendSlackNotification(JSON.stringify(userDoc), "DB-userRegister")
-    } catch (e) {
-        console.log(e);
-        res.status(400).json(e);
+    const userDoc = await User.findOne({ email }).lean();
+    console.log(userDoc)
+    if (userDoc !== null) {
+        res.status(400).json('User already exist in BD');
+    }
+    else {
+        try {
+            const userDocCreated = await User.create({
+                name,
+                email,
+                password: bcrypt.hashSync(password, salt),
+            }).then(newUser => {
+                sendEmail(newUser.email, templates.confirm(newUser._id));
+                console.log(newUser);
+                sendSlackNotification(JSON.stringify(newUser), "DB-userRegister");
+                res.json(newUser);
+            })
+                // .then(() => res.json({ msg: msgs.confirm }))
+                .catch(err => console.log(err));
+        } catch (e) {
+            console.log(e);
+            res.status(400).json(e);
+        }
     }
 }
 
@@ -46,24 +59,36 @@ const loginUser = async (req, res) => {
     const name = "NoUser"
     const userDoc = await User.findOne({ email }).lean();
     console.log(userDoc)
-    if (userDoc===null){
+    if (userDoc === null) {
         res.status(400).json('user dont exist');
     }
-    else{
+    else {
         const passOk = bcrypt.compareSync(password, userDoc.password);
         if (passOk) {
             console.log(userDoc)
-            sendSlackNotification(JSON.stringify(userDoc), "DB-userLogin")
             // logged in
+
+
+
             jwt.sign({ email, name, id: userDoc._id }, secret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie('token', token).json({
-                    id: userDoc._id,
-                    email,
-                    name: userDoc.name,
-                    credentials_level: userDoc.credentials_level
-                });
+
+                //only send token
+                if (userDoc.confirmed) {
+                    // res.cookie('token', token).json({
+                    //     id: userDoc._id,
+                    //     email,
+                    //     name: userDoc.name,
+                    //     credentials_level: userDoc.credentials_level
+                    // });
+                    sendSlackNotification(JSON.stringify(userDoc), "DB-userLogin")
+                    res.cookie('token', token).json({ sucess: true, err: null });
+                }
+                else {
+                    res.status(401).json('user not confirmed')
+                }
             });
+
         } else {
             res.status(400).json('wrong credentials');
         }
@@ -73,25 +98,49 @@ const loginUser = async (req, res) => {
 
 // profile User
 // app.get('/profile',
-const profileUser = (req, res) => {
+const profileUser = async (req, res) => {
     const { token } = req.cookies;
-    jwt.verify(token, secret, {}, (err, info) => {
-        if (err) throw err;
-        res.json(info);
+    // const { token } = req.body;
+    console.log("ProfileUser token = " + token)
+
+    if (token == null) {
+        res.status(400).json("No token");
+        return;
+    }
+
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) {
+            res.status(400).json(err);
+            return;
+        }
+
+        // console.log("Return Info = " + info);
+        console.log(info.email);
+        let token_email = info.email;
+        console.log("token_email = " + token_email);
+        const userDoc = await User.findOne({ "email": info.email });
+        console.log(userDoc)
+        //return only name, email, ... (filter)
+        res.json({ "email": userDoc.email, "name": userDoc.name, "credentials_level": userDoc.credentials_level });
+
     });
+
 }
 
 
 // logout User
 // app.post('/logout', 
 const logoutUser = (req, res) => {
+
+    //TODO Logout token
+
     console.log("Logout post")
     const { email } = req.body;
     console.log("email = ", email)
     dict_json = { 'email': email }
     console.log("Send slack = ", dict_json)
     sendSlackNotification(JSON.stringify(dict_json), "DB-userLogout")
-    res.cookie('token', '').json('ok');
+    res.cookie('token', '').json('Logout done!');
 }
 
 

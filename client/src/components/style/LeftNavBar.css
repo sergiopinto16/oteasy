@@ -1,0 +1,33 @@
+.left-navbar{
+    background: #e2e1e1;
+    /* min-height: 800px; */
+    height: 100%;
+    width: 200px;
+    /* top: 66px; */
+    padding: 10px;
+
+    position: fixed;
+    
+    /* left: 0; */
+    transition: 0.5s;
+
+    display: block;
+}
+
+.left-navbar-element{
+    padding: 10px;
+}
+
+a{
+    text-decoration:none;
+    color: inherit;
+}
+
+header a{
+    text-decoration:none;
+    color: inherit;
+}
+a.logo{
+    font-weight: bold;
+    font-size: 1.5rem;
+}

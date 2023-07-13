@@ -13,10 +13,11 @@ const api_host = config.api.host
 
 
 export default function LoginPage() {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const { setUserInfo } = useContext(UserContext);
+  
 
   async function login(ev) {
     ev.preventDefault();
@@ -26,14 +27,28 @@ export default function LoginPage() {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
+
+    console.log(response)
     if (response.ok) {
       response.json().then(userInfo => {
-        setUserInfo(userInfo);
+        console.log(userInfo);
+        // console.log(userInfo.token)
+        // localStorage.setItem('userInfo', userInfo.token);
+
         console.log("Redirect to home page!")
-        setRedirect(true);
+        window.location.replace("/");
+        // setRedirect(true);
+
       });
     } else {
-      alert('wrong credentials');
+      //TODO - add not email registed, ...
+      // console.log(response)
+      if (response.status === 401) {
+        alert('Please confirm email')
+      }
+      else {
+        alert('wrong credentials');
+      }
     }
   }
 
