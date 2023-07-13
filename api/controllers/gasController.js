@@ -27,7 +27,7 @@ const addGasReport = async (req, res) => {
             author: info.id,
         });
         res.json(gasReportAdd);
-        sendSlackNotification(JSON.stringify(gasReportAdd),"DB-gasReport")
+        sendSlackNotification(JSON.stringify(gasReportAdd), "DB-gasReport")
     });
 
     // try {
@@ -49,8 +49,13 @@ const addGasReport = async (req, res) => {
 // get all Gas Reports
 // app.get('/gasReports',
 const gasReports = async (req, res) => {
-    const gasReports = await Gas.find({}).sort({ createdAt: -1 })
-    res.status(200).json(gasReports)
+    const { token } = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+
+        const gasReports = await Gas.find({}).sort({ createdAt: -1 })
+        res.status(200).json(gasReports)
+    }
 }
 
 
