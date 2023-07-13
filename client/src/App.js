@@ -26,36 +26,48 @@ import GasReportIndex from './pages/Car/IndexPage'
 import ClientRegister from './pages/ClientAccount/RegisterPage'
 import Clients from './pages/ClientAccount/IndexPage'
 
+import { UserContext } from "./UserContext";
+
+
 
 
 function App() {
 
+  const { userInfo, setUserInfo } = useContext(UserContext);
+
+
   return (
 
-    <UserContextProvider>
+    <nav>
+      < UserContextProvider >
 
-      <Routes>
-        <Route path="/" element={<Layout />} >
-          <Route index element={<IndexPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/confirm/:id" element={<ConfirmPage />} />
-          <Route path="/create" element={<CreatePost />} />
-          <Route path="/post/:id" element={<PostPage />} />
-          <Route path="/edit/:id" element={<EditPost />} />
-          <Route path="/spm/spm-casa" element={<SpmCasa />} />
-          <Route path="/spm/spm-escola" element={<SpmEscola />} />
-          <Route path="/spm/spm-pcasa" element={<SpmpCasa />} />
-          <Route path="/spm/spm-pescola" element={<SpmpEscola />} />
-          {/* Gas Report */}
-          <Route path="/gas/add" element={<GasReportForm />} />
-          <Route path="/gas/gasReports" element={<GasReportIndex />} />
-          <Route path="/client/register" element={<ClientRegister />}> </Route>
-          <Route path="/client/clients" element={<Clients />}> </Route>
-          <Route path='*' element={<NotFound />} />
-        </Route>
-      </Routes>
-    </UserContextProvider>
+        <Routes>
+          <Route path="/" element={<Layout />} >
+            <Route index element={<IndexPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/confirm/:id" element={<ConfirmPage />} />
+
+            {userInfo?.email!==undefined && (
+              <>
+                <Route path="/create" element={<CreatePost />} />
+                <Route path="/post/:id" element={<PostPage />} />
+                <Route path="/edit/:id" element={<EditPost />} />
+                <Route path="/spm/spm-casa" element={<SpmCasa />} />
+                <Route path="/spm/spm-escola" element={<SpmEscola />} />
+                <Route path="/spm/spm-pcasa" element={<SpmpCasa />} />
+                <Route path="/spm/spm-pescola" element={<SpmpEscola />} />
+                {/* Gas Report */}
+                <Route path="/gas/add" element={<GasReportForm />} />
+                <Route path="/gas/gasReports" element={<GasReportIndex />} />
+                <Route path="/client/register" element={<ClientRegister />} />
+                <Route path="/client/clients" element={<Clients />} />
+              </>)}
+            <Route path='*' element={<NotFound />} />
+          </Route>
+        </Routes >
+      </UserContextProvider >
+    </nav >
   );
 }
 
