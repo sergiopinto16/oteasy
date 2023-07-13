@@ -73,7 +73,7 @@ const LeftNavBar = () => {
         <nav>
             <div className="left-navbar">
                 <div className="left-navbar-element">
-                    <Link to="/" className="logo">OTeasy</Link>
+                    <Link to="/" className="logo">VeSiTO</Link>
                 </div>
 
                 {/* SPMs | Clients */}
