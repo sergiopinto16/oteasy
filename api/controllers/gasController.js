@@ -55,7 +55,7 @@ const gasReports = async (req, res) => {
 
         const gasReports = await Gas.find({}).sort({ createdAt: -1 })
         res.status(200).json(gasReports)
-    }
+    });
 }
 
 
