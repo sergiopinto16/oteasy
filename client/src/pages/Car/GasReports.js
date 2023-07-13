@@ -2,7 +2,19 @@ import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
 import './GasReports.css'
 
-export default function GasReports({ _id, car_plate, car_km, quantity, price,createdAt }) {
+import { useContext, useEffect, useState, useRef } from "react";
+import { UserContext } from "../../UserContext";
+
+
+export default function GasReports({ _id, car_plate, car_km, quantity, price, createdAt }) {
+
+  const { userInfo, setUserInfo } = useContext(UserContext);
+
+  if (userInfo?.email === undefined) {
+    console.log("Not logged, return to home")
+    window.location.replace("/");
+  }
+
 
   return (
 

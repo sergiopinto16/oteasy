@@ -29,6 +29,7 @@ import { spmPDF } from './components/pdf';
 import TableWithRadioButtons from '../../components/SpmTableQuestionGroup'
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas'
+import { UserContext } from "../../UserContext";
 
 
 import config from '../../config/config.json';
@@ -64,7 +65,12 @@ let rows = [
 
 export default function SPMpEscola() {
 
+    const { userInfo, setUserInfo } = useContext(UserContext);
 
+    if (userInfo?.email === undefined) {
+        console.log("Not logged, return to home")
+        window.location.replace("/");
+    }
     const [valueArray, setValueArray] = useState([]);
     const [questionArray, setQuestionArray] = useState([]);
 

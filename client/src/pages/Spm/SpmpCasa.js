@@ -32,6 +32,9 @@ import html2canvas from 'html2canvas'
 
 import config from '../../config/config.json';
 
+import { UserContext } from "../../UserContext";
+
+
 const api_host = config.api.host
 const spm_type = 2
 
@@ -63,7 +66,12 @@ let rows = [
 
 export default function SPMpCasa() {
 
+    const { userInfo, setUserInfo } = useContext(UserContext);
 
+    if (userInfo?.email === undefined) {
+        console.log("Not logged, return to home")
+        window.location.replace("/");
+    }
 
     const [valueArray, setValueArray] = useState([]);
     const [questionArray, setQuestionArray] = useState([]);

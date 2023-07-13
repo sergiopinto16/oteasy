@@ -1,18 +1,26 @@
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import './GasReportForm.css'
-import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 
+import { useContext, useEffect, useState, useRef } from "react";
+import { UserContext } from "../../UserContext";
 
-import config  from './../../config/config.json';
+import config from './../../config/config.json';
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
 
 
 export default function CreateReport() {
+    const { userInfo, setUserInfo } = useContext(UserContext);
+
+    if (userInfo?.email === undefined) {
+        console.log("Not logged, return to home")
+        window.location.replace("/");
+    }
+
 
     const [car_plate, setCarPlate] = useState('CORSA | 82-RB-05');
     const [car_km, setKmCar] = useState('');
@@ -37,8 +45,8 @@ export default function CreateReport() {
         if (response.ok) {
             setRedirect(true);
         } else {
-            
-            alert('error adding to db - ' +response);
+
+            alert('error adding to db - ' + response);
         }
     }
 

@@ -1,11 +1,13 @@
 import ClientsReports from "./ClientReports";
-import { useEffect, useState } from "react";
-import {Link, Route, Routes} from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
 
 
+import { useContext, useEffect, useState, useRef } from "react";
+import { UserContext } from "../../UserContext";
 
-import config  from './../../config/config.json';
+
+import config from './../../config/config.json';
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
@@ -14,6 +16,14 @@ const api_host = config.api.host
 // TODO - if not logged and not credentials redirect to home page or show message not credentials 
 
 export default function IndexPage() {
+
+  const { userInfo, setUserInfo } = useContext(UserContext);
+
+  if (userInfo?.email === undefined) {
+    console.log("Not logged, return to home")
+    window.location.replace("/");
+  }
+
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
@@ -33,7 +43,7 @@ export default function IndexPage() {
 
 
       {clients.length > 0 && clients.map(clients => (
-        <ClientsReports key={clients._id} {...clients} /> 
+        <ClientsReports key={clients._id} {...clients} />
       ))}
     </>
   );

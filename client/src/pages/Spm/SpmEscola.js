@@ -29,6 +29,8 @@ import { spmPDF } from './components/pdf';
 import TableWithRadioButtons from '../../components/SpmTableQuestionGroup'
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas'
+import { UserContext } from "../../UserContext";
+
 
 
 import config from '../../config/config.json';
@@ -65,6 +67,12 @@ let rows = [
 
 export default function SPMEscola() {
 
+    const { userInfo, setUserInfo } = useContext(UserContext);
+
+    if (userInfo?.email === undefined) {
+        console.log("Not logged, return to home")
+        window.location.replace("/");
+    }
 
     document.title += " - SPM ESCOLA"
 
@@ -353,7 +361,7 @@ export default function SPMEscola() {
 
 
             <div className="button_form_download" >
-                <button  className="spm_escola" onClick={() => window.open(require('../../static/SPM/docs/SPM_Escola_TUDO_COMPLETO(5-12Anos).pdf'), '_none')}> Donwload Formulário</button>
+                <button className="spm_escola" onClick={() => window.open(require('../../static/SPM/docs/SPM_Escola_TUDO_COMPLETO(5-12Anos).pdf'), '_none')}> Donwload Formulário</button>
             </div>
 
             <h1 className="title spm_escola">SPM ESCOLA</h1>
@@ -841,7 +849,7 @@ export default function SPMEscola() {
 
             <div className="spm_calculate_button">
 
-                <button className="spm_escola"onClick={calculate_spm_escola}>Export to  PDF (NOT WORKING)</button>
+                <button className="spm_escola" onClick={calculate_spm_escola}>Export to  PDF (NOT WORKING)</button>
 
 
 

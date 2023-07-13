@@ -1,7 +1,6 @@
 
 
 
-import { useContext, useEffect, useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
 // import {UserContext} from "../UserContext";
 import SpmRadioAnswer from "../../components/SpmRadioAnswer";
@@ -30,6 +29,8 @@ import TableWithRadioButtons from '../../components/SpmTableQuestionGroup'
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas'
 
+import { useContext, useEffect, useState, useRef } from "react";
+import { UserContext } from "../../UserContext";
 
 
 import config from '../../config/config.json';
@@ -67,6 +68,13 @@ let rows = [
 
 
 export default function SpmCasa() {
+
+    const { userInfo, setUserInfo } = useContext(UserContext);
+
+    if (userInfo?.email === undefined) {
+        console.log("Not logged, return to home")
+        window.location.replace("/");
+    }
 
     document.title += " - SPM CASA"
 
@@ -348,6 +356,8 @@ export default function SpmCasa() {
         ];
 
         console.log(rows)
+
+
     }, [updateTabel])
 
 
@@ -360,19 +370,22 @@ export default function SpmCasa() {
     //   if (redirect) {
     //     return <Navigate to={'/'} />
     //   }
+
+
+
     return (
 
         <form className="spm_casa"  >
 
             {/* //TODO minimize all question and create a button (option) to open (show) questions to answer */}
-              
+
             <div className="button_form_download" >
                 <button className="spm_casa" onClick={() => window.open(require('../../static/SPM/docs/SPM_Casa_TUDO_COMPLETO(5-12Anos).pdf'), '_none')}> Donwload Formulário </button>
             </div>
 
             <h1 className="title spm_casa" >SPM CASA</h1>
-            
-            
+
+
 
 
 
@@ -945,7 +958,7 @@ export default function SpmCasa() {
 
             <div className="spm_calculate_button">
 
-                <button  className="spm_casa" onClick={calculate_spm_casa}>Export to  PDF (NOT WORKING)</button>
+                <button className="spm_casa" onClick={calculate_spm_casa}>Export to  PDF (NOT WORKING)</button>
 
             </div>
 
@@ -989,7 +1002,7 @@ export default function SpmCasa() {
 
 
 
-                <button  className="button_download_graph spm_casa" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Graph</button>
+                <button className="button_download_graph spm_casa" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Graph</button>
 
             </div>
 
@@ -1002,7 +1015,7 @@ export default function SpmCasa() {
                     <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} width_size={minWidth_graph} />
                 </div>
 
-                <button  className="button_download_table spm_casa" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Table</button>
+                <button className="button_download_table spm_casa" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Table</button>
 
 
 
