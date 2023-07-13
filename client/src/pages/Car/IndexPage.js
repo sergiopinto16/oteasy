@@ -26,11 +26,16 @@ export default function IndexPage() {
   const [gasReports, setGasReports] = useState([]);
 
   useEffect(() => {
-    fetch(api_host + '/api/gas/gasReports',{ credentials: 'include'}).then(response => {
-      response.json().then(gasReports => {
-        setGasReports(gasReports);
+    const fetchData = async () => {
+      const response = await fetch(api_host + '/api/gas/gasReports', { credentials: 'include' }).then(response => {
+        response.json().then(gasReports => {
+          setGasReports(gasReports);
+        });
       });
-    });
+    };
+
+    fetchData();
+
   }, []);
   return (
     <>
