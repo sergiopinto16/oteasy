@@ -14,7 +14,7 @@ const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
-const userRoutes = require('./routes/users')
+const userRoutes = require('../cp-alert/routes/cp')
 const gasRoutes = require('./routes/gas')
 const spmRoutes = require('./routes/spm')
 const clientRoutes = require('./routes/client')
