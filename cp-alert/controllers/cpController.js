@@ -40,6 +40,7 @@ const checkSuppressTrain = (req, res) => {
                 for(var attributename in dif_json['response'][0]['NodesComboioTabelsPartidasChegadas']){
                     console.log(attributename+": "+ JSON.stringify(dif_json['response'][0]['NodesComboioTabelsPartidasChegadas'][attributename]));
                     if (dif_json['response'][0]['NodesComboioTabelsPartidasChegadas'][attributename]['Observacoes']!=null){
+                            if(dif_json['response'][0]['NodesComboioTabelsPartidasChegadas'][attributename]['Observacoes'].length >0){
                         console.log("Comboio suprimido!")
                         console.log(current_json['response'][0]['NodesComboioTabelsPartidasChegadas'][attributename])
                         data = {
@@ -52,6 +53,7 @@ const checkSuppressTrain = (req, res) => {
                         console.log(data)
                         sendSlackNotification(JSON.stringify(data))
                     }
+                }
                 }
                 
             }

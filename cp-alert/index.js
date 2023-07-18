@@ -44,7 +44,7 @@ updateStamp();
 
 setInterval(() => {
   updateStamp();
-}, 30000);
+}, 300000);
 
 
 app.listen(process.env.PORT);
