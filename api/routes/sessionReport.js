@@ -1,5 +1,5 @@
 const express = require('express')
-const SessionReport = require('../models/sessionReportModel')
+const SessionReport= require('../models/sessionReportModel')
 const {
     addSessionReport,
     sessionReports,
@@ -8,13 +8,12 @@ const {
 const router = express.Router()
 
 
-
 // add session report
-router.post('/add',addSessionReport)
+router.post('/add', addSessionReport)
 
 
 // get sessions
-router.get('/sessionReports',sessionReports)
+router.get('/sessionReports', sessionReports)
 
 
 module.exports = router
