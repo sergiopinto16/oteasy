@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const SessionReport = require('../models/SessionReportModel')
+const SessionReport = require('../models/sessionReportModel')
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
