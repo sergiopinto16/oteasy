@@ -29,7 +29,7 @@ function calc_ps(sum_question) {
 
 
     if (sum_question !== 0) {
-        if (sum_question >= 10 && sum_question >= 12) {
+        if (sum_question >= 10 && sum_question <= 12) {
             score_group = 16;
             tscore_group = 40;
         }

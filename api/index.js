@@ -18,8 +18,10 @@ const userRoutes = require('./routes/users')
 const gasRoutes = require('./routes/gas')
 const spmRoutes = require('./routes/spm')
 const clientRoutes = require('./routes/client')
+const sessionReportRoutes = require('./routes/sessionReport')
 
 const sendSlackNotification = require('./slackNotifications')
+const {sessionReports} = require("./controllers/sessionReportController");
 
 // Add timestamp 
 sendSlackNotification("APP start")
@@ -43,6 +45,7 @@ app.use('/api/client/',clientRoutes)
 app.use('/api/user/', userRoutes)
 app.use('/api/gas/', gasRoutes)
 app.use('/api/spm/', spmRoutes)
+app.use('/api/sessionReport/', sessionReportRoutes)
 
 
 //app.listen(3010);
