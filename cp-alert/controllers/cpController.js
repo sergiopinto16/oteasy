@@ -87,6 +87,18 @@ const checkSuppressTrain = (req, res) => {
                                 }
                                 console.log(data)
                                 sendSlackNotification(JSON.stringify(data))
+                                if(today_trains[attributename]['Observacoes']==="SUPRIMIDO"){
+                                    console.log("REALMENTE Comboio suprimido!")
+                                    data = {
+                                        "DataHoraPartidaChegada_ToOrderBy":today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
+                                        "NomeEstacaoOrigem":today_trains[attributename]['NomeEstacaoOrigem'],
+                                        "NomeEstacaoDestino":today_trains[attributename]['NomeEstacaoDestino'],
+                                        "ComboioPassou":today_trains[attributename]['ComboioPassou'],
+                                        "Observacoes":today_trains[attributename]['Observacoes'],
+                                    }
+                                    console.log(data)
+                                    sendSlackNotification(JSON.stringify(data),"CP-SUPRIMIDO")
+                                }
                         }
                     }
                     }
