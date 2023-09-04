@@ -1,4 +1,4 @@
-import Post from "./Post";
+import Session from "./Session";
 import {useEffect, useState} from "react";
 
 

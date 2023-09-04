@@ -11,6 +11,6 @@ const PostSchema = new Schema({
   timestamps: true,
 });
 
-const PostModel = model('Post', PostSchema);
+const PostModel = model('Session', PostSchema);
 
 module.exports = PostModel;

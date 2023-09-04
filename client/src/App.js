@@ -27,6 +27,11 @@ import ClientRegister from './pages/ClientAccount/RegisterPage'
 import Clients from './pages/ClientAccount/IndexPage'
 
 
+import SessionReportCreate from "./pages/SessionReport/CreateSession"
+import SessionReportPage from "./pages/SessionReport/SessionPage"
+import SessionReportEdit from "./pages/SessionReport/EditSession"
+import ClientInfo from "./pages/ClientAccount/ClientInfo";
+
 
 
 function App() {
@@ -56,6 +61,13 @@ function App() {
           <Route path="/gas/gasReports" element={<GasReportIndex />} />
           <Route path="/client/register" element={<ClientRegister />} />
           <Route path="/client/clients" element={<Clients />} />
+          <Route path="/client/client/:client_id" element={<ClientInfo />} />
+          {/* Session Report */}
+          <Route path="/session_report/create/:client_id" element={<SessionReportCreate />} />
+          <Route path="/session_report/view/:client_id" element={<SessionReportPage />} />
+          <Route path="/session_report/edit/:client_id" element={<SessionReportEdit />} />
+
+s
 
           <Route path='*' element={<NotFound />} />
         </Route>

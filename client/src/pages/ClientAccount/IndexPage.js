@@ -2,12 +2,15 @@ import ClientsReports from "./ClientReports";
 import { Link, Route, Routes } from 'react-router-dom';
 
 
+import TableContainer from "../../utils/TableContainer";
+import { SelectColumnFilter } from '../../utils/filter';
 
-import { useContext, useEffect, useState, useRef } from "react";
+import {useContext, useEffect, useState, useRef, useMemo} from "react";
 import { UserContext } from "../../UserContext";
 
 
 import config from './../../config/config.json';
+import {Container} from "reactstrap";
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
@@ -27,12 +30,47 @@ export default function IndexPage() {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    fetch(api_host + '/api/client/clients').then(response => {
+    fetch(api_host + '/api/client/clients',{credentials:'include'}).then(response => {
       response.json().then(clients => {
         setClients(clients);
       });
     });
   }, []);
+
+  const table_columns = useMemo(
+      () => [
+        {
+          Header: "ID",
+          accessor: "_id",
+          Cell: props => <a href={"client/"+ props.value}>{props.value}</a>
+        },
+        {
+          Header: "Name",
+          accessor: "name"
+        },
+        {
+          Header: "Email",
+          accessor: "email"
+        },
+        {
+          Header: "Doctor",
+          accessor: "doctor",
+          filter: 'equals', // by default, filter: 'text', but in our case we don't want to filter options like text, we want to find exact match of selected option.
+          Filter: SelectColumnFilter
+
+        },
+        {
+          Header: "Time",
+          accessor: "createdAt",
+          disableFilters: true
+
+        },
+      ],
+      []
+  )
+
+
+
   return (
     <>
 
@@ -42,9 +80,16 @@ export default function IndexPage() {
 
 
 
-      {clients.length > 0 && clients.map(clients => (
-        <ClientsReports key={clients._id} {...clients} />
-      ))}
+      {/*{clients.length > 0 && clients.map(clients => (*/}
+      {/*  <ClientsReports key={clients._id} {...clients} />*/}
+      {/*))}*/}
+
+
+      <Container style={{ marginTop: 100 }}>
+        <TableContainer columns={table_columns} data={clients} />
+      </Container>
+
+
     </>
   );
 }

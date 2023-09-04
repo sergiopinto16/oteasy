@@ -344,15 +344,15 @@ export default function SpmCasa() {
         console.log("useEffect runs!")
 
         rows = [
-            createData('Participação Social', scoreQuestions[0], classificacaoQuestions[0]),
-            createData('Visão', scoreQuestions[1], classificacaoQuestions[1]),
-            createData('Audição', scoreQuestions[2], classificacaoQuestions[2]),
-            createData('Toque', scoreQuestions[3], classificacaoQuestions[3]),
+            createData('Participação Social', tsQuestions[0], classificacaoQuestions[0]),
+            createData('Visão', tsQuestions[1], classificacaoQuestions[1]),
+            createData('Audição', tsQuestions[2], classificacaoQuestions[2]),
+            createData('Toque', tsQuestions[3], classificacaoQuestions[3]),
             // createData('Gosto e Olfato', scoreQuestions[4], classificacaoQuestions[4]),
-            createData('Consciência Corporal', scoreQuestions[5], classificacaoQuestions[5]),
-            createData('Movimento e Equilibrio', scoreQuestions[6], classificacaoQuestions[6]),
-            createData('Planeamento Motor e Ideação', scoreQuestions[7], classificacaoQuestions[7]),
-            createData('TOTAL', scoreQuestions[8], classificacaoQuestions[8]),
+            createData('Consciência Corporal', tsQuestions[5], classificacaoQuestions[5]),
+            createData('Movimento e Equilibrio', tsQuestions[6], classificacaoQuestions[6]),
+            createData('Planeamento Motor e Ideação', tsQuestions[7], classificacaoQuestions[7]),
+            createData('TOTAL', tsQuestions[8], classificacaoQuestions[8]),
         ];
 
         console.log(rows)

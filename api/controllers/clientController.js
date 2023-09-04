@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
+const SessionReport = require("../models/sessionReportModel");
 
 
 const secret = process.env.SECRET;
@@ -62,13 +63,36 @@ const registerClient = async (req, res) => {
 // get all clients
 // app.get('/clients',
 const clients = async (req, res) => {
-    const clients = await Client.find({}).sort({ createdAt: -1 })
-    res.status(200).json(clients)
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+
+        //TODO - filter by utent
+        // await SessionReport.find().populate('author', ['username']).sort({ createdAt: -1 }).limit(20)
+        const clients = await Client.find({}).sort({createdAt: -1})
+        res.status(200).json(clients)
+    });
 }
 
 
+// get one Client Info
+// app.get('/client/:id',
+const client_id = async (req, res) => {
+    const {token} = req.cookies;
+    const {id} = req.params;
+    console.log(id)
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if (err) throw err;
+
+        //TODO - filter by user login
+        // const sessionReports = await SessionReport.findById(id).populate('author', ['username']);
+        const client = await Client.findById(id).sort({createdAt: -1})
+        res.status(200).json(client)
+    });
+}
 
 module.exports = {
     registerClient,
-    clients
+    clients,
+    client_id
 }
