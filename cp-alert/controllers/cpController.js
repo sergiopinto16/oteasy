@@ -64,48 +64,54 @@ const checkSuppressTrain = (req, res) => {
                 today_trains[json_aux["DataHoraPartidaChegada_ToOrderBy"]]=json_aux
             }
 
-            if(today_trains_last_update==null){
-                console.log("Last json is null")        
-            }
-            else{
+            let station;
+            if (today_trains_last_update == null) {
+                console.log("Last json is null")
+            } else {
                 // let dif_json = diff(today_trains_last_update,today_trains)
-                for(var attributename in today_trains){
+                for (var attributename in today_trains) {
                     console.log("attributename = " + attributename)
-                    if (today_trains[attributename]['Observacoes']!=null){
-                        if(today_trains[attributename]['Observacoes'].length >0){
+                    if (today_trains[attributename]['Observacoes'] != null) {
+                        if (today_trains[attributename]['Observacoes'].length > 0) {
                             console.log(today_trains[attributename]['Observacoes'] + " | " + today_trains_last_update[attributename]['Observacoes'])
-                            if(today_trains[attributename]['Observacoes']!==today_trains_last_update[attributename]['Observacoes']){
+                            if (today_trains[attributename]['Observacoes'] !== today_trains_last_update[attributename]['Observacoes']) {
                                 console.log("Comboio suprimido!")
                                 console.log(today_trains[attributename])
                                 data = {}
                                 data = {
-                                    "DataHoraPartidaChegada_ToOrderBy":today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
-                                    "NomeEstacaoOrigem":today_trains[attributename]['NomeEstacaoOrigem'],
-                                    "NomeEstacaoDestino":today_trains[attributename]['NomeEstacaoDestino'],
-                                    "ComboioPassou":today_trains[attributename]['ComboioPassou'],
-                                    "Observacoes":today_trains[attributename]['Observacoes'],
+                                    "DataHoraPartidaChegada_ToOrderBy": today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
+                                    "NomeEstacaoOrigem": today_trains[attributename]['NomeEstacaoOrigem'],
+                                    "NomeEstacaoDestino": today_trains[attributename]['NomeEstacaoDestino'],
+                                    "ComboioPassou": today_trains[attributename]['ComboioPassou'],
+                                    "Observacoes": today_trains[attributename]['Observacoes'],
+                                }
+                                station = "CETE";
+                                if (today_trains[attributename]['NomeEstacaoOrigem'] == "PORTO-SÃO BENTO") {
+                                    station = "PORTO-SÃO BENTO"
                                 }
                                 console.log(data)
-                                sendSlackNotification(JSON.stringify(data))
-                                if(today_trains[attributename]['Observacoes']==="SUPRIMIDO"){
+                                sendSlackNotification(JSON.stringify(data), "CP-bot", station)
+
+                                //if suprimido wirte in another channel
+                                if (today_trains[attributename]['Observacoes'] === "SUPRIMIDO") {
                                     console.log("REALMENTE Comboio suprimido!")
                                     data = {
-                                        "DataHoraPartidaChegada_ToOrderBy":today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
-                                        "NomeEstacaoOrigem":today_trains[attributename]['NomeEstacaoOrigem'],
-                                        "NomeEstacaoDestino":today_trains[attributename]['NomeEstacaoDestino'],
-                                        "ComboioPassou":today_trains[attributename]['ComboioPassou'],
-                                        "Observacoes":today_trains[attributename]['Observacoes'],
+                                        "DataHoraPartidaChegada_ToOrderBy": today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
+                                        "NomeEstacaoOrigem": today_trains[attributename]['NomeEstacaoOrigem'],
+                                        "NomeEstacaoDestino": today_trains[attributename]['NomeEstacaoDestino'],
+                                        "ComboioPassou": today_trains[attributename]['ComboioPassou'],
+                                        "Observacoes": today_trains[attributename]['Observacoes'],
                                     }
                                     console.log(data)
-                                    sendSlackNotification(JSON.stringify(data),"CP-SUPRIMIDO")
+                                    sendSlackNotification(JSON.stringify(data), "CP-SUPRIMIDO", station, true)
                                 }
+                            }
                         }
                     }
-                    }
-                    
+
 
                 }
-                
+
             }
         
             today_trains_last_update =JSON.parse(JSON.stringify(today_trains));
