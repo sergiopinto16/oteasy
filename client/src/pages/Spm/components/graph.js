@@ -46,7 +46,7 @@ export default class GraphSPM extends PureComponent {
         <Legend />
         <Bar dataKey="tscore" fill="green" />
         <ReferenceLine y={60} label="Típica" stroke="red" strokeDasharray="3 3" />
-        <ReferenceLine y={70} label="Disfunçao Provével" stroke="blue" strokeDasharray="3 3" />
+        <ReferenceLine y={70} label="Disfunção Provável" stroke="blue" strokeDasharray="3 3" />
         <ReferenceLine y={80} label="Disfunção Estabelecida" stroke="yellow" strokeDasharray="3 3" />
         {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
       </BarChart>
