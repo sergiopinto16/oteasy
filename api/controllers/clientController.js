@@ -67,9 +67,13 @@ const clients = async (req, res) => {
     jwt.verify(token, secret, {}, async (err, info) => {
         if (err) throw err;
 
+        console.log(info)
         //TODO - filter by utent
-        // await SessionReport.find().populate('author', ['username']).sort({ createdAt: -1 }).limit(20)
-        const clients = await Client.find({}).sort({createdAt: -1})
+        //const clients = await Client.find({}).sort({createdAt: -1})
+        //SessionReport.find().populate('author', ['username']).sort({ createdAt: -1 }).limit(20)
+        var query = { doctor: info.id };
+        const clients = await Client.find(query).sort({createdAt: -1})
+
         res.status(200).json(clients)
     });
 }
@@ -86,7 +90,8 @@ const client_id = async (req, res) => {
 
         //TODO - filter by user login
         // const sessionReports = await SessionReport.findById(id).populate('author', ['username']);
-        const client = await Client.findById(id).sort({createdAt: -1})
+        var query = { doctor: info.id, _id: id};
+        const client = await Client.findById(query).sort({createdAt: -1})
         res.status(200).json(client)
     });
 }

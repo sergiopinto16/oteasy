@@ -1,7 +1,7 @@
 
 
 
-import { Navigate } from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 // import {UserContext} from "../UserContext";
 import SpmRadioAnswer from "../../components/SpmRadioAnswer";
 import './Spm.css'
@@ -70,6 +70,7 @@ let rows = [
 export default function SpmCasa() {
 
     const { userInfo, setUserInfo } = useContext(UserContext);
+    const {client_id} = useParams();
 
     if (userInfo?.email === undefined) {
         console.log("Not logged, return to home")
@@ -281,7 +282,8 @@ export default function SpmCasa() {
                 "evaluation_reason": "evaluation reason",
                 scoreQuestions,
                 tsQuestions,
-                classificacaoQuestions
+                classificacaoQuestions,
+                client_id
             }),
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

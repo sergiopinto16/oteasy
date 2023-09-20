@@ -4,9 +4,7 @@ const {
     addSessionReport,
     sessionReports,
 } = require('../controllers/sessionReportController')
-const fs = require("fs");
-const jwt = require("jsonwebtoken");
-const Post = require("../models/postModel");
+
 
 const router = express.Router()
 
@@ -15,8 +13,9 @@ const router = express.Router()
 router.post('/add', addSessionReport)
 
 
-// get sessions
-router.get('/sessionReports', sessionReports)
+// post sessions
+// body with client id
+router.post('/sessionReports', sessionReports)
 
 
 module.exports = router

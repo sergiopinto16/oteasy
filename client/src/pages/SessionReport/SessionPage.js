@@ -19,8 +19,8 @@ export default function SessionPage() {
   useEffect(() => {
     fetch(api_host + '/api/api/sessionReport/sessionReports/${id}')
       .then(response => {
-        response.json().then(postInfo => {
-          setSessionInfo(postInfo);
+        response.json().then(sessionInfo => {
+          setSessionInfo(sessionInfo);
         });
       });
   }, []);
@@ -29,7 +29,7 @@ export default function SessionPage() {
 
   return (
     <div className="post-page">
-      <h1>{sessionInfo.title}</h1>
+      <h1>{sessionInfo.date}</h1>
       <time>{formatISO9075(new Date(sessionInfo.createdAt))}</time>
       <div className="author">by @{sessionInfo.author.username}</div>
       {userInfo.id === sessionInfo.author._id && (

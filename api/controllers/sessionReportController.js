@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
+const Client = require("../models/clientModel");
 
 const secret = process.env.SECRET;
 
@@ -17,16 +18,15 @@ const addSessionReport = async (req, res) => {
         if (err) throw err;
 
         //const { car_plate, car_km, quantity, price } = req.body;
-        const {title, summary, content, cover, client_id} = req.body;
+        const {date, summary, content, client_id} = req.body;
         console.log(req.body)
 
         //TODO - get client id (same in spm report)
 
         const sessionReportAdd = await SessionReport.create({
-            title,
+            date,
             summary,
             content,
-            cover,
             client: client_id,
             author: info.id,
         });
@@ -63,7 +63,7 @@ const updateSessionReport = async (req, res) => {
         if (err) throw err;
 
         //const { car_plate, car_km, quantity, price } = req.body;
-        const {id,title, summary, content, cover} = req.body;
+        const {id,date, summary, content} = req.body;
         console.log(req.body)
 
         //TODO - get client id (same in spm report)
@@ -74,10 +74,9 @@ const updateSessionReport = async (req, res) => {
         }
 
         const sessionReportUpdate = await SessionReport.update({
-            title,
+            date,
             summary,
-            content,
-            cover
+            content
         });
         res.json(sessionReportUpdate);
         sendSlackNotification(JSON.stringify(sessionReportUpdate), "DB-sessionReport")
@@ -103,15 +102,21 @@ const updateSessionReport = async (req, res) => {
 
 
 // get all Session Reports
-// app.get('/sessionReports',
+// app.post('/sessionReports',
 const sessionReports = async (req, res) => {
+
     const {token} = req.cookies;
+    const {client_id} = req.body;
+    console.log(client_id)
     jwt.verify(token, secret, {}, async (err, info) => {
         if (err) throw err;
 
-        //TODO - filter by utent
-        // await SessionReport.find().populate('author', ['username']).sort({ createdAt: -1 }).limit(20)
-        const sessionReports = await SessionReport.find({}).sort({createdAt: -1})
+        console.log(info)
+        console.log("session - client_id = " + client_id )
+
+        //filter by utent
+        var query = { author: info.id, client: client_id };
+        const sessionReports = await SessionReport.find(query).sort({createdAt: -1})
         res.status(200).json(sessionReports)
     });
 }

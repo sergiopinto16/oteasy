@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
+const SessionReport = require("../models/sessionReportModel");
 
 
 const secret = process.env.SECRET;
@@ -46,7 +47,8 @@ const addSPM = async (req, res) => {
       // group_ps_comment, group_v_comment, group_a_comment, group_t_comment,
       // group_go_comment, group_cc_comment, group_me_comment, group_pmi_comment,
       // group_total_comment
-      classificacaoQuestions
+      classificacaoQuestions,
+      client_id
     } = req.body;
   
     console.log(valueArray)
@@ -63,7 +65,7 @@ const addSPM = async (req, res) => {
     const spmAdd = await spm.create({
       spm_type, 
       author:info.id,
-      utente:info.id,
+      utente:client_id,
       evaluation_date:evaluation_date,
       question:valueArray,
       // question_01, question_02, question_03, question_04, question_05,
@@ -114,10 +116,26 @@ const addSPM = async (req, res) => {
 }
 
 // get all Gas Reports
-// app.get('/gasReports',
+// app.post('/gasReports',
 const SPMs = async (req, res) => {
-  const spms = await spm.find({}).sort({ createdAt: -1 })
-  res.status(200).json(spms)
+  //const spms = await spm.find({}).sort({ createdAt: -1 })
+  //res.status(200).json(spms)
+
+  const {token} = req.cookies;
+  const {client_id} = req.body;
+  console.log(client_id)
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+
+    console.log(info)
+    console.log("spm - client_id = " + client_id )
+
+    //filter by utent
+    var query = { author: info.id, utente: client_id };
+    const sessionReports = await spm.find(query).sort({createdAt: -1})
+    res.status(200).json(sessionReports)
+  });
+
 }
 
 

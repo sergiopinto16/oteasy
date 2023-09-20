@@ -85,10 +85,10 @@ const LeftNavBar = () => {
                                     <Dropdown>
                                         <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item> <Link to="/spm/spm-casa">SPM Casa</Link></Dropdown.Item>
-                                            <Dropdown.Item> <Link to="/spm/spm-escola">SPM Escola</Link></Dropdown.Item>
-                                            <Dropdown.Item> <Link to="/spm/spm-pcasa">SPM-p Casa</Link></Dropdown.Item>
-                                            <Dropdown.Item  ><Link to="/spm/spm-pescola">SPM-p Escola</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link to="/spm/spm-casa/0">SPM Casa</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link to="/spm/spm-escola/0">SPM Escola</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link to="/spm/spm-pcasa/0">SPM-p Casa</Link></Dropdown.Item>
+                                            <Dropdown.Item  ><Link to="/spm/spm-pescola/0">SPM-p Escola</Link></Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>

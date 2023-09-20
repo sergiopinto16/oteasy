@@ -45,8 +45,14 @@ export default function ClientInfo() {
             });
         });
 
+        console.log("Session")
         //sessions
-        fetch(api_host + '/api/sessionReport/sessionReports', {credentials: 'include'}).then(response => {
+        fetch(api_host + '/api/sessionReport/sessionReports', {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({"client_id": client_id}),
+            headers: {'Content-Type': 'application/json'},
+        }).then(response => {
             response.json().then(session => {
                 console.log(session);
                 setSession(session)
@@ -54,7 +60,12 @@ export default function ClientInfo() {
         });
 
         //spms
-        fetch(api_host + '/api/spm/spms', {credentials: 'include'}).then(response => {
+        fetch(api_host + '/api/spm/spms', {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({"client_id": client_id}),
+            headers: {'Content-Type': 'application/json'},
+        }).then(response => {
             response.json().then(spms => {
                 console.log(spms);
                 setSpms(spms)
@@ -94,13 +105,6 @@ export default function ClientInfo() {
                 Filter: SelectColumnFilter
             },
             {
-                Header: "Doctor",
-                accessor: "doctor",
-                filter: 'equals', // by default, filter: 'text', but in our case we don't want to filter options like text, we want to find exact match of selected option.
-                Filter: SelectColumnFilter
-
-            },
-            {
                 Header: "Time",
                 accessor: "createdAt",
                 disableFilters: true
@@ -112,26 +116,31 @@ export default function ClientInfo() {
 
     const table_session = useMemo(
         () => [
-            {
+            /*{
                 Header: "ID",
                 accessor: "_id",
                 Cell: props => <a href={"spm/" + props.value}>{props.value}</a>
-            },
-            {
+            },*/
+            /*{
                 Header: "Utente",
                 accessor: "client"
             },
             {
                 Header: "Author",
                 accessor: "author"
-            },
+            },*/
             {
-                Header: "Title",
-                accessor: "title"
+                Header: "Day",
+                accessor: "date",
+                Cell: props => <a href={"spm/" + props.value}>{props.value}</a>
             },
             {
                 Header: "Summary",
                 accessor: "summary"
+            },
+            {
+                Header: "Content",
+                accessor: "content"
             },
             {
                 Header: "Time",
@@ -158,7 +167,7 @@ export default function ClientInfo() {
                 <h1>Reports</h1>
 
 
-                <Link to={'/session_report/create/'+client_id}>
+                <Link to={'/session_report/create/' + client_id}>
                     <button className="btn_insert">Insert Session Report</button>
                 </Link>
 
@@ -171,16 +180,16 @@ export default function ClientInfo() {
                 <h1>SPMs</h1>
 
 
-                <Link to="/spm/spm-casa">
+                <Link to={"/spm/spm-casa/"+ client_id}>
                     <button className="btn_insert">NEW SPM CASA</button>
                 </Link>
-                <Link to="/spm/spm-escola">
+                <Link to={"/spm/spm-escola/"+ client_id}>
                     <button className="btn_insert">NEW SPM ESCOLA</button>
                 </Link>
-                <Link to="/spm/spm-pcasa">
+                <Link to={"/spm/spm-pcasa/"+ client_id}>
                     <button className="btn_insert">NEW SPM-p CASA</button>
                 </Link>
-                <Link to="/spm/spm-pescola">
+                <Link to={"/spm/spm-pescola/"+ client_id}>
                     <button className="btn_insert">NEW SPM-p ESCOLA</button>
                 </Link>
 

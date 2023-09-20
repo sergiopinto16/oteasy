@@ -11,26 +11,28 @@ const api_host = config.api.host
 //' + api_host + ':' + api_port + '
 
 export default function CreateSession() {
-    const [title, setTitle] = useState('');
+
+
+    const [date, setDate] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
-    const [files, setFiles] = useState('');
+
     const [redirect, setRedirect] = useState(false);
     const [client, setClient] = useState('')
     const {client_id} = useParams()
 
     async function createNewPost(ev) {
         const data = new FormData();
-        data.set('title', title);
+        data.set('date', date);
         data.set('summary', summary);
         data.set('content', content);
-        data.set('file', files[0]);
+
         //add utente
         //add doctor
         ev.preventDefault();
         const response = await fetch(api_host + '/api/sessionReport/add', {
             method: 'POST',
-            body: JSON.stringify({title, summary, content, files, client_id}),
+            body: JSON.stringify({date, summary, content, client_id}),
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
         });
@@ -44,22 +46,17 @@ export default function CreateSession() {
 
     if (redirect) {
         //TODO - Redirect to client page
-        return <Navigate to={''}/>
+        return <Navigate to={'/'}/>
     }
     return (
         <form onSubmit={createNewPost}>
-            <input type="title"
-                   placeholder={'Title'}
-                   value={title}
-                   onChange={ev => setTitle(ev.target.value)}/>
-            <input type="summary"
-                   placeholder={'Summary'}
-                   value={summary}
-                   onChange={ev => setSummary(ev.target.value)}/>
-            <input type="file"
-                   onChange={ev => setFiles(ev.target.files)}/>
-            <Editor value={content} onChange={setContent}/>
-            <button style={{marginTop: '5px'}}>Create session report</button>
+            <input type="date"
+                   placeholder={'Date'}
+                   value={date}
+                   onChange={ev => setDate(ev.target.value)}/>
+            <Editor name="Objetivos da sessão" value={summary} onChange={setSummary}/>
+            <Editor name="Observações" value={content} onChange={setContent}/>
+            <button style={{marginTop: 20}}>Create session report</button>
         </form>
     );
 }

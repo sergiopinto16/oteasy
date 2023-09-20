@@ -3,17 +3,14 @@ const SPM = require('../models/spmModel')
 const {
     addSPM, SPMs,
 } = require('../controllers/spmController')
-const {clients} = require("../controllers/clientController");
 
 const router = express.Router()
 
 
-
 // add spm
-router.post('/add',addSPM)
+router.post('/add', addSPM)
 
-router.get('/spms', SPMs)
-
+router.post('/spms', SPMs)
 
 
 module.exports = router

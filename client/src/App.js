@@ -52,10 +52,10 @@ function App() {
           <Route path="/create" element={<CreatePost />} />
           <Route path="/post/:id" element={<PostPage />} />
           <Route path="/edit/:id" element={<EditPost />} />
-          <Route path="/spm/spm-casa" element={<SpmCasa />} />
-          <Route path="/spm/spm-escola" element={<SpmEscola />} />
-          <Route path="/spm/spm-pcasa" element={<SpmpCasa />} />
-          <Route path="/spm/spm-pescola" element={<SpmpEscola />} />
+          <Route path="/spm/spm-casa/:client_id" element={<SpmCasa />} />
+          <Route path="/spm/spm-escola/:client_id" element={<SpmEscola />} />
+          <Route path="/spm/spm-pcasa/:client_id" element={<SpmpCasa />} />
+          <Route path="/spm/spm-pescola/:client_id" element={<SpmpEscola />} />
           {/* Gas Report */}
           <Route path="/gas/add" element={<GasReportForm />} />
           <Route path="/gas/gasReports" element={<GasReportIndex />} />

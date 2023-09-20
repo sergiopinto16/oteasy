@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 const {Schema,model} = mongoose;
 
 const SessionReportSchema = new Schema({
-    title:String,
+    date:Date,
     summary:String,
     content:String,
-    cover:String,
     client:{type:Schema.Types.ObjectId, ref:'Client'},
     author:{type:Schema.Types.ObjectId, ref:'User'},
 

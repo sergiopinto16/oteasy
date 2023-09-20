@@ -9,7 +9,7 @@ const api_host = config.api.host
 //' + api_host + ':' + api_port + '
 
 
-export default function Session({_id,title,summary,cover,content,createdAt,author}) {
+export default function Session({_id,date,summary,content,createdAt,author}) {
 
   return (
     <div className="post">

@@ -12,19 +12,18 @@ const api_host = config.api.host
 
 export default function EditSession() {
   const {id} = useParams();
-  const [title,setTitle] = useState('');
+  const [date,setDate] = useState('');
   const [summary,setSummary] = useState('');
   const [content,setContent] = useState('');
-  const [files, setFiles] = useState('');
   const [redirect,setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch(api_host + '/post/'+id)
+    fetch(api_host + '/sessionInfo/'+id)
       .then(response => {
-        response.json().then(postInfo => {
-          setTitle(postInfo.title);
-          setContent(postInfo.content);
-          setSummary(postInfo.summary);
+        response.json().then(sessionInfo => {
+          setDate(sessionInfo.date);
+          setContent(sessionInfo.content);
+          setSummary(sessionInfo.summary);
         });
       });
   }, []);
@@ -32,13 +31,11 @@ export default function EditSession() {
   async function updatePost(ev) {
     ev.preventDefault();
     const data = new FormData();
-    data.set('title', title);
+    data.set('date', date);
     data.set('summary', summary);
     data.set('content', content);
     data.set('id', id);
-    if (files?.[0]) {
-      data.set('file', files?.[0]);
-    }
+
     const response = await fetch(api_host + '/post', {
       method: 'PUT',
       body: data,
@@ -55,18 +52,14 @@ export default function EditSession() {
 
   return (
     <form onSubmit={updatePost}>
-      <input type="title"
-             placeholder={'Title'}
-             value={title}
-             onChange={ev => setTitle(ev.target.value)} />
-      <input type="summary"
-             placeholder={'Summary'}
-             value={summary}
-             onChange={ev => setSummary(ev.target.value)} />
-      <input type="file"
-             onChange={ev => setFiles(ev.target.files)} />
-      <Editor onChange={setContent} value={content} />
-      <button style={{marginTop:'5px'}}>Update post</button>
+      <input type="date"
+             placeholder={'Date'}
+             value={date}
+             onChange={ev => setDate(ev.target.value)} />
+      <Editor name="Summary" onChange={setSummary()} value={summary} />
+      <Editor name="Content" onChange={setContent} value={content} />
+
+      <button style={{marginTop: 20}}>Update post</button>
     </form>
   );
 }
