@@ -48,8 +48,8 @@ export default function IndexPage() {
             {
                 Header: "Name",
                 accessor: "name",
-
-                Cell: props => <a href={"client/" + props.value}>{props.value}</a>
+                Cell: props => <a href={"client/" + props.row.original._id}>{props.value}</a>
+                //Cell: props => <a href={"client/" + props._value}>{props.value}</a>
             },
             {
                 Header: "Email",

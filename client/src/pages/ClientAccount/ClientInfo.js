@@ -11,6 +11,7 @@ import {Container} from "reactstrap";
 import {SelectColumnFilter} from "../../utils/filter";
 
 import './ClientInfo.css'
+import moment from 'moment'
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
@@ -76,40 +77,61 @@ export default function ClientInfo() {
 
     const table_spm = useMemo(
         () => [
-            {
-                Header: "ID",
-                accessor: "_id",
-                Cell: props => <a href={"spm/" + props.value}>{props.value}</a>
-            },
-            {
-                Header: "Utente",
-                accessor: "utente"
-            },
-            {
-                Header: "Author",
-                accessor: "author"
-            },
+            // {
+            //     Header: "ID",
+            //     accessor: "_id",
+            //     Cell: props => <a href={"spm/" + props.value}>{props.value}</a>
+            // },
             {
                 Header: "evaluation_date",
-                accessor: "evaluation_date"
+                accessor: "evaluation_date",
+                Cell: (props) => {
+                    const formattedDate = moment(props.value).format('DD/MM/yyyy HH:mm');
+                    return <a href={"spm/" + props.row.original._id}>{formattedDate}</a>
+                },
+                // Cell: props => {moment(props.row.original._id).format('DD/MM/yyyy HH:mm')}
+            },
+            // {
+            //     Header: "Utente",
+            //     accessor: "utente"
+            // },
+            // {
+            //     Header: "Author",
+            //     accessor: "author"
+            // },
+            {
+                Header: "spm_type",
+                accessor: "spm_type",
+                Cell: (props) => {
+                    switch (props.value){
+                        case 0:
+                            // return <span style={{ color: 'orange' }}>{"SPM CASA"}</span>;
+                            return <span>{"SPM CASA"}</span>;
+                        case 1:
+                            return <span>{"SPM ESCOLA"}</span>;
+                        case 2:
+                            return <span>{"SPM-p CASA"}</span>;
+                        case 3:
+                            return <span>{"SPM-p ESCOLA"}</span>;
+                        default:
+                            return <span>{props.value}</span>;
+                    }
+                },
+                filter: 'equals', // by default, filter: 'text', but in our case we don't want to filter options like text, we want to find exact match of selected option.
+                Filter: SelectColumnFilter
             },
             {
                 Header: "evaluation_reason",
                 accessor: "evaluation_reason",
                 disableFilters: true
             },
-            {
-                Header: "spm_type",
-                accessor: "spm_type",
-                filter: 'equals', // by default, filter: 'text', but in our case we don't want to filter options like text, we want to find exact match of selected option.
-                Filter: SelectColumnFilter
-            },
-            {
-                Header: "Time",
-                accessor: "createdAt",
-                disableFilters: true
 
-            },
+            // {
+            //     Header: "Time",
+            //     accessor: "createdAt",
+            //     disableFilters: true
+            //
+            // },
         ],
         []
     );
@@ -119,7 +141,7 @@ export default function ClientInfo() {
             /*{
                 Header: "ID",
                 accessor: "_id",
-                Cell: props => <a href={"spm/" + props.value}>{props.value}</a>
+                Cell: props => <a href={"post/" + props.value}>{props.value}</a>
             },*/
             /*{
                 Header: "Utente",
@@ -132,7 +154,8 @@ export default function ClientInfo() {
             {
                 Header: "Day",
                 accessor: "date",
-                Cell: props => <a href={"spm/" + props.value}>{props.value}</a>
+                // Cell: props => <a href={"post/" + props.value}>{props.value}</a>
+                Cell: props => <a href={"post/" + props.row.original._id}>{moment(props.value).format('DD/MM/yyyy HH:mm')}</a>
             },
             {
                 Header: "Summary",
@@ -142,12 +165,13 @@ export default function ClientInfo() {
                 Header: "Content",
                 accessor: "content"
             },
-            {
-                Header: "Time",
-                accessor: "createdAt",
-                disableFilters: true
-
-            },
+            // {
+            //     Header: "createAt",
+            //     accessor: "createdAt",
+            //     Cell: props => {moment(props.value).format('DD/MM/yyyy HH:mm')},// Add moment js or use js Date formatting
+            //     disableFilters: true
+            //
+            // },
         ],
         []
     );

@@ -15,8 +15,19 @@ input{
 }
 
 
-.input{
+input{
+    display: inline;
     padding-top: 10px;
     padding-bottom: 10 px;
     height: 60px;
+}
+
+.span_input_name{
+    display: inline-block;
+    width: 100px;
+}
+
+.span_input_value{
+    display: inline-block;
+    width: 300px;
 }
