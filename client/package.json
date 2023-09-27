@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-notify-toast": "^0.5.1",
     "react-pdf": "^6.2.2",
+    "react-phone-number-input": "^3.3.6",
     "react-quill": "^2.0.0",
     "react-radio-buttons": "^1.2.2",
     "react-radio-group": "^3.0.3",

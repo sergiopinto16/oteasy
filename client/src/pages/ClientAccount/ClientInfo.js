@@ -176,15 +176,21 @@ export default function ClientInfo() {
         []
     );
 
-
     return (
         <form className="client">
             <div className="client_info">
                 <h1>CLIENT INFO</h1>
 
+
                 <label>Name: </label><p>{client.name}</p>
+                <label>Birth Date: </label><p> {client.birth_date}</p>
+                <label>cardID: </label><p>{client.card_id}</p>
+
+                <label>Parent Name: </label><p>{client.parent_name}</p>
+                <label>Phone: </label><p>{client.contact_number}</p>
                 <label>email: </label><p>{client.email}</p>
-                <label>cardID: </label><p>{client.cardId}</p>
+                <label>Address: </label><p>{client.address}</p>
+
             </div>
 
             <div className="client_reports">

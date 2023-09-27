@@ -14,10 +14,6 @@
     display: block;
 }
 
-.left-navbar-element{
-    padding: 10px;
-}
-
 a{
     text-decoration:none;
     color: inherit;
@@ -30,4 +26,43 @@ header a{
 a.logo{
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+a.logo:link, a.logo:visited {
+    /*background-color: #034101;*/
+    /*background: #cbcbcb;*/
+    color: #034101;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 6px;
+    width: 100%;
+    font-weight: bold;
+}
+
+a.logo:hover, a.logo:active {
+    background-color: #b2f1bd;
+}
+
+
+a.left-navbar-element-link:link, a.left-navbar-element-link:visited {
+    background-color: #039233;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 12px;
+    width: 100%;
+    font-weight: bold;
+}
+
+a.left-navbar-element-link:hover, a.left-navbar-element-link:active {
+    background-color: #012106;
+}
+
+
+.left-navbar-element{
+    padding: 10px;
 }

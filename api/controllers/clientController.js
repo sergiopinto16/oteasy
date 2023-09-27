@@ -23,7 +23,7 @@ const registerClient = async (req, res) => {
 
         console.log(req.body)
 
-        const { card_id, name, email, bird_year, bird_month, bird_day, parent_name, contact_number } = req.body;
+        const { card_id, name, email, birth_date, address, parent_name, contact_number } = req.body;
         console.log(card_id)
         console.log(name)
         console.log(email)
@@ -42,7 +42,8 @@ const registerClient = async (req, res) => {
                     card_id,
                     name,
                     email,
-                    bird_year, bird_month, bird_day,
+                    birth_date,
+                    address,
                     parent_name, contact_number,
                     doctor: info.id
                 });

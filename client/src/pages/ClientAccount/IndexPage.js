@@ -52,16 +52,29 @@ export default function IndexPage() {
                 //Cell: props => <a href={"client/" + props._value}>{props.value}</a>
             },
             {
+                Header: "cardID",
+                accessor: "card_id",
+            },
+            {
+                Header: "Parent Name",
+                accessor: "parent_name"
+            },
+            {
                 Header: "Email",
                 accessor: "email"
             },
             {
-                Header: "Doctor",
-                accessor: "doctor",
-                filter: 'equals', // by default, filter: 'text', but in our case we don't want to filter options like text, we want to find exact match of selected option.
-                Filter: SelectColumnFilter
-
+                Header: "Phone",
+                accessor: "contact_number"
             },
+
+            // {
+            //     Header: "Doctor",
+            //     accessor: "doctor",
+            //     filter: 'equals', // by default, filter: 'text', but in our case we don't want to filter options like text, we want to find exact match of selected option.
+            //     Filter: SelectColumnFilter
+            //
+            // },
             {
                 Header: "Time",
                 accessor: "createdAt",

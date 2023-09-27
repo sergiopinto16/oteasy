@@ -83,19 +83,19 @@ const LeftNavBar = () => {
                             <>
                                 <div className="left-navbar-element">
                                     <Dropdown>
-                                        <Dropdown.Toggle variant="success">SPMs</Dropdown.Toggle>
+                                        <Dropdown.Toggle className="left-navbar-element-link" variant="success">SPMs</Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item> <Link to="/spm/spm-casa/0">SPM Casa</Link></Dropdown.Item>
-                                            <Dropdown.Item> <Link to="/spm/spm-escola/0">SPM Escola</Link></Dropdown.Item>
-                                            <Dropdown.Item> <Link to="/spm/spm-pcasa/0">SPM-p Casa</Link></Dropdown.Item>
-                                            <Dropdown.Item  ><Link to="/spm/spm-pescola/0">SPM-p Escola</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link className="left-navbar-element-link" to="/spm/spm-casa/0">SPM Casa</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link className="left-navbar-element-link" to="/spm/spm-escola/0">SPM Escola</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link className="left-navbar-element-link" to="/spm/spm-pcasa/0">SPM-p Casa</Link></Dropdown.Item>
+                                            <Dropdown.Item  ><Link className="left-navbar-element-link" to="/spm/spm-pescola/0">SPM-p Escola</Link></Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
 
                                 {/* Clientes */}
                                 <div className="left-navbar-element">
-                                    <Link to="/client/clients">Clients</Link>
+                                    <Link className="left-navbar-element-link" to="/client/clients">Clients</Link>
                                 </div>
                             </>)}
                     </>
@@ -107,7 +107,7 @@ const LeftNavBar = () => {
                             {credentials_level[gas_report_credentials] === 1 && (
                                 <>
                                     < div className="left-navbar-element">
-                                        <Link to="/gas/gasReports">Gas Reports</Link>
+                                        <Link className="left-navbar-element-link" to="/gas/gasReports">Gas Reports</Link>
                                     </div>
                                 </>)}
                         </>
