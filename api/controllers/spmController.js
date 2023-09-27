@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendSlackNotification = require('../slackNotifications')
 const SessionReport = require("../models/sessionReportModel");
+const Client = require("../models/clientModel");
 
 
 const secret = process.env.SECRET;
@@ -140,7 +141,27 @@ const SPMs = async (req, res) => {
 
 
 
+// get one spm Info
+// app.get('/spm/:id',
+const spm_id = async (req, res) => {
+  const {token} = req.cookies;
+  const {id} = req.params;
+  console.log(id)
+  jwt.verify(token, secret, {}, async (err, info) => {
+    if (err) throw err;
+
+    //TODO - filter by user login
+    // const sessionReports = await SessionReport.findById(id).populate('author', ['username']);
+    var query = {_id: id};
+    const spm_result = await spm.findById(query).sort({createdAt: -1})
+    res.status(200).json(spm_result)
+  });
+}
+
+
+
 module.exports = {
   addSPM,
   SPMs,
+  spm_id
 }

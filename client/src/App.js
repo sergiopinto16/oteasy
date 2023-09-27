@@ -18,6 +18,8 @@ import SpmCasa from './pages/Spm/SpmCasa';
 import SpmEscola from './pages/Spm/SpmEscola';
 import SpmpCasa from './pages/Spm/SpmpCasa';
 import SpmpEscola from './pages/Spm/SpmpEscola';
+import SpmInfo from './pages/Spm/SpmInfo'
+
 import NotFound from './pages/404';
 
 import GasReportForm from './pages/Car/GasReportForm'
@@ -52,6 +54,7 @@ function App() {
           <Route path="/create" element={<CreatePost />} />
           <Route path="/post/:id" element={<PostPage />} />
           <Route path="/edit/:id" element={<EditPost />} />
+          <Route path="/spm/:spm_id" element={<SpmInfo />} />
           <Route path="/spm/spm-casa/:client_id" element={<SpmCasa />} />
           <Route path="/spm/spm-escola/:client_id" element={<SpmEscola />} />
           <Route path="/spm/spm-pcasa/:client_id" element={<SpmpCasa />} />

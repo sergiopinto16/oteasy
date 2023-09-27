@@ -896,7 +896,7 @@ export default function SPMEscola() {
 
 
 
-                <button className="button_download_table spm_escola" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Graph</button>
+                <button className="button_download_table spm_escola" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Table</button>
 
             </div>
 
@@ -909,7 +909,7 @@ export default function SPMEscola() {
                     <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} width_size={minWidth_graph} />
                 </div>
 
-                <button className="button_download_graph spm_escola" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Table</button>
+                <button className="button_download_graph spm_escola" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Graph</button>
 
 
 

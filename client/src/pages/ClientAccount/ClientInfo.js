@@ -4,7 +4,7 @@ import config from './../../config/config.json';
 
 import react, {useContext, useEffect, useState, useRef, useMemo} from "react";
 import {UserContext} from "../../UserContext";
-import {Link, useParams} from "react-router-dom";
+import {Link, redirect, useParams} from "react-router-dom";
 import TableContainer from "../../utils/TableContainer";
 import {Container} from "reactstrap";
 
@@ -35,6 +35,18 @@ export default function ClientInfo() {
     //TODO : get client info fron api
     //TODO : get reports from api
     //TODO: get spm from api
+
+
+    // Function to handle link clicks
+    const handleLinkClick = (e, url) => {
+        e.preventDefault(); // Prevent the default behavior of the link
+        // You can perform other actions here, such as opening a modal, showing a tooltip, etc.
+        // If you want to navigate to the URL under certain conditions, you can use window.location.href = url
+        console.log("handleLinkClick")
+        window.location.href = url
+
+    };
+
 
     //http://localhost:3010/api/client/client/64ae5f6d98a8e0320465d596
     useEffect(() => {
@@ -87,8 +99,21 @@ export default function ClientInfo() {
                 accessor: "evaluation_date",
                 Cell: (props) => {
                     const formattedDate = moment(props.value).format('DD/MM/yyyy HH:mm');
-                    return <a href={"spm/" + props.row.original._id}>{formattedDate}</a>
+                    //return <a href={"spm/" + props.row.original._id}>{formattedDate}</a>
+                    return (
+                        <Link to={"../../spm/" + props.row.original._id}>{formattedDate}</Link>
+                    );
+
                 },
+                // Cell: (props) => {
+                //     const formattedDate = moment(props.value).format('DD/MM/yyyy HH:mm');
+                //     return (
+                //         <a href={"spm/" + props.row.original._id}
+                //            onClick={(e) => handleLinkClick(e, "spm/" + props.row.original._id)}
+                //         >{formattedDate}</a>
+                //     );
+                // },
+
                 // Cell: props => {moment(props.row.original._id).format('DD/MM/yyyy HH:mm')}
             },
             // {
@@ -103,7 +128,7 @@ export default function ClientInfo() {
                 Header: "spm_type",
                 accessor: "spm_type",
                 Cell: (props) => {
-                    switch (props.value){
+                    switch (props.value) {
                         case 0:
                             // return <span style={{ color: 'orange' }}>{"SPM CASA"}</span>;
                             return <span>{"SPM CASA"}</span>;
@@ -155,7 +180,8 @@ export default function ClientInfo() {
                 Header: "Day",
                 accessor: "date",
                 // Cell: props => <a href={"post/" + props.value}>{props.value}</a>
-                Cell: props => <a href={"post/" + props.row.original._id}>{moment(props.value).format('DD/MM/yyyy HH:mm')}</a>
+                Cell: props => <a
+                    href={"session/" + props.row.original._id}>{moment(props.value).format('DD/MM/yyyy HH:mm')}</a>
             },
             {
                 Header: "Summary",
@@ -210,16 +236,16 @@ export default function ClientInfo() {
                 <h1>SPMs</h1>
 
 
-                <Link to={"/spm/spm-casa/"+ client_id}>
+                <Link to={"/spm/spm-casa/" + client_id}>
                     <button className="btn_insert">NEW SPM CASA</button>
                 </Link>
-                <Link to={"/spm/spm-escola/"+ client_id}>
+                <Link to={"/spm/spm-escola/" + client_id}>
                     <button className="btn_insert">NEW SPM ESCOLA</button>
                 </Link>
-                <Link to={"/spm/spm-pcasa/"+ client_id}>
+                <Link to={"/spm/spm-pcasa/" + client_id}>
                     <button className="btn_insert">NEW SPM-p CASA</button>
                 </Link>
-                <Link to={"/spm/spm-pescola/"+ client_id}>
+                <Link to={"/spm/spm-pescola/" + client_id}>
                     <button className="btn_insert">NEW SPM-p ESCOLA</button>
                 </Link>
 

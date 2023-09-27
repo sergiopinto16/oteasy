@@ -1000,7 +1000,7 @@ export default function SPMpCasa() {
 
 
 
-                <button className="button_download_table spm_p_casa" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Graph</button>
+                <button className="button_download_table spm_p_casa" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Table</button>
 
             </div>
 
@@ -1013,7 +1013,7 @@ export default function SPMpCasa() {
                     <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} width_size={minWidth_graph} />
                 </div>
 
-                <button className="button_download_graph spm_p_casa" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Table</button>
+                <button className="button_download_graph spm_p_casa" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Graph</button>
 
 
 
