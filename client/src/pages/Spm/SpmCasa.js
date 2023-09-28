@@ -354,7 +354,7 @@ export default function SpmCasa() {
 
             <div id="PS" className="question_group">
 
-                <h1>PARTICIPAÇÃO SOCIAL A criança ...</h1>
+                <h1 className="spm_casa">PARTICIPAÇÃO SOCIAL A criança ...</h1>
 
                 <div className="question">
                     <p>1. Brinca com os amigos cooperativamente (sem muita argumentação)?</p>
@@ -439,7 +439,7 @@ export default function SpmCasa() {
             <div id="VISAO" className="question_group">
 
 
-                <h1>VISÃO A criança ...</h1>
+                <h1 className="spm_casa">VISÃO A criança ...</h1>
 
 
                 <div className="question">
@@ -529,7 +529,7 @@ export default function SpmCasa() {
 
             <div id="AUDICAO" className="question_group">
 
-                <h1>AUDIÇÃO A criança ...</h1>
+                <h1 className="spm_casa">AUDIÇÃO A criança ...</h1>
 
 
                 <div className="question">
@@ -602,7 +602,7 @@ export default function SpmCasa() {
             <div id="TOQUE" className="question_group">
 
 
-                <h1>TOQUE A criança ...</h1>
+                <h1 className="spm_casa">TOQUE A criança ...</h1>
 
 
                 <div className="question">
@@ -691,7 +691,7 @@ export default function SpmCasa() {
             <div id="GOSTO_E_OLFATO" className="question_group">
 
 
-                <h1>GOSTO E OLFATO A criança ...</h1>
+                <h1 className="spm_casa">GOSTO E OLFATO A criança ...</h1>
 
 
                 <div className="question">
@@ -741,7 +741,7 @@ export default function SpmCasa() {
             <div id="CONSCIENCIA_CORPORAL" className="question_group">
 
 
-                <h1>CONSCIÊNCIA CORPORAL A criança ...</h1>
+                <h1 className="spm_casa">CONSCIÊNCIA CORPORAL A criança ...</h1>
 
 
                 <div className="question">
@@ -826,7 +826,7 @@ export default function SpmCasa() {
             <div id="MOVIMENTO_E_EQILIBRIO" className="question_group">
 
 
-                <h1>MOVIMENTO E EQUILIBRIO A criança ...</h1>
+                <h1 className="spm_casa">MOVIMENTO E EQUILIBRIO A criança ...</h1>
 
 
                 <div className="question">
@@ -912,7 +912,7 @@ export default function SpmCasa() {
             <div id="PLANEAMENTO_MOTOR_E_IDEACAO" className="question_group">
 
 
-                <h1>PLANEAMENTO MOTOR E IDEAÇÃO A criança ...</h1>
+                <h1 className="spm_casa">PLANEAMENTO MOTOR E IDEAÇÃO A criança ...</h1>
 
 
                 <div className="question">

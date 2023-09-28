@@ -77,7 +77,7 @@ export default function SpmCasa() {
     //     window.location.replace("/");
     // }
 
-    document.title += " - SPM CASA"
+    document.title += " - SPM INFO"
 
 
     const [valueArray, setValueArray] = useState([]);
@@ -200,7 +200,21 @@ export default function SpmCasa() {
                 update_tsQuestions(spm.group_score);
                 update_tsQuestions(spm.group_tsocre);
                 update_classificacaoQuestions(spm.group_comment);
-                
+
+
+                switch (spm.spm_type) {
+                    case 0:
+                        document.title = "SPM CASA"
+                    case 1:
+                        document.title = "SPM ESCOLA"
+                    case 2:
+                        document.title = "SPM-p CASA"
+                    case 3:
+                        document.title = "SPM-p ESCOLA"
+                    default:
+                        document.title = "SPM INFO"
+                }
+
 
                 console.log(tsQuestions)
                 console.log(classificacaoQuestions)
@@ -261,7 +275,10 @@ export default function SpmCasa() {
                 <button className="spm_casa" onClick={() => window.open(require('../../static/SPM/docs/SPM_Casa_TUDO_COMPLETO(5-12Anos).pdf'), '_none')}> Donwload Formulário </button>
             </div>
 
-            <h1 className="title spm_casa" >SPM CASA</h1>
+            <h1 className="title spm_casa" >SPM INFO</h1>
+
+            {/*TODO: Add type of spm, notes*/}
+            {/*Add utent info*/}
 
 
             <div className="spm_table">

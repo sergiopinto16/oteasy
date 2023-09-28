@@ -96,6 +96,7 @@ export default function SPMEscola() {
         minWidth_graph = 700;
     }
     const [redirect, setRedirect] = useState(false);
+    const [url, setUrl] = useState('');
 
 
     // const tsQuestions_data = [{ name: 'Participação Social', tscore: 0 },
@@ -247,7 +248,7 @@ export default function SPMEscola() {
 
         console.log("No refresh page")
 
-        spmPDF();
+        //spmPDF();
 
 
 
@@ -260,7 +261,7 @@ export default function SPMEscola() {
         console.log(valueArray)
         console.log(questionArray)
 
-        const response = await fetch(api_host + '/api/spm/add', {
+        fetch(api_host + '/api/spm/add', {
             method: 'POST',
             body: JSON.stringify({
                 "spm_type": spm_type,
@@ -272,15 +273,22 @@ export default function SPMEscola() {
                 classificacaoQuestions,
                 client_id
             }),
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             credentials: 'include',
-        });
-        if (response.ok) {
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Erro with db connect")
+        }).then((responseJson) => {
+            //DO something with responseJSON
+            console.log(responseJson);
+            console.log(responseJson._id);
+            setUrl('../' + responseJson._id);
             setRedirect(true);
-        } else {
-
-            alert('error adding to db - ' + response);
-        }
+        }).catch((error) => {
+            alert(error);
+        });
 
     };
 
@@ -293,48 +301,11 @@ export default function SPMEscola() {
     const graphElement = useRef()
 
 
-    async function downloadElement(ev, domElement) {
-
-        ev.preventDefault();
-
-        console.log("donwload element");
-
-        html2canvas(domElement).then(canvas => {
-            saveAs(canvas.toDataURL(), 'element.png');
-
-        });
-    };
-
-
-    function saveAs(uri, filename) {
-
-        var link = document.createElement('a');
-
-        if (typeof link.download === 'string') {
-
-            link.href = uri;
-            link.download = filename;
-
-            //Firefox requires the link to be in the body
-            document.body.appendChild(link);
-
-            //simulate click
-            link.click();
-
-            //remove the link when done
-            document.body.removeChild(link);
-
-        } else {
-
-            window.open(uri);
-
-        }
-    }
 
     useEffect(() => {
         // CustomizedTables(scoreQuestions, classificacaoQuestions)
         console.log("useEffect runs!")
-        window.scrollTo(0, 0)
+
         rows = [
             createData('Participação Social', tsQuestions[0], classificacaoQuestions[0]),
             createData('Visão', tsQuestions[1], classificacaoQuestions[1]),
@@ -353,6 +324,7 @@ export default function SPMEscola() {
     if (redirect) {
         //TODO redirect to dashboard
         // return <Navigate to={'/gas/gasReports'} />
+        window.location.href = url
     };
 
     //   if (redirect) {
@@ -370,7 +342,7 @@ export default function SPMEscola() {
 
             <div id="PS" className="question_group" >
 
-                <h1>PARTICIPAÇÃO SOCIAL Este aluno ...</h1>
+                <h1 className="spm_escola">PARTICIPAÇÃO SOCIAL Este aluno ...</h1>
 
                 <div className="question">
                     <p>1. Trabalha em equipa; é prestável com os outros.</p>
@@ -440,7 +412,7 @@ export default function SPMEscola() {
             <div id="VISAO" className="question_group">
 
 
-                <h1>VISÃO Este aluno ...</h1>
+                <h1 className="spm_escola">VISÃO Este aluno ...</h1>
 
 
                 <div className="question">
@@ -496,7 +468,7 @@ export default function SPMEscola() {
 
             <div id="AUDICAO" className="question_group">
 
-                <h1>AUDIÇÃO Este aluno ...</h1>
+                <h1 className="spm_escola">AUDIÇÃO Este aluno ...</h1>
 
 
 
@@ -557,7 +529,7 @@ export default function SPMEscola() {
             <div id="TOQUE" className="question_group">
 
 
-                <h1>TOQUE Este aluno ...</h1>
+                <h1 className="spm_escola">TOQUE Este aluno ...</h1>
 
                 <div className="question">
 
@@ -620,7 +592,7 @@ export default function SPMEscola() {
             <div id="GOSTO_E_OLFATO" className="question_group">
 
 
-                <h1>GOSTO E OLFATO Este aluno ...</h1>
+                <h1 className="spm_escola">GOSTO E OLFATO Este aluno ...</h1>
 
 
                 <div className="question">
@@ -661,7 +633,7 @@ export default function SPMEscola() {
 
 
 
-                <h1>CONSCIÊNCIA CORPORAL Este aluno ...</h1>
+                <h1 className="spm_escola">CONSCIÊNCIA CORPORAL Este aluno ...</h1>
 
                 <div className="question">
 
@@ -714,7 +686,7 @@ export default function SPMEscola() {
             <div id="MOVIMENTO_E_EQILIBRIO" className="question_group">
 
 
-                <h1>MOVIMENTO E EQUILIBRIO Este aluno ...</h1>
+                <h1 className="spm_escola">MOVIMENTO E EQUILIBRIO Este aluno ...</h1>
 
 
                 <div className="question">
@@ -778,7 +750,7 @@ export default function SPMEscola() {
             <div id="PLANEAMENTO_MOTOR_E_IDEACAO" className="question_group" >
 
 
-                <h1>PLANEAMENTO MOTOR E IDEAÇÃO Este aluno ...</h1>
+                <h1 className="spm_escola">PLANEAMENTO MOTOR E IDEAÇÃO Este aluno ...</h1>
 
                 <div className="question">
 
@@ -851,65 +823,7 @@ export default function SPMEscola() {
 
             <div className="spm_calculate_button">
 
-                <button className="spm_escola" onClick={calculate_spm_escola}>Export to  PDF (NOT WORKING)</button>
-
-
-
-            </div>
-
-            <div className="spm_table">
-
-
-
-                {/* <CustomizedTables scoreQuestions classificacaoQuestions/> */}
-
-                <div ref={tableElement}>
-                    {/* <p>Count {updateTabel}</p> */}
-
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: minWidth_graph }} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>Avaliação</StyledTableCell>
-                                    <StyledTableCell align="right">Pontuação</StyledTableCell>
-                                    <StyledTableCell align="right">Comentário</StyledTableCell>
-                                    {/* <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell> */}
-                                </TableRow>
-                            </TableHead>
-
-
-
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">
-                                            {row.name}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="right">{row.pontuacao}</StyledTableCell>
-                                        <StyledTableCell align="right">{row.comentario}</StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </div >
-
-
-
-                <button className="button_download_table spm_escola" onClick={(ev) => downloadElement(ev, tableElement.current)}>Download Table</button>
-
-            </div>
-
-
-            <div className="spm_graph">
-
-
-
-                <div ref={graphElement} >
-                    <GraphSPM tsQuestions_data={tsQuestions_data} ref={chartRef} width_size={minWidth_graph} />
-                </div>
-
-                <button className="button_download_graph spm_escola" onClick={(ev) => downloadElement(ev, graphElement.current)}>Download Graph</button>
+                <button className="spm_escola" onClick={calculate_spm_escola}>Save SPM</button>
 
 
 
