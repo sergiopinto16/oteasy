@@ -72,10 +72,10 @@ export default function SpmCasa() {
     const { userInfo, setUserInfo } = useContext(UserContext);
     const {spm_id} = useParams();
 
-    if (userInfo?.email === undefined) {
-        console.log("Not logged, return to home")
-        window.location.replace("/");
-    }
+    // if (userInfo?.email === undefined) {
+    //     console.log("Not logged, return to home")
+    //     window.location.replace("/");
+    // }
 
     document.title += " - SPM CASA"
 
@@ -188,7 +188,7 @@ export default function SpmCasa() {
     useEffect(() => {
         // CustomizedTables(scoreQuestions, classificacaoQuestions)
         console.log("useEffect start!")
-        window.scrollTo(0, 0)
+
         console.log("SPM id = " + spm_id)
         fetch(api_host + '/api/spm/spm/' + spm_id, {credentials: 'include'}).then(response => {
             response.json().then(spm => {

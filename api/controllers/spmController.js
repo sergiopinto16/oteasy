@@ -100,19 +100,6 @@ const addSPM = async (req, res) => {
     sendSlackNotification(JSON.stringify(spmAdd),"DB-spm")
   });
 
-  // try {
-  //     const gasReportAdd = await Gas.create({
-  //         car_plate,
-  //         car_km,
-  //         quantity,
-  //         price,
-  //     });
-  //     res.json(gasReportAdd);
-  // } catch (e) {
-  //     console.log(e);
-  //     res.status(400).json(e);
-  // }
-
 
 }
 
