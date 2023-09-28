@@ -1,9 +1,10 @@
-import { useState } from "react";
+import {useState} from "react";
 import PasswordInputField from "./PasswordInputField";
 import ConfirmPasswordInputField from "./ConfirmPasswordInputField";
 import Checkbox from "./Checkbox";
+import '../style.css'
 
-function PasswordAndConfirmPasswordValidation({ callbackPasswordFunction }) {
+function PasswordAndConfirmPasswordValidation({callbackPasswordFunction}) {
 
     const [passwordError, setPasswordErr] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
@@ -22,7 +23,7 @@ function PasswordAndConfirmPasswordValidation({ callbackPasswordFunction }) {
 
         const passwordInputValue = evnt.target.value.trim();
         const passwordInputFieldName = evnt.target.name;
-        const NewPasswordInput = { ...passwordInput, [passwordInputFieldName]: passwordInputValue }
+        const NewPasswordInput = {...passwordInput, [passwordInputFieldName]: passwordInputValue}
         setPasswordInput(NewPasswordInput);
 
     }
@@ -79,30 +80,37 @@ function PasswordAndConfirmPasswordValidation({ callbackPasswordFunction }) {
     }
 
     return (
-        <div className="row">
-            <div className="col-sm-4">
+        <>
+        {/*<div className="row">*/}
+        {/*    <div className="col-sm-4">*/}
                 <PasswordInputField
                     handlePasswordChange={handlePasswordChange}
                     handleValidation={handleValidation}
                     passwordValue={passwordInput.password}
                     passwordError={passwordError}
-                    showPassword={showPassword} />
+                    showPassword={showPassword}/>
                 <ConfirmPasswordInputField
                     handlePasswordChange={handlePasswordChange}
                     handleValidation={handleValidation}
                     confirmPasswordValue={passwordInput.confirmPassword}
                     confirmPasswordError={confirmPasswordError}
-                    showPassword={showPassword} />
+                    showPassword={showPassword}/>
                 <div className="checkbox-show-password">
                     <input type="checkbox"
-                        onChange={handleClickShowPassword}
-                        id="show_password_checkbox"
+                           className="checkbox-show-password_checkbox"
+                           onChange={handleClickShowPassword}
+                           id="passwordcheckbox"
                     />
-                    <label for="show_password_checkbox">Show password</label>
+                    <label className="checkbox-show-password_label"
+                           for="passwordcheckbox">Show password</label>
+
                 </div>
-            </div>
-        </div>
+        {/*    </div>*/}
+        {/*</div>*/}
+        </>
     )
+
+
 }
 
 export default PasswordAndConfirmPasswordValidation;
