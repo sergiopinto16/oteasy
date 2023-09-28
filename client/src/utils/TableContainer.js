@@ -4,6 +4,7 @@ import {useTable, useSortBy, useFilters, useExpanded, usePagination} from 'react
 import {Table, Row, Col, Button, Input, CustomInput} from 'reactstrap';
 
 import {Filter, DefaultColumnFilter} from './filter';
+import './TableContainer.css'
 
 // https://thewidlarzgroup.com/react-table-7/
 
@@ -53,7 +54,7 @@ const TableContainer = ({columns, data,renderRowSubComponent}) => {
 
     return (
         <Fragment>
-            <Table bordered hover {...getTableProps()}>
+            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" bordered hover {...getTableProps()}>
                 <thead>
                 {headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -98,14 +99,14 @@ const TableContainer = ({columns, data,renderRowSubComponent}) => {
             <Row style={{maxWidth: 1000, margin: '0 auto', textAlign: 'center'}}>
                 <Col md={3}>
                     <Button
-                        color='primary'
+                        color='success'
                         onClick={() => gotoPage(0)}
                         disabled={!canPreviousPage}
                     >
                         {'<<'}
                     </Button>
                     <Button
-                        color='primary'
+                        color='success'
                         onClick={previousPage}
                         disabled={!canPreviousPage}
                     >
@@ -143,11 +144,11 @@ const TableContainer = ({columns, data,renderRowSubComponent}) => {
                     </CustomInput>
                 </Col>
                 <Col md={3}>
-                    <Button color='primary' onClick={nextPage} disabled={!canNextPage}>
+                    <Button color='success' onClick={nextPage} disabled={!canNextPage}>
                         {'>'}
                     </Button>
                     <Button
-                        color='primary'
+                        color='success'
                         onClick={() => gotoPage(pageCount - 1)}
                         disabled={!canNextPage}
                     >

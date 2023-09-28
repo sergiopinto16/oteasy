@@ -205,9 +205,9 @@ export default function ClientInfo() {
     return (
         <form className="client">
             <div className="client_info">
-                <h1>CLIENT INFO</h1>
+                <h1>Client</h1>
 
-
+                <div className="client_info_data">
                 <label>Name: </label><p>{client.name}</p>
                 <label>Birth Date: </label><p> {client.birth_date}</p>
                 <label>cardID: </label><p>{client.card_id}</p>
@@ -216,18 +216,17 @@ export default function ClientInfo() {
                 <label>Phone: </label><p>{client.contact_number}</p>
                 <label>email: </label><p>{client.email}</p>
                 <label>Address: </label><p>{client.address}</p>
-
+                </div>
             </div>
 
             <div className="client_reports">
                 <h1>Reports</h1>
 
-
                 <Link to={'/session_report/create/' + client_id}>
                     <button className="btn_insert">Insert Session Report</button>
                 </Link>
 
-                <Container style={{marginTop: 100}}>
+                <Container style={{marginTop: 20}}>
                     <TableContainer columns={table_session} data={session}/>
                 </Container>
             </div>
@@ -237,19 +236,19 @@ export default function ClientInfo() {
 
 
                 <Link to={"/spm/spm-casa/" + client_id}>
-                    <button className="btn_insert">NEW SPM CASA</button>
+                    <button className="btn_insert btn_spm_casa">NEW SPM CASA</button>
                 </Link>
                 <Link to={"/spm/spm-escola/" + client_id}>
-                    <button className="btn_insert">NEW SPM ESCOLA</button>
+                    <button className="btn_insert btn_spm_escola">NEW SPM ESCOLA</button>
                 </Link>
                 <Link to={"/spm/spm-pcasa/" + client_id}>
-                    <button className="btn_insert">NEW SPM-p CASA</button>
+                    <button className="btn_insert btn_spm_p_casa">NEW SPM-p CASA</button>
                 </Link>
                 <Link to={"/spm/spm-pescola/" + client_id}>
-                    <button className="btn_insert">NEW SPM-p ESCOLA</button>
+                    <button className="btn_insert btn_spm_p_escola">NEW SPM-p ESCOLA</button>
                 </Link>
 
-                <Container style={{marginTop: 100}}>
+                <Container style={{marginTop: 20}}>
                     <TableContainer columns={table_spm} data={spms}/>
                 </Container>
             </div>

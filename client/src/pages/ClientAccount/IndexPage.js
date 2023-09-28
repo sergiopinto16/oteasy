@@ -11,6 +11,7 @@ import {UserContext} from "../../UserContext";
 
 import config from './../../config/config.json';
 import {Container} from "reactstrap";
+import './IndexPage.css'
 
 const api_host = config.api.host
 //' + api_host + ':' + api_port + '
@@ -59,10 +60,10 @@ export default function IndexPage() {
                 Header: "Parent Name",
                 accessor: "parent_name"
             },
-            {
-                Header: "Email",
-                accessor: "email"
-            },
+            // {
+            //     Header: "Email",
+            //     accessor: "email"
+            // },
             {
                 Header: "Phone",
                 accessor: "contact_number"
@@ -75,20 +76,20 @@ export default function IndexPage() {
             //     Filter: SelectColumnFilter
             //
             // },
-            {
-                Header: "Time",
-                accessor: "createdAt",
-                disableFilters: true
-
-            },
+            // {
+            //     Header: "Time",
+            //     accessor: "createdAt",
+            //     disableFilters: true
+            //
+            // },
         ],
         []
     )
 
 
     return (
-        <>
 
+        <form className="clients">
             <Link to="/client/register">
                 <button className="btn_insert">Register New Client</button>
             </Link>
@@ -97,13 +98,13 @@ export default function IndexPage() {
             {/*{clients.length > 0 && clients.map(clients => (*/}
             {/*  <ClientsReports key={clients._id} {...clients} />*/}
             {/*))}*/}
+            <div className="clients_table">
+                <h1>Clients:</h1>
+                <Container style={{marginTop: 20}}>
+                    <TableContainer columns={table_columns} data={clients}/>
+                </Container>
+            </div>
 
-
-            <Container style={{marginTop: 100}}>
-                <TableContainer columns={table_columns} data={clients}/>
-            </Container>
-
-
-        </>
+        </form>
     );
 }

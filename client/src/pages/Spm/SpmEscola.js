@@ -334,7 +334,7 @@ export default function SPMEscola() {
     useEffect(() => {
         // CustomizedTables(scoreQuestions, classificacaoQuestions)
         console.log("useEffect runs!")
-
+        window.scrollTo(0, 0)
         rows = [
             createData('Participação Social', tsQuestions[0], classificacaoQuestions[0]),
             createData('Visão', tsQuestions[1], classificacaoQuestions[1]),

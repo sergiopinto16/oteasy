@@ -188,7 +188,7 @@ export default function SpmCasa() {
     useEffect(() => {
         // CustomizedTables(scoreQuestions, classificacaoQuestions)
         console.log("useEffect start!")
-
+        window.scrollTo(0, 0)
         console.log("SPM id = " + spm_id)
         fetch(api_host + '/api/spm/spm/' + spm_id, {credentials: 'include'}).then(response => {
             response.json().then(spm => {

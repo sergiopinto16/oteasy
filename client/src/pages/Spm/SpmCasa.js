@@ -344,6 +344,7 @@ export default function SpmCasa() {
     useEffect(() => {
         // CustomizedTables(scoreQuestions, classificacaoQuestions)
         console.log("useEffect runs!")
+        window.scrollTo(0, 0)
 
         rows = [
             createData('Participação Social', tsQuestions[0], classificacaoQuestions[0]),
