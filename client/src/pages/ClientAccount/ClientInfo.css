@@ -45,9 +45,20 @@ button {
     background-color: green;
 }
 
+.btn_spm_casa:hover{
+    background-color: #004b00;
+    font-weight: 900;
+}
+
 
 .btn_spm_escola{
     background-color: orange;
+}
+
+.btn_spm_escola:hover{
+    background-color: #815901;
+    font-weight: 900;
+
 }
 
 
@@ -55,7 +66,18 @@ button {
     background-color: blue;
 }
 
+.btn_spm_p_casa:hover{
+    background-color: #000088;
+    font-weight: 900;
+}
+
 
 .btn_spm_p_escola{
     background-color: red;
+}
+
+
+.btn_spm_p_escola:hover{
+    background-color: #830000;
+    font-weight: 900;
 }
