@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../UserContext";
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../UserContext";
 
 import './style/LeftNavBar.css'
-
 
 
 import config from './../config/config.json';
@@ -17,7 +16,8 @@ const gas_report_credentials = 1
 
 const LeftNavBar = () => {
 
-    const { userInfo, setUserInfo } = useContext(UserContext);
+    const {userInfo, setUserInfo} = useContext(UserContext);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
 
     useEffect(() => {
@@ -44,8 +44,7 @@ const LeftNavBar = () => {
                     console.log('useEffect LeftNavBarNo SetUser')
 
                 });
-            }
-            else {
+            } else {
                 setUserInfo({})
                 console.log('useEffect LeftNavBarNo profile')
             }
@@ -71,7 +70,10 @@ const LeftNavBar = () => {
 
     return (
         <nav>
-            <div className="left-navbar">
+
+            <div className={'left-navbar'}>
+
+                <div className={`left-navbar-hidden ${showMobileMenu ? 'show-mobile-menu' : ''}`}>
                 <div className="left-navbar-element">
                     <Link to="/" className="logo">VeSiTO</Link>
                 </div>
@@ -83,12 +85,20 @@ const LeftNavBar = () => {
                             <>
                                 <div className="left-navbar-element">
                                     <Dropdown>
-                                        <Dropdown.Toggle className="left-navbar-element-link" variant="success">SPMs</Dropdown.Toggle>
+                                        <Dropdown.Toggle className="left-navbar-element-link"
+                                                         variant="success">SPMs</Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item> <Link className="left-navbar-element-link" to="/spm/spm-casa/0">SPM Casa</Link></Dropdown.Item>
-                                            <Dropdown.Item> <Link className="left-navbar-element-link" to="/spm/spm-escola/0">SPM Escola</Link></Dropdown.Item>
-                                            <Dropdown.Item> <Link className="left-navbar-element-link" to="/spm/spm-pcasa/0">SPM-p Casa</Link></Dropdown.Item>
-                                            <Dropdown.Item  ><Link className="left-navbar-element-link" to="/spm/spm-pescola/0">SPM-p Escola</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link className="left-navbar-element-link"
+                                                                  to="/spm/spm-casa/0">SPM Casa</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link className="left-navbar-element-link"
+                                                                  to="/spm/spm-escola/0">SPM
+                                                Escola</Link></Dropdown.Item>
+                                            <Dropdown.Item> <Link className="left-navbar-element-link"
+                                                                  to="/spm/spm-pcasa/0">SPM-p
+                                                Casa</Link></Dropdown.Item>
+                                            <Dropdown.Item><Link className="left-navbar-element-link"
+                                                                 to="/spm/spm-pescola/0">SPM-p
+                                                Escola</Link></Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
@@ -113,9 +123,20 @@ const LeftNavBar = () => {
                         </>
                     )
                 }
+                </div>
 
-            </div >
-        </nav >
+                <div className="mobile-left-navbar">
+
+                    <button type="button" className="mobile-toggler"
+                            onClick={() => setShowMobileMenu(!showMobileMenu)}>hamburger button
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </nav>
     );
 }
 

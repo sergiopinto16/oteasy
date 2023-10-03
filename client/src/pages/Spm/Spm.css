@@ -150,7 +150,7 @@ button.spm_p_escola:hover{
 
 
 
-@media (max-width: 600px) {
+@media screen and (max-width: 767px) {
     body {
         /* background-color: blue; */
         font-size: xx-small;

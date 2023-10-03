@@ -1,4 +1,4 @@
-.left-navbar{
+.left-navbar {
     background: #e2e1e1;
     /* min-height: 800px; */
     height: 100%;
@@ -7,26 +7,12 @@
     padding: 10px;
 
     position: fixed;
-    
+
     /* left: 0; */
     transition: 0.5s;
 
-    display: block;
 }
 
-a{
-    text-decoration:none;
-    color: inherit;
-}
-
-header a{
-    text-decoration:none;
-    color: inherit;
-}
-a.logo{
-    font-weight: bold;
-    font-size: 1.5rem;
-}
 
 a.logo:link, a.logo:visited {
     /*background-color: #034101;*/
@@ -63,6 +49,46 @@ a.left-navbar-element-link:hover, a.left-navbar-element-link:active {
 }
 
 
-.left-navbar-element{
+.left-navbar-element {
     padding: 10px;
+}
+
+/*default hide hamburger button*/
+.mobile-toggler {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .mobile-toggler {
+        display: block;
+        /*style your hamburger button*/
+    }
+    .left-navbar {
+
+        width: 40px;
+    }
+
+
+    .left-navbar-hidden {
+        /*this will hide menu for small screen*/
+        /*you can use display:none/block as you desired*/
+        visibility: hidden;
+
+        /*these are optional you can add your style here*/
+        width: 280px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -15px;
+        padding: 20px;
+        background-color: #fff;
+        color: #000;
+        transition: 400ms ease;
+    }
+
+    /*This will handle show/hide after you toggle your hamburger button*/
+    .left-navbar-hidden.show-mobile-menu {
+        visibility: visible;
+        left: 0;
+    }
 }

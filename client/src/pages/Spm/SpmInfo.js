@@ -269,6 +269,13 @@ export default function SpmCasa() {
 
         <form className="spm_casa"  >
 
+            {/*
+            Add Utent info,
+            Add edited comment of spm
+            Add edited reaseaon of spm 
+
+            */}
+
             {/* //TODO minimize all question and create a button (option) to open (show) questions to answer */}
 
             <div className="button_form_download" >

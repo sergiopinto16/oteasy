@@ -1,9 +1,8 @@
-
-import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../UserContext";
+import {Link} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../UserContext";
 import './style/NavBar.css'
-import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -21,8 +20,9 @@ const gas_report_credentials = 1
 
 const Navbar = () => {
 
-    const { userInfo, setUserInfo } = useContext(UserContext);
+    const {userInfo, setUserInfo} = useContext(UserContext);
     const [redirect, setRedirect] = useState(false);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     // Dont understand how information change this userInfo
     // useEffect(() => {
@@ -30,6 +30,46 @@ const Navbar = () => {
     //     console.log("useEffect NavBar token = " + userToken)
 
     //     //TODO cehck if ok in api
+
+    useEffect(() => {
+        // declare the data fetching function
+        const fetchData = async () => {
+
+            // let userToken = localStorage.getItem("userInfo")
+            // console.log("useEffect LeftNavBar token = " + userToken)
+
+            // const response = await fetch(api_host + '/api/user/profile', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ "token": userToken }),
+            //     headers: { 'Content-Type': 'application/json' },
+            //     credentials: 'include',
+            // });
+            const response = await fetch(api_host + '/api/user/profile', {
+                credentials: 'include',
+            });
+            //TODO cehck if ok in api
+            console.log(response)
+            if (response.ok) {
+                response.json().then(userInfo => {
+                    setUserInfo(userInfo);
+                    console.log('useEffect LeftNavBarNo SetUser')
+
+                });
+            } else {
+                setUserInfo({})
+                console.log('useEffect LeftNavBarNo profile')
+            }
+        }
+        const response = fetchData().catch(console.error);
+        console.log(response)
+
+
+        // setUserInfo(localStorage.getItem("userInfo"))
+
+        // console.log("LeftNavBar UserInfo = " + userInfo)
+        // console.log("LeftNavBar UserInfo.token = " + userInfo.token)
+    }, []);
+
 
     //     const response = fetch(api_host + '/api/user/profile', {
     //         method: 'POST',
@@ -62,16 +102,17 @@ const Navbar = () => {
     const credentials_level = userInfo?.credentials_level;
     console.log("NavBar.js | credentials_level =" + credentials_level)
 
+
     async function logout(ev) {
         ev.preventDefault();
         console.log("NavBar Logout email = ", email)
         const response = await fetch(api_host + '/api/user/logout', {
             credentials: 'include',
             method: 'POST',
-            body: JSON.stringify({ 'email': email }),
-            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({'email': email}),
+            headers: {'Content-Type': 'application/json'},
         }).catch(console.error);
-        
+
         // setUserInfo({});
         // console.log("Remove item from localStorage = " +localStorage.getItem("userInfo"))
         // localStorage.removeItem("userInfo");
@@ -81,29 +122,107 @@ const Navbar = () => {
     }
 
     if (redirect) {
-        return <Navigate to={'/'} />
+        return <Navigate to={'/'}/>
     }
 
 
     return (
         <nav>
-            {
-                email && (
-                    <>
-                        {/* <Link to="/create">Create new post</Link> */}
-                        <a onClick={logout}> Logout ({name})</a>
-                    </>
-                )
-            }
-            {
-                !email && (
-                    <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
-                    </>
-                )
-            }
-        </nav >
+
+            <div className={'nav-bar'}>
+                <div className={'left-navbar'}>
+
+                    <div className={`left-navbar-hidden ${showMobileMenu ? 'show-mobile-menu' : ''}`}>
+                        <div className="navbar-element">
+                            <Link to="/" className="logo">VeSiTO</Link>
+                        </div>
+
+                        {/* SPMs | Clients */}
+                        {email && credentials_level !== undefined && (
+                            <>
+                                {credentials_level[spm_credentials] === 1 && (
+                                    <>
+                                        <div className="navbar-element">
+                                            <Dropdown>
+                                                <Dropdown.Toggle className="navbar-element-link"
+                                                                 variant="success">SPMs</Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item> <Link className="navbar-element-link"
+                                                                          to="/spm/spm-casa/0">SPM
+                                                        Casa</Link></Dropdown.Item>
+                                                    <Dropdown.Item> <Link className="navbar-element-link"
+                                                                          to="/spm/spm-escola/0">SPM
+                                                        Escola</Link></Dropdown.Item>
+                                                    <Dropdown.Item> <Link className="navbar-element-link"
+                                                                          to="/spm/spm-pcasa/0">SPM-p
+                                                        Casa</Link></Dropdown.Item>
+                                                    <Dropdown.Item><Link className="navbar-element-link"
+                                                                         to="/spm/spm-pescola/0">SPM-p
+                                                        Escola</Link></Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </div>
+
+                                        {/* Clientes */}
+                                        <div className="navbar-element">
+                                            <Link className="navbar-element-link"
+                                                  to="/client/clients">Clients</Link>
+                                        </div>
+                                    </>)}
+                            </>
+                        )}
+                        {/* Gas Reports */}
+                        {
+                            email && credentials_level !== undefined && (
+                                <>
+                                    {credentials_level[gas_report_credentials] === 1 && (
+                                        <>
+                                            <div className="navbar-element">
+                                                <Link className="navbar-element-link" to="/gas/gasReports">Gas
+                                                    Reports</Link>
+                                            </div>
+                                        </>)}
+                                </>
+                            )
+                        }
+                    </div>
+
+                    <div className="mobile-left-navbar">
+
+                        <button type="button" className="mobile-toggler"
+                                onClick={() => setShowMobileMenu(!showMobileMenu)}>hamburger button
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div className={'right-navbar'}>
+                    {
+                        email && (
+                            <div className="navbar-element">
+                                {/* <Link to="/create">Create new post</Link> */}
+                                <a className={"navbar-element-link"} onClick={logout}> Logout ({name})</a>
+                            </div>
+                        )
+                    }
+                    {
+                        !email && (
+                            <>
+                                <div className={"navbar-element"}>
+                                    <Link className={"navbar-element-link"} to="/login">Login</Link>
+                                </div>
+                                <div className={"navbar-element"}>
+                                    <Link className={"navbar-element-link"} to="/register">Register</Link>
+                                </div>
+                            </>
+                        )
+                    }
+
+                </div>
+            </div>
+        </nav>
     );
 };
 
