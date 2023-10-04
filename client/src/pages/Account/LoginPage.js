@@ -51,8 +51,14 @@ export default function LoginPage() {
         }
     }
 
-    const navigate = useNavigate();
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            console.log('do validate')
+            onButtonClick(event)
+        }
+    }
 
+    const navigate = useNavigate();
 
 
     if (redirect) {
@@ -93,7 +99,8 @@ export default function LoginPage() {
                     value={password}
                     placeholder="Enter your password here"
                     onChange={ev => setPassword(ev.target.value)}
-                    className={"inputBox"}/>
+                    className={"inputBox"}
+                    onKeyDown={handleKeyDown}/>
                 <label className="errorLabel">{passwordError}</label>
             </div>
             <br/>

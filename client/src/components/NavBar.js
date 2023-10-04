@@ -125,6 +125,11 @@ const Navbar = () => {
         return <Navigate to={'/'}/>
     }
 
+    function hamburger_button_click(ev){
+        if(showMobileMenu){
+            setShowMobileMenu(!showMobileMenu)
+        }
+    }
 
     return (
         <nav>
@@ -133,6 +138,15 @@ const Navbar = () => {
                 <div className={'left-navbar'}>
 
                     <div className={`left-navbar-hidden ${showMobileMenu ? 'show-mobile-menu' : ''}`}>
+
+                        <div className="mobile-left-navbar">
+
+                            <button type="button" className="mobile-toggler"
+                                    onClick={() => setShowMobileMenu(!showMobileMenu)}>X
+                            </button>
+
+                        </div>
+
                         <div className="navbar-element">
                             <Link to="/" className="logo">VeSiTO</Link>
                         </div>
@@ -148,16 +162,20 @@ const Navbar = () => {
                                                                  variant="success">SPMs</Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                     <Dropdown.Item> <Link className="navbar-element-link"
-                                                                          to="/spm/spm-casa/0">SPM
+                                                                          to="/spm/spm-casa/0"
+                                                                          onClick={hamburger_button_click}>SPM
                                                         Casa</Link></Dropdown.Item>
                                                     <Dropdown.Item> <Link className="navbar-element-link"
-                                                                          to="/spm/spm-escola/0">SPM
+                                                                          to="/spm/spm-escola/0"
+                                                                          onClick={hamburger_button_click}>SPM
                                                         Escola</Link></Dropdown.Item>
                                                     <Dropdown.Item> <Link className="navbar-element-link"
-                                                                          to="/spm/spm-pcasa/0">SPM-p
+                                                                          to="/spm/spm-pcasa/0"
+                                                                          onClick={hamburger_button_click}>SPM-p
                                                         Casa</Link></Dropdown.Item>
                                                     <Dropdown.Item><Link className="navbar-element-link"
-                                                                         to="/spm/spm-pescola/0">SPM-p
+                                                                         to="/spm/spm-pescola/0"
+                                                                         onClick={hamburger_button_click}>SPM-p
                                                         Escola</Link></Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
@@ -166,7 +184,8 @@ const Navbar = () => {
                                         {/* Clientes */}
                                         <div className="navbar-element">
                                             <Link className="navbar-element-link"
-                                                  to="/client/clients">Clients</Link>
+                                                  to="/client/clients"
+                                                  onClick={hamburger_button_click}>Clients</Link>
                                         </div>
                                     </>)}
                             </>
@@ -178,8 +197,9 @@ const Navbar = () => {
                                     {credentials_level[gas_report_credentials] === 1 && (
                                         <>
                                             <div className="navbar-element">
-                                                <Link className="navbar-element-link" to="/gas/gasReports">Gas
-                                                    Reports</Link>
+                                                <Link className="navbar-element-link"
+                                                      to="/gas/gasReports"
+                                                      onClick={hamburger_button_click}>Gas Reports</Link>
                                             </div>
                                         </>)}
                                 </>
@@ -190,7 +210,7 @@ const Navbar = () => {
                     <div className="mobile-left-navbar">
 
                         <button type="button" className="mobile-toggler"
-                                onClick={() => setShowMobileMenu(!showMobileMenu)}>hamburger button
+                                onClick={() => setShowMobileMenu(!showMobileMenu)}>H
                         </button>
 
                     </div>
