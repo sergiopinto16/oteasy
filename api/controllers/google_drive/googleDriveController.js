@@ -14,7 +14,6 @@ const KEYFILEPATH = path.join(__dirname, 'vesito-284096f577dd.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
 
 
-
 console.log('getDriveService = ', KEYFILEPATH)
 const auth = new google.auth.GoogleAuth({
     keyFile: KEYFILEPATH,
@@ -25,7 +24,7 @@ const drive = google.drive({version: "v3", auth: auth});
 
 
 //divide check folder from check files
-async function checkFolder(folderId, folder_name) {
+async function checkAndCreateFolder(folderId, folder_name) {
     //check folder
     console.log("Check if folder already exist " + folderId + " " + folder_name)
 
@@ -46,23 +45,9 @@ async function checkFolder(folderId, folder_name) {
                 return files[i_file].id
             }
         }
-    } else {
-        console.log('No files found.');
-        return "";
     }
 
-}
-
-
-async function createFolder(folderId, folder_name) {
-
-    save_folder_id = await checkFolder(folderId, folder_name)
-
-    console.log("check folder = " + save_folder_id)
-
-    if (save_folder_id.length > 1) {
-        return save_folder_id
-    }
+    console.log('No folder found.');
     // create folder
     const fileMetaData = {
         name: folder_name,
@@ -81,7 +66,37 @@ async function createFolder(folderId, folder_name) {
     return res.data.id
 
 
-};
+}
+
+
+// async function createFolder(folderId, folder_name) {
+//
+//     save_folder_id = await checkFolder(folderId, folder_name)
+//
+//     console.log("check folder = " + save_folder_id)
+//
+//     if (save_folder_id.length > 1) {
+//         return save_folder_id
+//     }
+//     // create folder
+//     const fileMetaData = {
+//         name: folder_name,
+//         mimeType: "application/vnd.google-apps.folder",
+//         parents: [folderId],
+//     };
+//
+//
+//     const res = await drive.files.create({
+//         fields: "id",
+//         resource: fileMetaData,
+//     })
+//         .catch((err) => console.log(err));
+//     console.log("Created new folder id = ", res.data);
+//
+//     return res.data.id
+//
+//
+// };
 
 const readFiles = async (folder) => {
 
@@ -114,7 +129,7 @@ async function checkFileExist(save_folder_id, file_name) {
 const uploadFile = async (folder, fileObject) => {
     // TODO: add folder_id to config file
 
-    save_folder_id = await createFolder(parentFolderID, folder);
+    save_folder_id = await checkAndCreateFolder(parentFolderID, folder);
 
     console.log("folder save id = " + save_folder_id)
 
@@ -212,7 +227,7 @@ const get_url_folderId = async (req, res) => {
         console.log("client_id = ", clientID);
 
         // res.send(file);
-        save_folder_id = await checkFolder(parentFolderID, clientID)
+        save_folder_id = await checkAndCreateFolder(parentFolderID, clientID)
 
         res.status(200).send({
             'msg': 'Folder url  =  https://drive.google.com/drive/folders/' + save_folder_id,
