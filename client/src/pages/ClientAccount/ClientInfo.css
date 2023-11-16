@@ -1,24 +1,20 @@
-.client_info{
-    margin-top: 10px;
+.div_data{
+    margin-top: 20px;
     padding: 10px;
     padding-bottom: 50px;
 
     background-color: rgba(241, 241, 241, 0.2);
 }
+
+.client_info{
+    margin-top: 10px;
+}
 .client_info_data{
     padding-top: 20px;
 }
 .client_reports{
-    margin-top: 20px;
-    padding: 10px;
-    padding-bottom: 50px;
-    background-color: rgba(241, 241, 241, 0.2);
 }
 .client_spms{
-    margin-top: 20px;
-    padding: 10px;
-    padding-bottom: 50px;
-    background-color: rgba(241, 241, 241, 0.2);
 }
 
 h1 {
@@ -80,4 +76,9 @@ button {
 .btn_spm_p_escola:hover{
     background-color: #830000;
     font-weight: 900;
+}
+
+
+.div_url{
+    padding-top: 20px;
 }

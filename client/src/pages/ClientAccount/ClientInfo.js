@@ -31,6 +31,7 @@ export default function ClientInfo() {
     const [session, setSession] = useState([])
     const [spms, setSpms] = useState([])
     const {client_id} = useParams()
+    const [cloudUrl,setCloudUrl] = useState('')
 
     //TODO : get client info fron api
     //TODO : get reports from api
@@ -51,7 +52,9 @@ export default function ClientInfo() {
     //http://localhost:3010/api/client/client/64ae5f6d98a8e0320465d596
     useEffect(() => {
         console.log("CLient id = " + client_id)
-        fetch(api_host + '/api/client/client/' + client_id, {credentials: 'include'}).then(response => {
+        fetch(api_host + '/api/client/client/' + client_id, {
+            credentials: 'include'
+        }).then(response => {
             response.json().then(client => {
                 console.log(client);
                 setClient(client)
@@ -84,6 +87,21 @@ export default function ClientInfo() {
                 setSpms(spms)
             });
         });
+
+        //cloud
+        fetch(api_host + '/api/upload/get_url', {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({"client_id": client_id}),
+            headers: {'Content-Type': 'application/json'},
+        }).then(response => {
+            response.json().then(data => {
+                console.log(data);
+                setCloudUrl(data['url'])
+            });
+        });
+
+
     }, []);
 
 
@@ -204,7 +222,7 @@ export default function ClientInfo() {
 
     return (
         <form className="client">
-            <div className="client_info">
+            <div className="client_info div_data">
                 <h1>Client</h1>
 
                 <div className="client_info_data">
@@ -219,7 +237,7 @@ export default function ClientInfo() {
                 </div>
             </div>
 
-            <div className="client_reports">
+            <div className="client_reports div_data">
                 <h1>Reports</h1>
 
                 <Link to={'/session_report/create/' + client_id}>
@@ -231,7 +249,7 @@ export default function ClientInfo() {
                 </Container>
             </div>
 
-            <div className="client_spms">
+            <div className="client_spms div_data">
                 <h1>SPMs</h1>
 
 
@@ -252,6 +270,22 @@ export default function ClientInfo() {
                     <TableContainer columns={table_spm} data={spms}/>
                 </Container>
             </div>
+
+            <div className="cloud div_data">
+                <h1>Cloud</h1>
+
+                <Link to={'/cloud/upload/' + client_id}>
+                    <button className="btn_insert">Upload data</button>
+                </Link>
+
+                <div className="div_url">
+                <a href={cloudUrl} target="_blank">Open Folder</a>
+                </div>
+                {/*TODO : list all files in cloud*/}
+
+            </div>
+
+
         </form>
     );
 }
