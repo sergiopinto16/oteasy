@@ -6,13 +6,13 @@ const sendSlackNotification = require('../slackNotifications')
 
 const secret = process.env.SECRET;
 
-station = "9408227"
+station_ref = "9408227"
 url_cp_cete = "https://www.infraestruturasdeportugal.pt/negocios-e-servicos/partidas-chegadas/9408227/2023-07-17%2000:00/2023-07-17%2023:59/INTERNACIONAL,%20ALFA,%20IC,%20IR,%20REGIONAL,%20URB%7CSUBUR,%20ESPECIAL"
 let last_json = null
 let current_json = null
 let today_day = null
-let today_trains = []
-let today_trains_last_update = []
+let today_trains = {}
+let today_trains_last_update = {}
 
 // check supppress train
 // app.post('/check_suppress_train', 
@@ -42,7 +42,7 @@ const checkSuppressTrain = (req, res) => {
     }
 
     url = "https://www.infraestruturasdeportugal.pt/negocios-e-servicos/partidas-chegadas/" +
-        station + "/" + date_string + "%2000:00/" + date_string +
+        station_ref + "/" + date_string + "%2000:00/" + date_string +
         "%2023:59/INTERNACIONAL,%20ALFA,%20IC,%20IR,%20REGIONAL,%20URB%7CSUBUR,%20ESPECIAL"
     console.log(url)
     fetch(url)
@@ -58,18 +58,29 @@ const checkSuppressTrain = (req, res) => {
             // }
 
             //filter data to add in today_trains by date
-            for (var attributename in current_json['response'][0]['NodesComboioTabelsPartidasChegadas']) {
-                json_aux = current_json['response'][0]['NodesComboioTabelsPartidasChegadas'][attributename]
-                // add data to today_trains
-                today_trains[json_aux["DataHoraPartidaChegada_ToOrderBy"]] = json_aux
+            if (current_json !== null && current_json['response'] !== null) {
+                for (var attributename in current_json['response'][0]['NodesComboioTabelsPartidasChegadas']) {
+                    json_aux = current_json['response'][0]['NodesComboioTabelsPartidasChegadas'][attributename]
+                    // add data to today_trains
+                    today_trains[json_aux["DataHoraPartidaChegada_ToOrderBy"]] = json_aux
+                }
+            }
+            else{
+                return False
             }
 
             let station;
             if (today_trains_last_update.length == 0) {
                 console.log("Last json is null, adding components.")
             }
+
+            // run sort
+            var keys = Object.keys(today_trains); // or loop over the object to get the array
+            // keys will be in any order
+            keys.sort();
+
             // let dif_json = diff(today_trains_last_update,today_trains)
-            for (var attributename in today_trains) {
+            for (var attributename of keys) {
                 console.log("attributename = " + attributename)
                 if (today_trains[attributename]['Observacoes'] != null) {
                     if (today_trains[attributename]['Observacoes'].length > 0) {
@@ -77,21 +88,19 @@ const checkSuppressTrain = (req, res) => {
                         if (!(attributename in today_trains_last_update)) {
                             // attribute not in today_trains_last_update
                             console.log("attributename = " + attributename + " is not in today_trains_last_update. Adding...")
-                            today_trains_last_update[attributename] = today_trains[attributename]
+                            //today_trains_last_update[attributename] = today_trains[attributename]
+                            today_trains_last_update[attributename] = {}
+                            Object.assign(today_trains_last_update[attributename], today_trains[attributename]);
+                            today_trains_last_update[attributename]['Observacoes'] = ""
                         }
 
                         //call function to check if suprimido or diff
                         check_status_slack_notification(attributename, today_trains, today_trains_last_update)
-
+                        //today_trains_last_update[attributename] = today_trains[attributename]
+                        Object.assign(today_trains_last_update[attributename], today_trains[attributename]);
                     }
-
                 }
-
-
             }
-
-
-            today_trains_last_update = JSON.parse(JSON.stringify(today_trains));
 
         });
 
@@ -126,14 +135,17 @@ function check_status_slack_notification(attributename, today_trains, today_trai
         console.log(data)
 
         sendSlackNotification(JSON.stringify(data), "CP-bot", station)
-    }
-    //if suprimido wirte in another channel
-    if (today_trains[attributename]['Observacoes'] === "SUPRIMIDO") {
-        console.log("REALMENTE Comboio suprimido!")
 
-        console.log(data)
-        sendSlackNotification(JSON.stringify(data), "CP-SUPRIMIDO", station, true)
+        //if suprimido wirte in another channel
+        if (today_trains[attributename]['Observacoes'] === "SUPRIMIDO" && today_trains_last_update[attributename]['Slack'] !== 1) {
+            console.log("REALMENTE Comboio suprimido!")
+
+            console.log(data)
+            today_trains_last_update[attributename]['Slack'] = 1
+            sendSlackNotification(JSON.stringify(data), "CP-SUPRIMIDO", station, true)
+        }
     }
+
 
 }
 
