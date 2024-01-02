@@ -74,7 +74,7 @@ const checkSuppressTrain = (req, res) => {
                 if (today_trains[attributename]['Observacoes'] != null) {
                     if (today_trains[attributename]['Observacoes'].length > 0) {
                         //check if today_trains_last_update have key, if not add
-                        if (!( attributename in today_trains_last_update)) {
+                        if (!(attributename in today_trains_last_update)) {
                             // attribute not in today_trains_last_update
                             console.log("attributename = " + attributename + " is not in today_trains_last_update. Adding...")
                             today_trains_last_update[attributename] = today_trains[attributename]
@@ -106,38 +106,35 @@ const checkSuppressTrain = (req, res) => {
 
 function check_status_slack_notification(attributename, today_trains, today_trains_last_update) {
     console.log(today_trains[attributename]['Observacoes'] + " | " + today_trains_last_update[attributename]['Observacoes'])
+
+    console.log(today_trains[attributename])
+    data = {
+        "DataHoraPartidaChegada_ToOrderBy": today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
+        "NomeEstacaoOrigem": today_trains[attributename]['NomeEstacaoOrigem'],
+        "NomeEstacaoDestino": today_trains[attributename]['NomeEstacaoDestino'],
+        "ComboioPassou": today_trains[attributename]['ComboioPassou'],
+        "Observacoes": today_trains[attributename]['Observacoes'],
+    }
+    station = "CETE";
+    if (today_trains[attributename]['NomeEstacaoOrigem'] == "PORTO-SÃO BENTO") {
+        station = "PORTO-SÃO BENTO"
+    }
+
+
     if (today_trains[attributename]['Observacoes'] !== today_trains_last_update[attributename]['Observacoes']) {
         console.log("Comboio suprimido!")
-        console.log(today_trains[attributename])
-        data = {}
-        data = {
-            "DataHoraPartidaChegada_ToOrderBy": today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
-            "NomeEstacaoOrigem": today_trains[attributename]['NomeEstacaoOrigem'],
-            "NomeEstacaoDestino": today_trains[attributename]['NomeEstacaoDestino'],
-            "ComboioPassou": today_trains[attributename]['ComboioPassou'],
-            "Observacoes": today_trains[attributename]['Observacoes'],
-        }
-        station = "CETE";
-        if (today_trains[attributename]['NomeEstacaoOrigem'] == "PORTO-SÃO BENTO") {
-            station = "PORTO-SÃO BENTO"
-        }
         console.log(data)
-        sendSlackNotification(JSON.stringify(data), "CP-bot", station)
 
-        //if suprimido wirte in another channel
-        if (today_trains[attributename]['Observacoes'] === "SUPRIMIDO") {
-            console.log("REALMENTE Comboio suprimido!")
-            data = {
-                "DataHoraPartidaChegada_ToOrderBy": today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
-                "NomeEstacaoOrigem": today_trains[attributename]['NomeEstacaoOrigem'],
-                "NomeEstacaoDestino": today_trains[attributename]['NomeEstacaoDestino'],
-                "ComboioPassou": today_trains[attributename]['ComboioPassou'],
-                "Observacoes": today_trains[attributename]['Observacoes'],
-            }
-            console.log(data)
-            sendSlackNotification(JSON.stringify(data), "CP-SUPRIMIDO", station, true)
-        }
+        sendSlackNotification(JSON.stringify(data), "CP-bot", station)
     }
+    //if suprimido wirte in another channel
+    if (today_trains[attributename]['Observacoes'] === "SUPRIMIDO") {
+        console.log("REALMENTE Comboio suprimido!")
+
+        console.log(data)
+        sendSlackNotification(JSON.stringify(data), "CP-SUPRIMIDO", station, true)
+    }
+
 }
 
 
