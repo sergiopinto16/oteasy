@@ -107,7 +107,7 @@ const checkSuppressTrain = (req, res) => {
 function check_status_slack_notification(attributename, today_trains, today_trains_last_update) {
     console.log(today_trains[attributename]['Observacoes'] + " | " + today_trains_last_update[attributename]['Observacoes'])
 
-    console.log(today_trains[attributename])
+    //console.log(today_trains[attributename])
     data = {
         "DataHoraPartidaChegada_ToOrderBy": today_trains[attributename]['DataHoraPartidaChegada_ToOrderBy'],
         "NomeEstacaoOrigem": today_trains[attributename]['NomeEstacaoOrigem'],
