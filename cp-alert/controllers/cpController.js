@@ -65,7 +65,7 @@ const checkSuppressTrain = (req, res) => {
             }
 
             let station;
-            if (today_trains_last_update == null) {
+            if (today_trains_last_update.length == 0) {
                 console.log("Last json is null, adding components.")
             }
             // let dif_json = diff(today_trains_last_update,today_trains)
@@ -74,8 +74,9 @@ const checkSuppressTrain = (req, res) => {
                 if (today_trains[attributename]['Observacoes'] != null) {
                     if (today_trains[attributename]['Observacoes'].length > 0) {
                         //check if today_trains_last_update have key, if not add
-                        if (!today_trains_last_update.includes(attributename)) {
+                        if (!( attributename in today_trains_last_update)) {
                             // attribute not in today_trains_last_update
+                            console.log("attributename = " + attributename + " is not in today_trains_last_update. Adding...")
                             today_trains_last_update[attributename] = today_trains[attributename]
                         }
 
